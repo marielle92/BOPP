@@ -7,12 +7,10 @@
     }
 
     $id = $_SESSION["id"];
-    $reservationId = $_SESSION["reservationId"];
-    $reservationTime = $_SESSION["time"];
-
     $sql = "SELECT * FROM tbl_user where id='$id'";
     $result = $cn->query($sql);
       if ($result->num_rows > 0) {
+
         while($row = $result->fetch_assoc()) {
           $_SESSION["firstName"] = $row["firstName"];
           $_SESSION["middleName"] = $row["middleName"];
@@ -22,7 +20,7 @@
       }
       else {
         echo '<script> alert("Non-existent in DB"); window.location.href="index.php"; </script>';
-      }
+        }
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Reservation</title>
+  <title>Check In</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -45,6 +43,7 @@
   <link href="startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
   <!-- bootstrap calendar -->
   <link href="css/bootstrap-datepicker/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
+  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -56,7 +55,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="user_reservation.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Make Reservation</span>
@@ -80,8 +79,8 @@
             <span class="nav-link-text">Check In</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="user_checkout.php">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Check Out</span>
           </a>
@@ -103,130 +102,16 @@
       </ul>
     </div>
   </nav>
+
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active"><a href="user_reservation.php">Make Reservation</a> / Payment</li>
+        <li class="breadcrumb-item active">Check Out</li>
       </ol>
     </div>
-
     
-    <div class="container-fluid" style="padding-bottom: 3px; padding-top: 3px;">
-      <!-- Booking Summary -->
-      <div class="row">
-        <div class="offset-1 col-10">
-          <h3>Booking Summary</h3>
-        </div>
-      </div>
-      <div class="row">
-          <div class="offset-1 col-md-10">
-            <?php
-              
-              if ($reservationTime == "Day") {
-                $reservationTimePrice = 9000;
-              }
-              else {
-                $reservationTimePrice = 10000;
-              }
 
-              echo $reservationTime . " Swimming: <b>" . (string)$reservationTimePrice . '.00Php</b><br>';
-              $totalAmenityPrice = 0;
-
-              $sql = "SELECT * FROM tbl_reservation_amenities WHERE reservation_id='$reservationId'"; //reservation id
-              $result = $cn->query($sql);
-              if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) { 
-                  $amenityId = $row["amenity_id"];
-                  //echo $amenityId;
-                  $tblAmenitySql = "SELECT * FROM tbl_amenities WHERE id='$amenityId'";
-                  $result1 = $cn->query($tblAmenitySql);
-
-                  $cn->query($tblAmenitySql);
-                    while($row1 = $result1->fetch_assoc()) {
-                      echo $row1["amenityName"] . ': <b>' . $row1["amenityPrice"] . '.00Php</b><br>';
-                      $totalAmenityPrice = $totalAmenityPrice + $row1["amenityPrice"];
-                     
-                    }
-                }
-                echo "<br>";
-                //echo $totalAmenityPrice;
-                $totalAmount = $totalAmenityPrice + $reservationTimePrice;
-                //echo $totalAmount;
-                echo "<b>Total: </b><h4>" . $totalAmount . ".00Php</h4><br>";
-                $dpAmount = $totalAmount / 2;
-                echo "<b>Downpayment: </b><h4>" . $dpAmount . ".00Php</h4>";
-                $remainingBalance = $totalAmount - $dpAmount;
-                $_SESSION["totalAmount"] = $totalAmount;
-                $_SESSION["dpAmount"] = $dpAmount;
-                $_SESSION["remainingBalance"] = $remainingBalance;
-              }
-              else {
-                echo "0 results";
-              }
-            ?>
-          </div>
-        </div><br/>
-      <!-- RESERVATION FORM -->
-      <form method="post" action="payment_redirect.php">
-        <div class="row">
-          <div class="offset-1 col-10">
-            <h3>Bill to:</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="offset-1 col-10">
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Full Name</label>
-                <input type="text" class="form-control" name="fullName" required>
-              </div>
-            </div><br/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="offset-1 col-10">
-            <h3>Billing Address</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="offset-1 col-10">
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Country</label>
-                <input type="text" class="form-control" name="add_country" required data-validation-required-message="Please enter your contact number.">
-              </div>
-            </div><br/>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>City</label>
-                <input type="text" class="form-control" name="add_city" required data-validation-required-message="Please enter your contact number.">
-              </div>
-            </div><br/>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Street Number, Street Name, Subdivision, Barangay, etc.</label>
-                <input type="text" class="form-control" name="add_others" required data-validation-required-message="Please enter your contact number.">
-              </div>
-            </div><br/>
-
-            <div id="success"></div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <!-- For success/fail messages -->
-                <button type="submit" class="btn btn-primary" id="btnSubmit">Proceed to Payment</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </form>
-    </div>
-
-      <!-- Example DataTables Card-->
-      
-    <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
@@ -277,6 +162,7 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
+
   <script>
     $(function () { 
       $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
@@ -295,6 +181,7 @@
     });
   </script>
 
+<!--  -->
 
 </body>
 

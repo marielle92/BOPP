@@ -34,15 +34,15 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			  </button>
-			  <a class="navbar-brand" href="#">Blue Oasis Private Pool</a>
+			  <a class="navbar-brand" href="index.php">Blue Oasis Private Pool</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			  <ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+				<li><a href="index.php">Home</a></li>
 				<li><a href="gallery.php">Gallery</a></li>
 				<li><a href="amenities.php">Rates and Amenities</a></li>
-				<li><a href="about_us.php">About Us</a></li>
+				<li class="active"><a href="#">About Us<span class="sr-only">(current)</span></a></li>
 				<li><a href="contact_us.php">Contact Us</a></li>
 			  </ul>
 

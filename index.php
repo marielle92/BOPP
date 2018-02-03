@@ -58,11 +58,11 @@
 								  	<label><b>First Name</b></label>
 									<input type="text" name="firstName" required>
 									<label><b>Middle Name</b></label>
-									<input type="text" name="middleName">
+									<input type="text" name="middleName" required>
 									<label><b>Last Name</b></label>
 									<input type="text" name="lastName" required>
 									<label><b>Email Address</b></label>
-									<input type="text" name="email" required>
+									<input type="email" name="email" required>
 									<label><b>Username</b></label>
 									<input type="text" name="username" required>
 									<label><b>Password</b></label>

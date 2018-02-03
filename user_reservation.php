@@ -55,7 +55,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="user_reservation.php">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Make Reservation</span>
           </a>
@@ -67,19 +67,19 @@
             </a>
           </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="guest_booking.php">
+          <a class="nav-link" href="user_booking.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">My Booking</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="guest-in.php">
+          <a class="nav-link" href="user_checkin.php">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Check In</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="guest_checkout.php">
+          <a class="nav-link" href="user_checkout.php">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Check Out</span>
           </a>
@@ -145,7 +145,7 @@
           </div>
         </div><br/><br/>
         <?php
-          $sql = "SELECT * FROM tbl_amenities";
+          $sql = "SELECT * FROM tbl_amenities WHERE isVisible=true";
 
           $result = $cn->query($sql);
             if ($result->num_rows > 0) {
@@ -188,8 +188,10 @@
 
             <div class="control-group form-group">
               <div class="controls">
-                <input type="checkbox" name="termsAndConds" value="Terms and Conditions" required data-validation-required-message="This field is required.">
-                <label>I have read and agree with the terms and conditions.</label>
+                <label>
+                  <input type="checkbox" name="termsAndConds" value="Terms and Conditions" required data-validation-required-message="This field is required.">
+                  I have read and agree with the terms and conditions.
+                </label>
               </div>
             </div><br/>
 

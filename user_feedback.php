@@ -62,25 +62,25 @@
           </a>
         </li>
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="user_feedback.php">
+            <a class="nav-link" href="#">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">Feedback</span>
             </a>
           </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="guest_booking.php">
+          <a class="nav-link" href="user_booking.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">My Booking</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="guest_checkin.html">
+          <a class="nav-link" href="user_checkin.php">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Check In</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="guest_checkout.php">
+          <a class="nav-link" href="user_checkout.php">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Check Out</span>
           </a>
