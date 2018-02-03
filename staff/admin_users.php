@@ -1,5 +1,4 @@
 <?php
-  
   session_start();
 
   $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
@@ -8,15 +7,12 @@
     }
 
     $id = $_SESSION["id"];
-    $nameSql = "SELECT * FROM tbl_user where id='$id'";
-    $nameResult = $cn->query($nameSql);
-      if ($nameResult->num_rows > 0) {
+    $sql = "SELECT * FROM tbl_user where id='$id'";
+    $result = $cn->query($sql);
+      if ($result->num_rows > 0) {
 
-        while($row = $nameResult->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
           $_SESSION["firstName"] = $row["firstName"];
-          $_SESSION["middleName"] = $row["middleName"];
-          $_SESSION["email"] = $row["email"];
-          $_SESSION["username"] = $row["username"];
         }
       }
       else {
@@ -28,18 +24,13 @@
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Reservation Records</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
+  <title>User Records</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -61,8 +52,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="#">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="admin_reservations">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Reservations</span>
           </a>
@@ -73,8 +64,8 @@
               <span class="nav-link-text">Payments</span>
             </a>
           </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_users.php">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Users</span>
           </a>
@@ -131,66 +122,85 @@
           <i class="fa fa-table"></i> Reservations</div>
         <div class="card-body">
           <div class="table-responsive">
+             <!-- ADD USER BUTTON -->
+             <div class="container">
+                <!-- Button to Open the Modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                  Add New User
+                </button></br></br>
+
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                    
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <h4 class="modal-title">Add New User</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+                      
+                      <!-- Modal body -->
+                      
+                        <div class"row">
+                          <div class="modal-body">
+                            <form method="post" action="addNewUser_redirect.php"> <!-- class="modal-content" -->
+                              <div class="col-md-12 col-md-offset-12">
+                              <label><b>Level of Acess</b></label></br>
+                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Staff" checked>Staff</label> &nbsp; &nbsp;
+                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Manager">Manager</label></br>
+                              <label><b>First Name</b></label>
+                              <input type="text" name="firstName" style="width: 100%;" required>
+                              <label><b>Middle Name</b></label>
+                              <input type="text" name="middleName" style="width: 100%;">
+                              <label><b>Last Name</b></label>
+                              <input type="text" name="lastName" style="width: 100%;" required>
+                              <label><b>Email Address</b></label>
+                              <input type="text" name="email" style="width: 100%;" required>
+                              <label><b>Username</b></label>
+                              <input type="text" name="username" style="width: 100%;" required>
+                              <label><b>Password</b></label>
+                              <input type="password" name="password" style="width: 100%;" required></br></br>
+                              <button type="submit" class="btn btn-success">Add User</button>
+                            </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Reservation ID</th>
-                  <th>Contact Number</th>
-                  <th>Reserved Date</th>
-                  <th>Reserved Time</th>
                   <th>User ID</th>
-                  <th>Payment ID</th>
+                  <th>Level of Access</th>
+                  <th>First Name</th>
+                  <th>Middle Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Username</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $sql = "SELECT * FROM tbl_reservation";
-                  $result = $cn->query($sql);
-                    if ($result->num_rows > 0) {
-
-                      while($row = $result->fetch_assoc()) {
-                        $reservationId = $row["id"];
-                        $contactNumber = $row["contactNumber"];
-                        $reservedDate = $row["reservedDate"];
-                        $time = $row["time"];
-                        $userId = $row["user_id"];
-                        $paymentId = $row["payment_id"];
-
-                        /*
-                        echo $reservationId . "\n";
-                        echo $contactNumber;
-                        echo $reservedDate;
-                        echo $time;
-                        echo $userId;
-                        echo $paymentId;
-                        */
-        
-                        
-                        //table rows
-                        echo '
-                          <tr>
-                            <td>
-                              <!-- Button to Open the Modal -->
-                              <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $reservationId .'">
-                                Update
-                              </button>
-                              
-                            </td>
-                            <td>' . $reservationId . '</td>
-                            <td>' . $contactNumber . '</td>
-                            <td>' . $reservedDate . '</td>
-                            <td>' . $time . '</td>
-                            <td>' . $userId . '</td>
-                            <td>' . $paymentId . '</td>
-                          </tr>
-                        ';
-                        }   
-                      }
-                      
-                    else {
-                      echo "0 results";
-                      }
+                  $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
+                  $query = mysqli_query($con, "SELECT * FROM tbl_user");
+                  while ($tblResult = mysqli_fetch_array($query)) {
+                    echo '<tr>
+                      <td>' . $tblResult["id"] . '</td>
+                      <td>' . $tblResult["levelOfAccess"] . '</td>
+                      <td>' . $tblResult["firstName"] . '</td>
+                      <td>' . $tblResult["middleName"] . '</td>
+                      <td>' . $tblResult["lastName"] . '</td>
+                      <td>' . $tblResult["email"] . '</td>
+                      <td>' . $tblResult["username"] . '</td>
+                      <td>' . $tblResult["status"] . '</td>
+                    </tr>';
+                  }
                 ?>
               </tbody>
             </table>
@@ -232,46 +242,6 @@
     </div>
 
   </div>
-
-  <!-- insert modal here -->
-  <!-- The Modal -->
-  <div class="container">
-    <div class="modal fade" id="update">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-        
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Update Row</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <!-- $("input[name='reservationId']").val() -->
-          <!-- Modal body -->
-          <div class="modal-body">
-            <form action="reservation_update.php" method="post">
-              <label>Reservation ID</label>
-              <input type="text" name="reservationId" readonly><br><br>
-              <label>Contact Number</label>
-              <input type="text" name="contactNumber"><br><br>
-              <label>Reserved Date</label>
-              <input type="text" name="reservedDate" ><br><br>
-              <label>Time</label>
-              <input type="text" name="time"><br><br>
-              <label>User ID</label>
-              <input type="text" name="userId" readonly><br><br>
-              <label>Payment ID</label>
-              <input type="text" name="paymentId" readonly>
-            </form>
-
-          </div>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-
   
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -287,6 +257,7 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
+  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
@@ -294,7 +265,7 @@
       $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
     });
   </script>
-  
+
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -303,40 +274,17 @@
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
-  
+
   <script type="text/javascript">
     $('#dataTable').DataTable( {
-      dom: 'Blfrtip',  
-      buttons: [
-       'excel', 'pdf', 'print',]
+        dom: 'Blfrtip',
+        buttons: [
+         'excel', 'pdf', 'print'
+        ]
     } );
   </script>
-  <!--ajax -->
-  <script type="text/javascript">
-    $(function(){
-      $(document).on('click', '.btn_update', function(){
-        var reservationId = $(this).attr('data-rId');
-        $.ajax({
-          url : "get_reservations.php?update=true&rid=" + reservationId,
-          type : "get",
-          dataType : 'json',
-          success : function(data){
-            console.log(data);
-            $("input[name='reservationId']").val(data.id);
-            $("input[name='contactNumber']").val(data.contactNumber);
-            $("input[name='reservedDate']").val(data.reservedDate);
-             $("input[name='time']").val(data.time);
-              $("input[name='userId']").val(data.user_id);
-               $("input[name='paymentId']").val(data.payment_id);
 
-          },
-          error: function(err){
-            console.log(err);
-          }
-        })
-      })
-    });
-  </script>
+
 </body>
 
 </html>

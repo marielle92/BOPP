@@ -1,4 +1,5 @@
 <?php
+  
   session_start();
 
   $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
@@ -7,11 +8,11 @@
     }
 
     $id = $_SESSION["id"];
-    $sql = "SELECT * FROM tbl_user where id='$id'";
-    $result = $cn->query($sql);
-      if ($result->num_rows > 0) {
+    $nameSql = "SELECT * FROM tbl_user where id='$id'";
+    $nameResult = $cn->query($nameSql);
+      if ($nameResult->num_rows > 0) {
 
-        while($row = $result->fetch_assoc()) {
+        while($row = $nameResult->fetch_assoc()) {
           $_SESSION["firstName"] = $row["firstName"];
           $_SESSION["middleName"] = $row["middleName"];
           $_SESSION["email"] = $row["email"];
@@ -32,7 +33,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Check In</title>
+  <title>My Booking</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -43,7 +50,6 @@
   <link href="startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
   <!-- bootstrap calendar -->
   <link href="css/bootstrap-datepicker/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
-  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -111,6 +117,91 @@
       </ol>
     </div>
 
+    <!-- Example DataTables Card-->
+    <div class="container-fluid">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> My Booking</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>
+                    <h4 align="center">THIS SERVES AS YOUR OFFICIAL RECEIPT</h4>
+                  </th>
+                  <th>
+                    <p align="center">
+                      #1 Int. 103 cor. Serrano St., Brgy. Maysan, Valenzuela City<br>
+                      LIWANAG C. ACUNA - Prop.<br>
+                      Non-VAT Reg. TIN: 127-182-023-000
+                    </p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php
+                  $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
+                  $reservationQuery = mysqli_query($con, "SELECT * FROM tbl_reservation WHERE user_id='$id'");
+                  while ($reservationResult = mysqli_fetch_array($reservationQuery)) {
+                    $reservationId = $reservationResult["id"];
+                    echo '
+                      
+                      <td><b>Reservation ID<b></td>
+                      <td>' . $reservationResult["id"] . '</td>
+                      </tr>
+                      <tr>
+                      <td><b>Contact Number<b></td>
+                      <td>' . $reservationResult["contactNumber"] . '</td>
+                      </tr>
+                      <tr>
+                      <td><b>Reserved Date<b></td>
+                      <td>' . $reservationResult["reservedDate"] . '</td>
+                      </tr>
+                      <tr>
+                      <td><b>Reserved Time<b></td>
+                      <td>' . $reservationResult["time"] . '</td>
+                      </tr>
+                      ';
+                  }
+                ?>
+                <?php
+                  $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
+                  $paymentQuery = mysqli_query($con, "SELECT * FROM tbl_payment WHERE reservation_id='$reservationId'");
+                  while ($paymentResult = mysqli_fetch_array($paymentQuery)) {
+                    $dpPaidOn = (string)$paymentResult["dpPaidOn"];
+                    echo '
+                      <tr>
+                      <td><b>Bill To<b></td>
+                      <td>' . $paymentResult["fullName"] . '</td>
+                      </tr>
+                      <tr>
+                      <td><b>Billing Address<b></td>
+                      <td>' . $paymentResult["addressOthers"] . ', ' . $paymentResult["addressCity"] . ', ' .  $paymentResult["addressCountry"] . '</td>
+                      </tr>
+                      <tr>
+                      <td><b>Downpayment Amount<b></td>
+                      <td>' . $paymentResult["dpAmount"] . '.00Php</td>
+                      </tr>
+                      <tr>
+                      <td><b>Downpayment Paid On<b></td>
+                      <td>' . $dpPaidOn . '</td>
+                      </tr>
+                      <tr>
+                      <td><b>Remaining Balance<b></td>
+                      <td>' . $paymentResult["remainingBalance"] . '.00Php</td>
+                      </tr>
+                      ';
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
@@ -143,6 +234,46 @@
     </div>
 
   </div>
+
+  <!-- insert modal here -->
+  <!-- The Modal -->
+  <div class="container">
+    <div class="modal fade" id="update">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Update Row</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- $("input[name='reservationId']").val() -->
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form action="reservation_update.php" method="post">
+              <label>Reservation ID</label>
+              <input type="text" name="reservationId" readonly><br><br>
+              <label>Contact Number</label>
+              <input type="text" name="contactNumber"><br><br>
+              <label>Reserved Date</label>
+              <input type="text" name="reservedDate" ><br><br>
+              <label>Time</label>
+              <input type="text" name="time"><br><br>
+              <label>User ID</label>
+              <input type="text" name="userId" readonly><br><br>
+              <label>Payment ID</label>
+              <input type="text" name="paymentId" readonly>
+            </form>
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
   
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -158,30 +289,31 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
-  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
-
   <script>
     $(function () { 
       $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
     });
   </script>
+  
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 
-  <script type="text/javascript" src="js/momentjs/moment.js"></script>
-  <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 
+  
   <script type="text/javascript">
-    $(function () {
-      $('#reservationDate').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: moment().format('YYYY-MM-DD')
-      });
-    });
+    $('#dataTable').DataTable( {
+      dom: 'Brt',  
+      buttons: [
+       'print']
+    } );
   </script>
-
-<!--  -->
-
 </body>
 
 </html>

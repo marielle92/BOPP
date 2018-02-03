@@ -61,13 +61,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Reservations</span>
           </a>
         </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
             <a class="nav-link" href="admin_payments.php">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">Payments</span>
@@ -120,7 +120,7 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Reservations</li>
+        <li class="breadcrumb-item active">Payments</li>
       </ol>
     </div>
 
@@ -128,61 +128,69 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Reservations</div>
+          <i class="fa fa-table"></i> Payments</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th></th>
-                  <th>Reservation ID</th>
-                  <th>Contact Number</th>
-                  <th>Reserved Date</th>
-                  <th>Reserved Time</th>
-                  <th>User ID</th>
                   <th>Payment ID</th>
+                  <th>Full Name</th>
+                  <th>Country</th>
+                  <th>City</th>
+                  <th>Specific Address</th>
+                  <th>Total Amount</th>
+                  <th>Downpayment Amount</th>
+                  <th>Downpayment Paid On</th>
+                  <th>Remaining Balance</th>
+                  <th>Full Paid On</th>
+                  <th>Payment Status</th>
+                  <th>Reservation ID</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $sql = "SELECT * FROM tbl_reservation";
+                  $sql = "SELECT * FROM tbl_payment";
                   $result = $cn->query($sql);
                     if ($result->num_rows > 0) {
 
                       while($row = $result->fetch_assoc()) {
-                        $reservationId = $row["id"];
-                        $contactNumber = $row["contactNumber"];
-                        $reservedDate = $row["reservedDate"];
-                        $time = $row["time"];
-                        $userId = $row["user_id"];
-                        $paymentId = $row["payment_id"];
-
-                        /*
-                        echo $reservationId . "\n";
-                        echo $contactNumber;
-                        echo $reservedDate;
-                        echo $time;
-                        echo $userId;
-                        echo $paymentId;
-                        */
-        
+                        $paymentId = $row["id"];
+                        $fullName = $row["fullName"];
+                        $addressCountry = $row["addressCountry"];
+                        $addressCity = $row["addressCity"];
+                        $addressOthers = $row["addressOthers"];
+                        $totalAmount = $row["totalAmount"];
+                        $dpAmount = $row["dpAmount"];
+                        $dpPaidOn = $row["dpPaidOn"];
+                        $remainingBalance = $row["remainingBalance"];
+                        $fullPaidOn = $row["fullPaidOn"];
+                        $paymentStatus = $row["paymentStatus"];
+                        $reservationId = $row["reservation_id"];
                         
                         //table rows
                         echo '
                           <tr>
                             <td>
                               <!-- Button to Open the Modal -->
-                              <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $reservationId .'">
+                              <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $paymentId .'">
                                 Update
                               </button>
                               
                             </td>
-                            <td>' . $reservationId . '</td>
-                            <td>' . $contactNumber . '</td>
-                            <td>' . $reservedDate . '</td>
-                            <td>' . $time . '</td>
-                            <td>' . $userId . '</td>
                             <td>' . $paymentId . '</td>
+                            <td>' . $fullName . '</td>
+                            <td>' . $addressCountry . '</td>
+                            <td>' . $addressCity . '</td>
+                            <td>' . $addressOthers . '</td>
+                            <td>' . $totalAmount . '</td>
+                            <td>' . $dpAmount . '</td>
+                            <td>' . $dpPaidOn . '</td>
+                            <td>' . $remainingBalance . '</td>
+                            <td>' . $fullPaidOn . '</td>
+                            <td>' . $paymentStatus . '</td>
+                            <td>' . $reservationId . '</td>
                           </tr>
                         ';
                         }   
@@ -235,7 +243,7 @@
 
   <!-- insert modal here -->
   <!-- The Modal -->
-  <div class="container">
+  <div class="container-fluid">
     <div class="modal fade" id="update">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -248,19 +256,32 @@
           <!-- $("input[name='reservationId']").val() -->
           <!-- Modal body -->
           <div class="modal-body">
-            <form action="reservation_update.php" method="post">
-              <label>Reservation ID</label>
-              <input type="text" name="reservationId" readonly><br><br>
-              <label>Contact Number</label>
-              <input type="text" name="contactNumber"><br><br>
-              <label>Reserved Date</label>
-              <input type="text" name="reservedDate" ><br><br>
-              <label>Time</label>
-              <input type="text" name="time"><br><br>
-              <label>User ID</label>
-              <input type="text" name="userId" readonly><br><br>
+            <form action="payment_update.php" method="post">
               <label>Payment ID</label>
-              <input type="text" name="paymentId" readonly>
+              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Full Name</label>
+              <input type="text" name="fullName"><br><br>
+              <label>Country</label>
+              <input type="text" name="addressCountry" ><br><br>
+              <label>City</label>
+              <input type="text" name="addressCity"><br><br>
+              <label>Specific Address</label>
+              <input type="text" name="addressOthers"><br><br>
+              <label>Total Amount</label>
+              <input type="text" name="totalAmount"><br><br>
+              <label>Downpayment Amount</label>
+              <input type="text" name="dpAmount" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Downpayment Paid On</label>
+              <input type="text" name="dpPaidOn" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Remaining Balance</label>
+              <input type="text" name="remainingBalance" ><br><br>
+              <label>Full Paid On</label>
+              <input type="text" name="fullPaidOn"><br><br>
+              <label>Payment Status</label>
+              <input type="text" name="paymentStatus"><br><br>
+              <label>Reservation Id</label>
+              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
+              <input type="Submit" value="Update">
             </form>
 
           </div>
@@ -315,19 +336,25 @@
   <script type="text/javascript">
     $(function(){
       $(document).on('click', '.btn_update', function(){
-        var reservationId = $(this).attr('data-rId');
+        var paymentId = $(this).attr('data-rId');
         $.ajax({
-          url : "get_reservations.php?update=true&rid=" + reservationId,
+          url : "get_payments.php?update=true&rid=" + paymentId,
           type : "get",
           dataType : 'json',
           success : function(data){
             console.log(data);
-            $("input[name='reservationId']").val(data.id);
-            $("input[name='contactNumber']").val(data.contactNumber);
-            $("input[name='reservedDate']").val(data.reservedDate);
-             $("input[name='time']").val(data.time);
-              $("input[name='userId']").val(data.user_id);
-               $("input[name='paymentId']").val(data.payment_id);
+            $("input[name='paymentId']").val(data.id);
+            $("input[name='fullName']").val(data.fullName);
+            $("input[name='addressCountry']").val(data.addressCountry);
+            $("input[name='addressCity']").val(data.addressCity);
+            $("input[name='addressOthers']").val(data.addressOthers);
+            $("input[name='totalAmount']").val(data.totalAmount);
+            $("input[name='dpAmount']").val(data.dpAmount);
+            $("input[name='dpPaidOn']").val(data.dpPaidOn);
+            $("input[name='remainingBalance']").val(data.remainingBalance);
+            $("input[name='fullPaidOn']").val(data.fullPaidOn);
+            $("input[name='paymentStatus']").val(data.paymentStatus);
+            $("input[name='reservationId']").val(data.reservation_id);
 
           },
           error: function(err){

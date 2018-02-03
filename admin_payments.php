@@ -1,4 +1,5 @@
 <?php
+  
   session_start();
 
   $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
@@ -7,11 +8,11 @@
     }
 
     $id = $_SESSION["id"];
-    $sql = "SELECT * FROM tbl_user where id='$id'";
-    $result = $cn->query($sql);
-      if ($result->num_rows > 0) {
+    $nameSql = "SELECT * FROM tbl_user where id='$id'";
+    $nameResult = $cn->query($nameSql);
+      if ($nameResult->num_rows > 0) {
 
-        while($row = $result->fetch_assoc()) {
+        while($row = $nameResult->fetch_assoc()) {
           $_SESSION["firstName"] = $row["firstName"];
           $_SESSION["middleName"] = $row["middleName"];
           $_SESSION["email"] = $row["email"];
@@ -32,7 +33,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Payment Records</title>
+  <title>Reservation Records</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -55,13 +62,13 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_reservations">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Reservations</span>
           </a>
         </li>
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="admin_payments.php">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">Payments</span>
             </a>
@@ -113,7 +120,7 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Reservations</li>
+        <li class="breadcrumb-item active">Payments</li>
       </ol>
     </div>
 
@@ -121,46 +128,77 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Reservations</div>
+          <i class="fa fa-table"></i> Payments</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th></th>
                   <th>Payment ID</th>
-                  <th>Name</th>
+                  <th>Full Name</th>
                   <th>Country</th>
                   <th>City</th>
                   <th>Specific Address</th>
                   <th>Total Amount</th>
                   <th>Downpayment Amount</th>
-                  <th>DP Paid On</th>
+                  <th>Downpayment Paid On</th>
                   <th>Remaining Balance</th>
-                  <th>Paid Full On</th>
+                  <th>Full Paid On</th>
                   <th>Payment Status</th>
                   <th>Reservation ID</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
-                  $query = mysqli_query($con, "SELECT * FROM tbl_payment");
-                  while ($tblResult = mysqli_fetch_array($query)) {
-                    echo '<tr>
-                      <td>' . $tblResult["id"] . '</td>
-                      <td>' . $tblResult["fullName"] . '</td>
-                      <td>' . $tblResult["addressCountry"] . '</td>
-                      <td>' . $tblResult["addressCity"] . '</td>
-                      <td>' . $tblResult["addressOthers"] . '</td>
-                      <td>' . $tblResult["totalAmount"] . '</td>
-                      <td>' . $tblResult["dpAmount"] . '</td>
-                      <td>' . $tblResult["dpPaidOn"] . '</td>
-                      <td>' . $tblResult["remainingBalance"] . '</td>
-                      <td>' . $tblResult["fullPaidOn"] . '</td>
-                      <td>' . $tblResult["paymentStatus"] . '</td>
-                      <td>' . $tblResult["reservation_id"] . '</td>
-                    </tr>';
-                  }
+                  $sql = "SELECT * FROM tbl_payment";
+                  $result = $cn->query($sql);
+                    if ($result->num_rows > 0) {
+
+                      while($row = $result->fetch_assoc()) {
+                        $paymentId = $row["id"];
+                        $fullName = $row["fullName"];
+                        $addressCountry = $row["addressCountry"];
+                        $addressCity = $row["addressCity"];
+                        $addressOthers = $row["addressOthers"];
+                        $totalAmount = $row["totalAmount"];
+                        $dpAmount = $row["dpAmount"];
+                        $dpPaidOn = $row["dpPaidOn"];
+                        $remainingBalance = $row["remainingBalance"];
+                        $fullPaidOn = $row["fullPaidOn"];
+                        $paymentStatus = $row["paymentStatus"];
+                        $reservationId = $row["reservation_id"];
+                        
+                        //table rows
+                        echo '
+                          <tr>
+                            <td>
+                              <!-- Button to Open the Modal -->
+                              <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $paymentId .'">
+                                Update
+                              </button>
+                              
+                            </td>
+                            <td>' . $paymentId . '</td>
+                            <td>' . $fullName . '</td>
+                            <td>' . $addressCountry . '</td>
+                            <td>' . $addressCity . '</td>
+                            <td>' . $addressOthers . '</td>
+                            <td>' . $totalAmount . '</td>
+                            <td>' . $dpAmount . '</td>
+                            <td>' . $dpPaidOn . '</td>
+                            <td>' . $remainingBalance . '</td>
+                            <td>' . $fullPaidOn . '</td>
+                            <td>' . $paymentStatus . '</td>
+                            <td>' . $reservationId . '</td>
+                          </tr>
+                        ';
+                        }   
+                      }
+                      
+                    else {
+                      echo "0 results";
+                      }
                 ?>
               </tbody>
             </table>
@@ -202,6 +240,59 @@
     </div>
 
   </div>
+
+  <!-- insert modal here -->
+  <!-- The Modal -->
+  <div class="container-fluid">
+    <div class="modal fade" id="update">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Update Row</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- $("input[name='reservationId']").val() -->
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form action="payment_update.php" method="post">
+              <label>Payment ID</label>
+              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Full Name</label>
+              <input type="text" name="fullName" required><br><br>
+              <label>Country</label>
+              <input type="text" name="addressCountry" required><br><br>
+              <label>City</label>
+              <input type="text" name="addressCity" required><br><br>
+              <label>Specific Address</label>
+              <input type="text" name="addressOthers" required><br><br>
+              <label>Total Amount</label>
+              <input type="text" name="totalAmount"><br><br>
+              <label>Downpayment Amount</label>
+              <input type="text" name="dpAmount" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Downpayment Paid On</label>
+              <input type="text" name="dpPaidOn" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Remaining Balance</label>
+              <input type="text" name="remainingBalance" required><br><br>
+              <label>Full Paid On</label>
+              <input type="text" name="fullPaidOn"><br><br>
+              <label>Payment Status</label>
+              <input type="text" name="paymentStatus" required><br><br>
+              <label>Reservation Id</label>
+              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
+              <input type="Submit" value="Update">
+            </form>
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
   
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -217,7 +308,6 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
-  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
@@ -225,20 +315,7 @@
       $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
     });
   </script>
-
-  <script type="text/javascript" src="js/momentjs/moment.js"></script>
-  <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
-  <script type="text/javascript">
-    $(function () {
-      $('#reservationDate').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: moment().format('YYYY-MM-DD')
-      });
-    });
-  </script>
-
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -247,17 +324,46 @@
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
-
+  
   <script type="text/javascript">
     $('#dataTable').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-         'excel', 'pdf', 'print'
-        ]
+      dom: 'Blfrtip',  
+      buttons: [
+       'excel', 'pdf', 'print',]
     } );
   </script>
+  <!--ajax -->
+  <script type="text/javascript">
+    $(function(){
+      $(document).on('click', '.btn_update', function(){
+        var paymentId = $(this).attr('data-rId');
+        $.ajax({
+          url : "get_payments.php?update=true&rid=" + paymentId,
+          type : "get",
+          dataType : 'json',
+          success : function(data){
+            console.log(data);
+            $("input[name='paymentId']").val(data.id);
+            $("input[name='fullName']").val(data.fullName);
+            $("input[name='addressCountry']").val(data.addressCountry);
+            $("input[name='addressCity']").val(data.addressCity);
+            $("input[name='addressOthers']").val(data.addressOthers);
+            $("input[name='totalAmount']").val(data.totalAmount);
+            $("input[name='dpAmount']").val(data.dpAmount);
+            $("input[name='dpPaidOn']").val(data.dpPaidOn);
+            $("input[name='remainingBalance']").val(data.remainingBalance);
+            $("input[name='fullPaidOn']").val(data.fullPaidOn);
+            $("input[name='paymentStatus']").val(data.paymentStatus);
+            $("input[name='reservationId']").val(data.reservation_id);
 
-
+          },
+          error: function(err){
+            console.log(err);
+          }
+        })
+      })
+    });
+  </script>
 </body>
 
 </html>

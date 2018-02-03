@@ -127,7 +127,7 @@
               $amenitySql = "SELECT * FROM tbl_amenities WHERE id = '$amenityId'";
               $amenityResult = $cn->query($amenitySql);
               if ($amenityResult->num_rows > 0) {
-                while($amenityRow = $amenityResult->fetch_assoc()) {
+                while($amenityRow = $amenityResult->fetch_assoc()) { 
                   echo '
                     <!-- CHECK IN EQUIPMENT STATUS -->
                     <div class="col-md-12 mb-3">
@@ -144,8 +144,9 @@
 
                       if($equipmentResult->num_rows > 0) {
                         echo '
-                          <table class="table table-striped">
-                            <tr>
+                        
+                          <table class="table table-responsive table-striped" style="width:100%">
+                            <tr align="center">
                               <th>
                                 Name
                               </th>
@@ -172,21 +173,28 @@
 
                         while($equipmentRow = $equipmentResult->fetch_assoc()) {
                           echo '
-                            <tr>
+                            <tr align="center">
                               <td>
                                 ' . $equipmentRow["equipmentName"] . '
                               </td>
                               <td>
+                                '. $equipmentRow["quantity"] . '
                               </td>
                               <td>
+                                <form action="checkin_redirect.php" method="post">
+                                  <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Complete" checked></label>
                               </td>
                               <td>
+                              <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Incomplete"></label>
                               </td>
                               <td>
+                              <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Damaged"></label>
                               </td>
                               <td>
+                              <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Unavailable"></label>
                               </td>
                               <td>
+                                <textarea class="form-control" rows="2" id="'. $equipmentRow["equipmentName"] . 'Comment" style="font-size: 12px;"></textarea>
                               </td>
                             </tr>
                           ';
@@ -194,6 +202,7 @@
 
                         echo '
                           </table>
+                          
                         ';
                       }
 
@@ -205,6 +214,10 @@
                 }
               }
             }
+             echo '
+                      <input type="submit" value="Submit" style="text-align:center;">
+                  </form>
+                ';
           }
         }
       ?>
@@ -247,6 +260,7 @@
         </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

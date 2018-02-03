@@ -32,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Check In</title>
+  <title>Payment Records</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -43,7 +43,6 @@
   <link href="startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
   <!-- bootstrap calendar -->
   <link href="css/bootstrap-datepicker/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
-  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -56,34 +55,42 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="user_reservation.php">
+          <a class="nav-link" href="admin_reservations">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Make Reservation</span>
+            <span class="nav-link-text">Reservations</span>
           </a>
         </li>
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
             <a class="nav-link" href="#">
               <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Feedback</span>
+              <span class="nav-link-text">Payments</span>
             </a>
           </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="user_booking.php">
+          <a class="nav-link" href="admin_users.php">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">My Booking</span>
+            <span class="nav-link-text">Users</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="user_checkin.php">
+          <a class="nav-link" href="admin_logs.php">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Check In</span>
+            <span class="nav-link-text">Logs</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="user_checkout.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Check Out</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventory">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Inventory</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="admin_amenities.php">Amenities</a>
+            </li>
+            <li>
+              <a href="admin_equipment.php">Equipment</a>
+            </li>
+          </ul>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
@@ -102,54 +109,67 @@
       </ul>
     </div>
   </nav>
-
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Feedback</li>
+        <li class="breadcrumb-item active">Reservations</li>
       </ol>
     </div>
-    <!-- FEEDBACK FORM -->
-    <div class="container-fluid" style="padding-bottom: 3px; padding-top: 3px;">
-      <form method="post" action="uploader.php" enctype="multipart/form-data">
 
-        <div class="row">
-          <div class="offset-1 col-md-10">
-            <label class="radio-inline">Rate Us<br>
-              <input type="radio" name="rating" value="5">5 &nbsp; &nbsp;
-              <input type="radio" name="rating" value="4">4 &nbsp; &nbsp;
-              <input type="radio" name="rating" value="3">3 &nbsp; &nbsp;
-              <input type="radio" name="rating" value="2">2 &nbsp; &nbsp;
-              <input type="radio" name="rating" value="1">1
-            </label>
-          </div>
-        </div><br>
-       
-        <div class="row">
-          <div class="offset-1 col-md-10">
-            <label>Review:</label><br/>
-            <textarea rows="10" id="review" name="review" style="font-size: 12px; width: 90%;"></textarea>
-          </div>
-        </div><br><br>
-
-        <div class="row">
-          <div class="offset-1 col-md-10">
-            <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-            Choose a photo to upload (you can only upload 1): &nbsp; <input name="uploadedfile" type="file" />
-          </div>
-        </div><br><br><br>
-        <div class="row">
-          <div class="offset-1 col-md-10">
-            <input type="submit" value="Submit" />
+    <!-- Example DataTables Card-->
+    <div class="container-fluid">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Reservations</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Name</th>
+                  <th>Country</th>
+                  <th>City</th>
+                  <th>Specific Address</th>
+                  <th>Total Amount</th>
+                  <th>Downpayment Amount</th>
+                  <th>DP Paid On</th>
+                  <th>Remaining Balance</th>
+                  <th>Paid Full On</th>
+                  <th>Payment Status</th>
+                  <th>Reservation ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
+                  $query = mysqli_query($con, "SELECT * FROM tbl_payment");
+                  while ($tblResult = mysqli_fetch_array($query)) {
+                    echo '<tr>
+                      <td>' . $tblResult["id"] . '</td>
+                      <td>' . $tblResult["fullName"] . '</td>
+                      <td>' . $tblResult["addressCountry"] . '</td>
+                      <td>' . $tblResult["addressCity"] . '</td>
+                      <td>' . $tblResult["addressOthers"] . '</td>
+                      <td>' . $tblResult["totalAmount"] . '</td>
+                      <td>' . $tblResult["dpAmount"] . '</td>
+                      <td>' . $tblResult["dpPaidOn"] . '</td>
+                      <td>' . $tblResult["remainingBalance"] . '</td>
+                      <td>' . $tblResult["fullPaidOn"] . '</td>
+                      <td>' . $tblResult["paymentStatus"] . '</td>
+                      <td>' . $tblResult["reservation_id"] . '</td>
+                    </tr>';
+                  }
+                ?>
+              </tbody>
+            </table>
           </div>
         </div>
-
-      </form>
-    </div><br/><br/>
-  </div>
-    <!-- END FEEDBACK FORM -->
-
+      </div>
+    </div>
+      
+    <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
@@ -200,7 +220,6 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
-
   <script>
     $(function () { 
       $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
@@ -219,7 +238,25 @@
     });
   </script>
 
-<!--  -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+
+  <script type="text/javascript">
+    $('#dataTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+         'excel', 'pdf', 'print'
+        ]
+    } );
+  </script>
+
 
 </body>
 

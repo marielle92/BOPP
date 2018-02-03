@@ -7,12 +7,18 @@
 <html lang="en">
 	<head>
 		<title>Home</title>
-	
-	  <meta charset="utf-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <meta name="description" content="">
+	  <meta name="author" content="">
+
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
 	</head>
 	<body>
@@ -169,8 +175,40 @@
 			</a>
 		  </div>
 		</div>
+		<!-- REVIEWS -->
+		<div class="container">
+	    <table class="table table-condensed" id="dataTable" cellspacing="0">
+	      <tbody>
+	      <?php
+	          $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
+	          $feedbackQuery = mysqli_query($con, "SELECT * FROM tbl_feedback"); //WHERE mgr_evaluation="Approved"
+	          while ($feedbackResult = mysqli_fetch_array($feedbackQuery)) {
+	          	$userId = $feedbackResult["user_id"];
+	          	$userQuery = mysqli_query($con, "SELECT * FROM tbl_user WHERE id='$userId'"); 
+	          		while ($userResult = mysqli_fetch_array($userQuery)) {
+	          			$firstName = $userResult["firstName"];
+	          			$lastName = $userResult["lastName"];
+	          		}
 
-
+	            echo '
+	              <tr>
+		              <td>
+		              	<img src="uploads/' . $feedbackResult["image"] .'" height="100" width="100">   	
+		              </td>
+		              <td>
+		              <b>'. $firstName . ' ' . $lastName . '</b><br>'
+		              	. $feedbackResult["rating"] . ' Stars <br>'
+		              	. $feedbackResult["review"] . '
+		         				
+		              </td>
+	              </tr>
+	            ';
+	          }
+	        ?>
+	      </tbody>
+	    </table>
+  	</div>
+        
 
 	</body>
 </html>
