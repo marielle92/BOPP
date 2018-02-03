@@ -1,0 +1,1 @@
+SELECT u.id FROM tbl_user u INNER JOIN tbl_reservation r ON u.id=reservation_id INNER JOIN tbl_payment ON payment_id

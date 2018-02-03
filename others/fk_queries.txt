@@ -1,0 +1,4 @@
+alter table tbl_logs add CONSTRAINT fk_tbl_user FOREIGN key (user_id) REFERENCES tbl_user (id);
+alter table tbl_reservation add CONSTRAINT fk_tbl_reservation_payment FOREIGN key (payment_id) REFERENCES tbl_payment (id);
+alter table tbl_reservation_amenities add CONSTRAINT fk_tbl_ra_reservation FOREIGN key (reservation_id) REFERENCES tbl_reservation (id);
+alter table tbl_reservation_amenities add CONSTRAINT fk_tbl_ra_amenity FOREIGN key (amenity_id) REFERENCES tbl_amenities (id);alter table tbl_payment add CONSTRAINT fk_tbl_payment_reservation FOREIGN key (reservation_id) REFERENCES tbl_reservation (id);

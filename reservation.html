@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Reservation</title>
+		<meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="css/bootstrap337/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src="js/bootstrap337/bootstrap.min.js"></script>
+		
+	</head>
+	<body>
+
+			<!-- NAVBAR FIXED TOP RESPONSIVE -->
+			<nav class="navbar navbar-inverse">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="index.html">Blue Oasis Private Pool</a>
+			    </div>
+
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			        <li><a href="index.html">Home</a></li>
+			        <li><a href="gallery.html">Gallery</a></li>
+			        <li><a href="amenities.html">Rates and Amenities</a></li>
+			        <li class="active"><a href="#">Reservation<span class="sr-only">(current)</span></a></li>
+			        <li><a href="about_us.html">About Us</a></li>
+			        <li><a href="contact_us.html">Contact Us</a></li>
+			      </ul>
+
+			      <!-- LOGIN BUTTON AND MODAL RESPONSIVE -->
+			      <div>
+				      <ul class="nav navbar-nav navbar-right">
+				        <li>
+				        	<link rel="stylesheet" href="css/login.css">
+
+							    <button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin-left: 10px">Log In</button>
+							    <div id="id01" class="modal">  
+							      <form class="modal-content animate" action="/action_page.php">
+							        <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
+							          <label><b>Username</b></label>
+							          <input type="text" placeholder="Enter Username" name="uname" required>
+							          <label><b>Password</b></label>
+							          <input type="password" placeholder="Enter Password" name="psw" required>
+							          <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
+							        </div>
+							      </form>
+							    </div>
+
+							    <script>
+							      var modal = document.getElementById('id01');
+							      window.onclick = function(event) {
+							          if (event.target == modal) {
+							              modal.style.display = "none";
+							          }
+							      }
+							    </script>
+				        </li>
+				      </ul> 
+			    </div>
+
+			    
+
+			  </div>
+			</nav>
+<!--
+		 DATE PICKER
+		    <div class="container">
+			    <div class="row">
+			        <div class='col-sm-6'>
+			            <div class="form-group">
+			                <div class='input-group date' id='datetimepicker5'>
+			                    <input type='text' class="form-control" />
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+			            </div>
+			        </div>
+			        <script type="text/javascript">
+			            $(function () {
+			                $('#datetimepicker5').datetimepicker({
+			                    defaultDate: "11/1/2013",
+			                    disabledDates: [
+			                        moment("12/25/2013"),
+			                        new Date(2013, 11 - 1, 21),
+			                        "11/22/2013 00:53"
+			                    ]
+			                });
+			            });
+			        </script>
+			    </div>
+				</div>
+
+				https://uxsolutions.github.io/bootstrap-datepicker/?markup=component&format=&weekStart=&startDate=&endDate=&startView=0&minViewMode=0&maxViewMode=4&todayBtn=false&clearBtn=false&language=en&orientation=auto&multidate=&multidateSeparator=&keyboardNavigation=on&forceParse=on#sandbox
+				http://bootstrap-datepicker.readthedocs.io/en/latest/
+				https://eonasdan.github.io/bootstrap-datetimepicker/
+				https://www.malot.fr/bootstrap-datetimepicker/
+				https://eonasdan.github.io/bootstrap-datetimepicker/Installing/
+				https://github.com/Serhioromano/bootstrap-calendar
+				https://vitalets.github.io/bootstrap-datepicker/
+
+-->
+
+		<div>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+			<link href="css/multistep.css" rel="stylesheet">
+
+			<form id="regForm" action="/action_page.php">
+			  <h1>Register:</h1>
+			  <!-- One "tab" for each step in the form: -->
+			  <div class="tab1">Name:
+			    <p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p>
+			    <p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p>
+			  </div>
+			  <div class="tab1">Contact Info:
+			    <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+			    <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+			  </div>
+			  <div class="tab1">Birthday:
+			    <p><input placeholder="dd" oninput="this.className = ''" name="dd"></p>
+			    <p><input placeholder="mm" oninput="this.className = ''" name="nn"></p>
+			    <p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p>
+			  </div>
+			  <div class="tab1">Login Info:
+			    <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
+			    <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+			  </div>
+			  <div style="overflow:auto;">
+			    <div style="float:right;">
+			      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+			      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+			    </div>
+			  </div>
+			  <!-- Circles which indicates the steps of the form: -->
+			  <div style="text-align:center;margin-top:40px;">
+			    <span class="step1"></span>
+			    <span class="step1"></span>
+			    <span class="step1"></span>
+			    <span class="step1"></span>
+			  </div>
+			</form>
+
+			<script type="text/javascript" src="js/multistep.js"></script>
+			<!-- jQuery -->
+		    <script src="js/jquery.js"></script>
+		    <script src="js/jquery-3.2.1.js"></script>
+		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		    <!-- Bootstrap Core JavaScript -->
+		    <script src="js/bootstrap337/bootstrap.min.js"></script>
+
+		</div>
+
+	</body>
+</html>
