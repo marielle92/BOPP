@@ -140,7 +140,7 @@
         </div><br><br><br>
         <div class="row">
           <div class="offset-1 col-md-10">
-            <input type="submit" value="Submit" />
+            <input class="btn btn-primary" type="submit" value="Submit" />
           </div>
         </div>
 

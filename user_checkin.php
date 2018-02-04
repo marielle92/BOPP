@@ -105,7 +105,7 @@
       </ol>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-2">
 
       <!-- AMENITIES FROM DATABASE -->
       <?php
@@ -144,8 +144,9 @@
 
                       if($equipmentResult->num_rows > 0) {
                         echo '
-                        
-                          <table class="table table-responsive table-striped" style="width:100%">
+                          <form action="checkin_redirect.php" method="post">
+                          <input type="hidden" name="amenityId" value="' . $amenityId . '" />
+                          <table class="table table-striped table-responsive">
                             <tr align="center">
                               <th>
                                 Name
@@ -181,20 +182,19 @@
                                 '. $equipmentRow["quantity"] . '
                               </td>
                               <td>
-                                <form action="checkin_redirect.php" method="post">
-                                  <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Complete" checked></label>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Complete" checked></label>
                               </td>
                               <td>
-                              <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Incomplete"></label>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Incomplete"></label>
                               </td>
                               <td>
-                              <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Damaged"></label>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Damaged"></label>
                               </td>
                               <td>
-                              <label><input type="radio" name="'. $equipmentRow["equipmentName"] . 'Status" value="Unavailable"></label>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Unavailable"></label>
                               </td>
                               <td>
-                                <textarea class="form-control" rows="2" id="'. $equipmentRow["equipmentName"] . 'Comment" style="font-size: 12px;"></textarea>
+                                <textarea class="form-control" rows="2" name="'. $equipmentRow["id"] . '-Comment" style="font-size: 12px;"></textarea>
                               </td>
                             </tr>
                           ';
@@ -202,6 +202,8 @@
 
                         echo '
                           </table>
+                          <input type="submit" value="Submit" class="btn btn-primary">
+                          </form>
                           
                         ';
                       }
@@ -214,10 +216,6 @@
                 }
               }
             }
-             echo '
-                      <input type="submit" value="Submit" style="text-align:center;">
-                  </form>
-                ';
           }
         }
       ?>
