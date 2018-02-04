@@ -142,7 +142,7 @@
               <tbody>
               <?php
                   $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
-                  $reservationQuery = mysqli_query($con, "SELECT * FROM tbl_reservation WHERE user_id='$id'");
+                  $reservationQuery = mysqli_query($con, "SELECT * FROM tbl_reservation WHERE user_id='$id' ORDER BY id DESC LIMIT 1");
                   while ($reservationResult = mysqli_fetch_array($reservationQuery)) {
                     $reservationId = $reservationResult["id"];
                     echo '
@@ -167,7 +167,7 @@
                 ?>
                 <?php
                   $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
-                  $paymentQuery = mysqli_query($con, "SELECT * FROM tbl_payment WHERE reservation_id='$reservationId'");
+                  $paymentQuery = mysqli_query($con, "SELECT * FROM tbl_payment WHERE reservation_id='$reservationId' ORDER BY id LIMIT 1");
                   while ($paymentResult = mysqli_fetch_array($paymentQuery)) {
                     $dpPaidOn = (string)$paymentResult["dpPaidOn"];
                     echo '

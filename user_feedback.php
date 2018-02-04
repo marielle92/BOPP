@@ -32,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Check In</title>
+  <title>Feedback</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -135,8 +135,7 @@
 
         <div class="row">
           <div class="offset-1 col-md-10">
-            <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-            Choose a photo to upload (you can only upload 1): &nbsp; <input name="uploadedfile" type="file" />
+            Choose a photo to upload (you can only upload 1): &nbsp; <input name="uploadedfile" type="file" accept="image/jpeg, image/png, image/jpg" />
           </div>
         </div><br><br><br>
         <div class="row">

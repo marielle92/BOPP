@@ -231,7 +231,7 @@
     <!-- Contact Form JavaScript -->
     <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
     <script src="startbootstrap-modern-business-3.3.7/js/jqBootstrapValidation.js"></script>
-    <script src="startbootstrap-modern-business-3.3.7/js/contact_me.js"></script>
+    
 		
 	</body>
 </html>

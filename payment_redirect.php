@@ -37,7 +37,8 @@
 		          <input type="hidden" name="business" value="mariellebanares@gmail.com">
 		          <input type="hidden" name="currency_code" value="PHP">
 		          <input type="hidden" name="item_name" value="Downpayment">
-		          <input type="hidden" name="amount" value="1"> <!-- <?php //echo $dpAmount; ?> -->
+		          <input type="hidden" name="amount" value="1">
+		          <input type="hidden" name="return" value="http://192.168.1.4:80/BOPP3/payment_success.php">
 		          <input type="image" style="width:300px; height:75px; display:block; padding-top: 20%; margin-left:auto; margin-right:auto;" src="photos/paypalButton.png" border="0" name="submit" alt="Make payments with PayPal - its fast, free and secure!">
 		        </form>
 		        ';

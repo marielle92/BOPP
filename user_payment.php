@@ -215,7 +215,7 @@
             <div class="control-group form-group">
               <div class="controls">
                 <!-- For success/fail messages -->
-                <button type="submit" class="btn btn-primary" id="btnSubmit">Proceed to Payment</button>
+                <button type="submit" class="btn btn-primary" id="btnSubmit">Pay with PayPal</button>
               </div>
             </div>
           </div>
