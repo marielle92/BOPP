@@ -190,7 +190,7 @@
               <div class="controls">
                 <label>
                   <input type="checkbox" name="termsAndConds" value="Terms and Conditions" required data-validation-required-message="This field is required.">
-                  I have read and agree with the terms and conditions.
+                  I have read and agree with the <a href="termsandconds.php" target="_blank">terms and conditions.</a>
                 </label>
               </div>
             </div><br/>

@@ -32,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Reservation Records</title>
+  <title>Amenities Inventory</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -53,42 +53,26 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Inventory<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Content</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+      </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventory">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Records</span>
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Amenities</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li class="nav-item">
-              <a href="admin_reservations.php">Reservations</a>
-            </li>
-            <li>
-              <a href="admin_payments.php">Payments</a>
-            </li>
-             <li>
-              <a href="admin_users.php">Users</a>
-            </li>
-            <li>
-              <a href="admin_logs.php">Logs</a>
-            </li>
-          </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventory">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Inventory</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="admin_equipment.php">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Equipment</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li class="nav-item active">
-              <a href="#">Amenities</a>
-            </li>
-            <li>
-              <a href="admin_equipment.php">Equipment</a>
-            </li>
-          </ul>
         </li>
-
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -106,11 +90,12 @@
       </ul>
     </div>
   </nav>
+
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Reservations</li>
+        <li class="breadcrumb-item active">Amenities</li>
       </ol>
     </div>
 
@@ -118,7 +103,7 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Reservations</div>
+          <i class="fa fa-table"></i> Amenities</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -38,11 +38,11 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			  <ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-				<li><a href="gallery.php">Gallery</a></li>
-				<li><a href="amenities.php">Rates and Amenities</a></li>
-				<li><a href="about_us.php">About Us</a></li>
-				<li><a href="contact_us.php">Contact Us</a></li>
+					<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+					<li><a href="gallery.php">Gallery</a></li>
+					<li><a href="amenities.php">Rates and Amenities</a></li>
+					<li><a href="about_us.php">About Us</a></li>
+					<li><a href="contact_us.php">Contact Us</a></li>
 			  </ul>
 
 			  
@@ -108,6 +108,9 @@
 								  <label><b>Password</b></label>
 								  <input type="password" placeholder="Enter Password" name="login_password" required>
 								  <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
+								  <a href="forgot_password.php">
+						          	<button type="button" class="btn btn-warning" role="button">Forgot Password</button>
+						          </a>
 								</div>
 							  </form>
 							</div>
@@ -177,6 +180,7 @@
 		</div>
 		<!-- REVIEWS -->
 		<div class="container">
+		<h1 align="center">FEEDBACK</h1>
 	    <table class="table table-condensed" id="dataTable" cellspacing="0">
 	      <tbody>
 	      <?php

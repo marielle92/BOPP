@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Home</title>
+		<title>Contact Us</title>
 	
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -107,6 +107,9 @@
 						          <label><b>Password</b></label>
 						          <input type="password" placeholder="Enter Password" name="login_password" required>
 						          <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
+						          <a href="forgot_password.php">
+						          	<button type="button" class="btn btn-warning" role="button">Forgot Password</button>
+						          </a>
 						        </div>
 						      </form>
 						    </div>

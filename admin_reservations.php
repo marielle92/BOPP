@@ -60,6 +60,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_amenities.php">Inventory</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Content</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+      </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="#">
@@ -84,20 +91,6 @@
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Logs</span>
           </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventory">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Inventory</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="admin_amenities.php">Amenities</a>
-            </li>
-            <li>
-              <a href="admin_equipment.php">Equipment</a>
-            </li>
-          </ul>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">

@@ -109,6 +109,9 @@
                             <label><b>Password</b></label>
                             <input type="password" placeholder="Enter Password" name="login_password" required>
                             <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
+                            <a href="forgot_password.php">
+                              <button type="button" class="btn btn-warning" role="button">Forgot Password</button>
+                            </a>
                           </div>
                         </form>
                       </div>
@@ -133,9 +136,7 @@
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+                <h1 class="page-header">Gallery</h1>
             </div>
         </div>
         <!-- /.row -->
@@ -144,47 +145,22 @@
         <div class="row">
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4642.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4643.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4644.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                </a>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4645.jpg" alt="">
                 </a>
             </div>
         </div>
@@ -194,70 +170,57 @@
         <div class="row">
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4646.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4647.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4648.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-3 portfolio-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src="evidences/DSC_4649.jpg" alt="">
                 </a>
             </div>
         </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+            <div class="col-md-3 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="evidences/DSC_4650.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="evidences/DSC_4651.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="evidences/DSC_4652.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="evidences/DSC_4656.jpg" alt="">
+                </a>
+            </div>
+        </div>
+      </div>
         <!-- /.row -->
 
         <hr>
 
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
 
         <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
 
     </div>
     <!-- /.container -->

@@ -9,20 +9,18 @@
     $id = $_SESSION["id"];
     $sql = "SELECT * FROM tbl_user where id='$id'";
     $result = $cn->query($sql);
-      if ($result->num_rows > 0) {
-
-        while($row = $result->fetch_assoc()) {
-          $_SESSION["firstName"] = $row["firstName"];
-          $_SESSION["middleName"] = $row["middleName"];
-          $_SESSION["email"] = $row["email"];
-          $_SESSION["username"] = $row["username"];
-        }
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        $_SESSION["firstName"] = $row["firstName"];
+        $_SESSION["middleName"] = $row["middleName"];
+        $_SESSION["email"] = $row["email"];
+        $_SESSION["username"] = $row["username"];
       }
-      else {
-        echo '<script> alert("Non-existent in DB"); window.location.href="index.php"; </script>';
-        }
+    }
+    else {
+      echo '<script> alert("Non-existent in DB"); window.location.href="index.php"; </script>';
+    }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,9 +39,6 @@
   <link href="startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
-  <!-- bootstrap calendar -->
-  <link href="css/bootstrap-datepicker/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
-  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -102,7 +97,6 @@
       </ul>
     </div>
   </nav>
-
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -110,8 +104,130 @@
         <li class="breadcrumb-item active">Check Out</li>
       </ol>
     </div>
+
+    <div class="container-fluid mb-2">
+
+      <!-- AMENITIES FROM DATABASE -->
+      <?php
+        // Get latest reservation
+        $reservationSql = "SELECT * FROM tbl_reservation WHERE user_id='$id' ORDER BY id DESC LIMIT 1";
+        $reservationResult = $cn->query($reservationSql);
+        if($reservationResult->num_rows > 0) {
+          $reservationRow = $reservationResult->fetch_assoc();
+          $reservationId = $reservationRow["id"];
+          
+          // Get amenities under latest reservation
+          $resAmenitySql = "SELECT * FROM tbl_reservation_amenities WHERE reservation_id = '$reservationId'";
+          $resAmenityResult = $cn->query($resAmenitySql);
+          if($resAmenityResult->num_rows > 0) {
+            while($resAmenityRow = $resAmenityResult->fetch_assoc()) {
+              $amenityId = $resAmenityRow["amenity_id"];
+
+              // Get amenity details
+              $amenitySql = "SELECT * FROM tbl_amenities WHERE id = '$amenityId'";
+              $amenityResult = $cn->query($amenitySql);
+              if ($amenityResult->num_rows > 0) {
+                while($amenityRow = $amenityResult->fetch_assoc()) { 
+                  echo '
+                    <!-- CHECK OUT EQUIPMENT STATUS -->
+                    <div class="col-md-12 mb-3">
+                      <div class="card">
+                        <div class="card-header">
+                          <strong>' . $amenityRow["amenityName"] . '</strong>
+                        </div>
+                        <div class="card-body">
+                    ';
+
+                      // Get equipments for each amenity
+                      $equipmentSql = "SELECT * FROM tbl_equipment WHERE amenity_id = " . $amenityRow["id"];
+                      $equipmentResult = $cn->query($equipmentSql);
+
+                      if($equipmentResult->num_rows > 0) {
+                        echo '
+                          <form action="checkin_redirect.php" method="post">
+                          <input type="hidden" name="amenityId" value="' . $amenityId . '" />
+                          <table class="table table-striped table-responsive">
+                            <tr align="center">
+                              <th>
+                                Name
+                              </th>
+                              <th>
+                                Qty
+                              </th>
+                              <th>
+                                Complete
+                              </th>
+                              <th>
+                                Incomplete
+                              </th>
+                              <th>
+                                Damaged
+                              </th>
+                              <th>
+                                Unavailable
+                              </th>
+                              <th>
+                                Comment
+                              </th>
+                            </tr>
+                        ';
+
+                        while($equipmentRow = $equipmentResult->fetch_assoc()) {
+                          echo '
+                            <tr align="center">
+                              <td>
+                                ' . $equipmentRow["equipmentName"] . '
+                              </td>
+                              <td>
+                                '. $equipmentRow["quantity"] . '
+                              </td>
+                              <td>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Complete" checked></label>
+                              </td>
+                              <td>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Incomplete"></label>
+                              </td>
+                              <td>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Damaged"></label>
+                              </td>
+                              <td>
+                                <label><input type="radio" name="'. $equipmentRow["id"] . '-Status" value="Unavailable"></label>
+                              </td>
+                              <td>
+                                <textarea class="form-control" rows="2" name="'. $equipmentRow["id"] . '-Comment" style="font-size: 12px;"></textarea>
+                              </td>
+                            </tr>
+                          ';
+                        }
+
+                        echo '
+                          </table>
+                          <input type="submit" value="Submit" class="btn btn-primary">
+                          </form>
+                          
+                        ';
+                      }
+
+                  echo '
+                        </div>
+                      </div>
+                    </div>
+                  ';
+                }
+              }
+            }
+          }
+        }
+      ?>
+
+    </div>
+  </div>
+
     
 
+      <!-- Example DataTables Card-->
+      
+    <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
@@ -137,52 +253,27 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="logout_redirect.php">Logout</a>
+            <a class="btn btn-primary" href="index.php">Logout</a>
           </div>
         </div>
       </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
+    <script src="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
+    <script src="startbootstrap-sb-admin-gh-pages/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
+    <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   </div>
-  
-  <!-- jQuery -->
-  <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-  <!-- Bootstrap core JavaScript-->
-  <script src="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <!-- Page level plugin JavaScript-->
-  <script src="startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
-  <script src="startbootstrap-sb-admin-gh-pages/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.js"></script>
-  <!-- Custom scripts for all pages-->
-  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
-  <!-- Custom scripts for this page-->
-  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
-  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
-  <!-- jqBootstrapValidation -->
-  <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
-
-  <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
-    });
-  </script>
-
-  <script type="text/javascript" src="js/momentjs/moment.js"></script>
-  <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
-  <script type="text/javascript">
-    $(function () {
-      $('#reservationDate').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: moment().format('YYYY-MM-DD')
-      });
-    });
-  </script>
-
-<!--  -->
-
 </body>
 
 </html>

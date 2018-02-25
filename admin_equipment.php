@@ -32,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Reservation Records</title>
+  <title>Equipment Inventory</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -53,44 +53,25 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Inventory<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Content</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+      </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="admin_amenities.php">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Amenities</span>
+          </a>
+        </li>
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Reservations</span>
+            <span class="nav-link-text">Equipment</span>
           </a>
-        </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="admin_payments.php">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Payments</span>
-            </a>
-          </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_users.php">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Users</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="admin_logs.php">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Logs</span>
-          </a>
-        </li>
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Inventory">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Inventory</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="admin_amenities.php">Amenities</a>
-            </li>
-            <li>
-              <a href="#">Equipment</a>
-            </li>
-          </ul>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
@@ -113,7 +94,7 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Reservations</li>
+        <li class="breadcrumb-item active">Equipment</li>
       </ol>
     </div>
 
@@ -121,7 +102,7 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Reservations</div>
+          <i class="fa fa-table"></i> Equipment</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -131,8 +112,10 @@
                   <th>Equipment Name</th>
                   <th>Quantity</th>
                   <th>Price</th>
-                  <th>Status</th>
-                  <th>Comment</th>
+                  <th>managerNotes</th>
+                  <th>Amenity ID</th>
+                  <th>Latest Status</th>
+                  <th>Latest Comment</th>
                 </tr>
               </thead>
               <tbody>
@@ -145,8 +128,10 @@
                       <td>' . $tblResult["equipmentName"] . '</td>
                       <td>' . $tblResult["quantity"] . '</td>
                       <td>' . $tblResult["buyingPrice"] . '</td>
-                      <td>' . $tblResult["equipmentStatus"] . '</td>
-                      <td>' . $tblResult["comment"] . '</td>
+                      <td>' . $tblResult["managerNotes"] . '</td>
+                      <td>' . $tblResult["amenity_id"] . '</td>
+                      <td>' . $tblResult["latestStatus"] . '</td>
+                      <td>' . $tblResult["latestComment"] . '</td>
                     </tr>';
                   }
                 ?>

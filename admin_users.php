@@ -51,6 +51,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_amenities.php">Inventory</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Content</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+      </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="admin_reservations">
@@ -76,20 +83,6 @@
             <span class="nav-link-text">Logs</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventory">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Inventory</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="admin_amenities.php">Amenities</a>
-            </li>
-            <li>
-              <a href="admin_equipment.php">Equipment</a>
-            </li>
-          </ul>
-        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -111,7 +104,7 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Reservations</li>
+        <li class="breadcrumb-item active">Users</li>
       </ol>
     </div>
 
@@ -119,7 +112,7 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Reservations</div>
+          <i class="fa fa-table"></i> Users</div>
         <div class="card-body">
           <div class="table-responsive">
              <!-- ADD USER BUTTON -->
@@ -147,8 +140,8 @@
                             <form method="post" action="addNewUser_redirect.php"> <!-- class="modal-content" -->
                               <div class="col-md-12 col-md-offset-12">
                               <label><b>Level of Acess</b></label></br>
-                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Staff" checked>Staff</label> &nbsp; &nbsp;
-                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Manager">Manager</label></br>
+                              <!--<label class="radio-inline"><input type="radio" name="levelOfAccess" value="Staff" checked>Staff</label> &nbsp; &nbsp; -->
+                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Manager" checked>Manager</label></br>
                               <label><b>First Name</b></label>
                               <input type="text" name="firstName" style="width: 100%;" required>
                               <label><b>Middle Name</b></label>
