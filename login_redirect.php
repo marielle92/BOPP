@@ -3,11 +3,7 @@
 ?>
 <?php
 	session_start();
-
-	$cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
-    if($cn->connect_errno > 0) {
-      die('Unable to connect to database [' . $cn->connect_error . ']');
-    }
+  require 'connection.php';
 ?>
 <html>
 <head>
@@ -26,7 +22,7 @@
       		if ($login_password == $row["password"]) {
             $accessLevel = $row["levelOfAccess"];
             if ($accessLevel == 'Manager') {
-        			header('Location: admin_reservations.php');
+        			header('Location: admin_notifications.php');
               $_SESSION["id"] = $row["id"];
 
               //tbl_logs

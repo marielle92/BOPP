@@ -184,11 +184,11 @@
 	    <table class="table table-condensed" id="dataTable" cellspacing="0">
 	      <tbody>
 	      <?php
-	          $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
-	          $feedbackQuery = mysqli_query($con, "SELECT * FROM tbl_feedback"); //WHERE mgr_evaluation="Approved"
+	      	require 'connection.php';
+	          $feedbackQuery = mysqli_query($cn, "SELECT * FROM tbl_feedback WHERE mgr_evaluation='Approved'");
 	          while ($feedbackResult = mysqli_fetch_array($feedbackQuery)) {
 	          	$userId = $feedbackResult["user_id"];
-	          	$userQuery = mysqli_query($con, "SELECT * FROM tbl_user WHERE id='$userId'"); 
+	          	$userQuery = mysqli_query($cn, "SELECT * FROM tbl_user WHERE id='$userId'"); 
 	          		while ($userResult = mysqli_fetch_array($userQuery)) {
 	          			$firstName = $userResult["firstName"];
 	          			$lastName = $userResult["lastName"];

@@ -2,10 +2,7 @@
   
   session_start();
 
-  $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
-    if($cn->connect_errno > 0) {
-      die('Unable to connect to database [' . $cn->connect_error . ']');
-    }
+  require 'connection.php';
 
     $id = $_SESSION["id"];
     $nameSql = "SELECT * FROM tbl_user where id='$id'";
@@ -33,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Reservation Records</title>
+  <title>Home</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -60,55 +57,34 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#">Notifications</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_amenities.php">Inventory</a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Content<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+      </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Reservations</span>
+            <span class="nav-link-text">Home</span>
           </a>
         </li>
-          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
             <a class="nav-link" href="admin_payments.php">
               <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">Payments</span>
+              <span class="nav-link-text">Gallery</span>
             </a>
           </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="admin_users.php">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Users</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="admin_logs.php">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Logs</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventory">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Inventory</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="admin_amenities.php">Amenities</a>
-            </li>
-            <li>
-              <a href="admin_equipment.php">Equipment</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
+            <span class="nav-link-text">Rates And Amenities</span>
           </a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -120,91 +96,8 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Payments</li>
+        <li class="breadcrumb-item active">Home Content</li>
       </ol>
-    </div>
-
-    <!-- Example DataTables Card-->
-    <div class="container-fluid">
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i> Payments</div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Payment ID</th>
-                  <th>Full Name</th>
-                  <th>Country</th>
-                  <th>City</th>
-                  <th>Specific Address</th>
-                  <th>Total Amount</th>
-                  <th>Downpayment Amount</th>
-                  <th>Downpayment Paid On</th>
-                  <th>Remaining Balance</th>
-                  <th>Full Paid On</th>
-                  <th>Payment Status</th>
-                  <th>Reservation ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                  $sql = "SELECT * FROM tbl_payment";
-                  $result = $cn->query($sql);
-                    if ($result->num_rows > 0) {
-
-                      while($row = $result->fetch_assoc()) {
-                        $paymentId = $row["id"];
-                        $fullName = $row["fullName"];
-                        $addressCountry = $row["addressCountry"];
-                        $addressCity = $row["addressCity"];
-                        $addressOthers = $row["addressOthers"];
-                        $totalAmount = $row["totalAmount"];
-                        $dpAmount = $row["dpAmount"];
-                        $dpPaidOn = $row["dpPaidOn"];
-                        $remainingBalance = $row["remainingBalance"];
-                        $fullPaidOn = $row["fullPaidOn"];
-                        $paymentStatus = $row["paymentStatus"];
-                        $reservationId = $row["reservation_id"];
-                        
-                        //table rows
-                        echo '
-                          <tr>
-                            <td>
-                              <!-- Button to Open the Modal -->
-                              <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $paymentId .'">
-                                Update
-                              </button>
-                              
-                            </td>
-                            <td>' . $paymentId . '</td>
-                            <td>' . $fullName . '</td>
-                            <td>' . $addressCountry . '</td>
-                            <td>' . $addressCity . '</td>
-                            <td>' . $addressOthers . '</td>
-                            <td>' . $totalAmount . '</td>
-                            <td>' . $dpAmount . '</td>
-                            <td>' . $dpPaidOn . '</td>
-                            <td>' . $remainingBalance . '</td>
-                            <td>' . $fullPaidOn . '</td>
-                            <td>' . $paymentStatus . '</td>
-                            <td>' . $reservationId . '</td>
-                          </tr>
-                        ';
-                        }   
-                      }
-                      
-                    else {
-                      echo "0 results";
-                      }
-                ?>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
       
     <!-- /.container-fluid-->
@@ -212,7 +105,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>by Marielle</small>
         </div>
       </div>
     </footer>
@@ -256,31 +149,19 @@
           <!-- $("input[name='reservationId']").val() -->
           <!-- Modal body -->
           <div class="modal-body">
-            <form action="payment_update.php" method="post">
+            <form action="reservation_update.php" method="post">
+              <label>Reservation ID</label>
+              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Contact Number</label>
+              <input type="text" name="contactNumber"><br><br>
+              <label>Reserved Date(YYYY-MM-DD)</label>
+              <input type="text" name="reservedDate" ><br><br>
+              <label>Time</label>
+              <input type="text" name="time"><br><br>
+              <label>User ID</label>
+              <input type="text" name="userId" style="background-color:#C0C0C0;" readonly><br><br>
               <label>Payment ID</label>
               <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Full Name</label>
-              <input type="text" name="fullName"><br><br>
-              <label>Country</label>
-              <input type="text" name="addressCountry" ><br><br>
-              <label>City</label>
-              <input type="text" name="addressCity"><br><br>
-              <label>Specific Address</label>
-              <input type="text" name="addressOthers"><br><br>
-              <label>Total Amount</label>
-              <input type="text" name="totalAmount"><br><br>
-              <label>Downpayment Amount</label>
-              <input type="text" name="dpAmount" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Downpayment Paid On</label>
-              <input type="text" name="dpPaidOn" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Remaining Balance</label>
-              <input type="text" name="remainingBalance" ><br><br>
-              <label>Full Paid On</label>
-              <input type="text" name="fullPaidOn"><br><br>
-              <label>Payment Status</label>
-              <input type="text" name="paymentStatus"><br><br>
-              <label>Reservation Id</label>
-              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
               <input type="Submit" value="Update">
             </form>
 
@@ -336,25 +217,19 @@
   <script type="text/javascript">
     $(function(){
       $(document).on('click', '.btn_update', function(){
-        var paymentId = $(this).attr('data-rId');
+        var reservationId = $(this).attr('data-rId');
         $.ajax({
-          url : "get_payments.php?update=true&rid=" + paymentId,
+          url : "get_reservations.php?update=true&rid=" + reservationId,
           type : "get",
           dataType : 'json',
           success : function(data){
             console.log(data);
-            $("input[name='paymentId']").val(data.id);
-            $("input[name='fullName']").val(data.fullName);
-            $("input[name='addressCountry']").val(data.addressCountry);
-            $("input[name='addressCity']").val(data.addressCity);
-            $("input[name='addressOthers']").val(data.addressOthers);
-            $("input[name='totalAmount']").val(data.totalAmount);
-            $("input[name='dpAmount']").val(data.dpAmount);
-            $("input[name='dpPaidOn']").val(data.dpPaidOn);
-            $("input[name='remainingBalance']").val(data.remainingBalance);
-            $("input[name='fullPaidOn']").val(data.fullPaidOn);
-            $("input[name='paymentStatus']").val(data.paymentStatus);
-            $("input[name='reservationId']").val(data.reservation_id);
+            $("input[name='reservationId']").val(data.id);
+            $("input[name='contactNumber']").val(data.contactNumber);
+            $("input[name='reservedDate']").val(data.reservedDate);
+             $("input[name='time']").val(data.time);
+              $("input[name='userId']").val(data.user_id);
+               $("input[name='paymentId']").val(data.payment_id);
 
           },
           error: function(err){

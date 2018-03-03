@@ -12,17 +12,17 @@
 
 <?php
 	if (isset($_GET["email"]) && isset($_GET["token"])) {
-		$connection = new mysqli("localhost", "root", "", "blueoasis");
+		require 'connection.php';
 
-		$email = $connection->real_escape_string($_GET["email"]);
-		$token = $connection->real_escape_string($_GET["token"]);
+		$email = $cn->real_escape_string($_GET["email"]);
+		$token = $cn->real_escape_string($_GET["token"]);
 		echo '
 			<label>Email: <input type="text" name="email" value="'. $email .'" readonly></label><br>
 			<label>Token: <input type="text" name="token" value="'. $token .'" readonly></label>
 			</form>
 		';
 
-		$data = $connection->query("SELECT id FROM tbl_user WHERE email='$email' AND token='$token'");
+		$data = $cn->query("SELECT id FROM tbl_user WHERE email='$email' AND token='$token'");
 
 		if ($data->num_rows > 0) {
 

@@ -1,9 +1,6 @@
 <?php
 
-	$cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
-    if($cn->connect_errno > 0) {
-      die('Unable to connect to database [' . $cn->connect_error . ']');
-    }
+	 require 'connection.php';
 
     $password1 = $_POST["password1"];
     $password2 = $_POST["password2"];
@@ -19,7 +16,7 @@
 		<?php
 		   if ($password1 == $password2) {
         $password = md5($password2, FALSE);
-        $sql = "UPDATE tbl_user SET password='$password', token='' WHERE token='$token' AND email='$email'";
+        $sql = "UPDATE tbl_user SET password='$password', token=NULL WHERE token='$token' AND email='$email'";
         if($cn->query($sql) === TRUE) {
           echo '<script> alert("Password changed successfully.");  window.location.href="index.php"; </script>';
           $token = "NULL";

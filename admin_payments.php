@@ -2,10 +2,7 @@
   
   session_start();
 
-  $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
-    if($cn->connect_errno > 0) {
-      die('Unable to connect to database [' . $cn->connect_error . ']');
-    }
+  require 'connection.php';
 
     $id = $_SESSION["id"];
     $nameSql = "SELECT * FROM tbl_user where id='$id'";

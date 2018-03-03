@@ -1,5 +1,5 @@
 <?php
-  $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
+  require 'connection.php';
 	if($_GET['update'] == true && $_GET['rid']){
     $rid = $_GET['rid'];
     $sql = "SELECT * FROM tbl_payment where id = " . $rid;

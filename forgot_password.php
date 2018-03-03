@@ -1,9 +1,9 @@
 <?php
 	if (isset($_POST["forgotPass"])) {
-		$connection = new mysqli("localhost", "root", "", "blueoasis");
+		require 'connection.php';
 
-		$email = $connection->real_escape_string($_POST["email"]);
-		$data = $connection->query("SELECT id FROM tbl_user WHERE email='$email'");
+		$email = $cn->real_escape_string($_POST["email"]);
+		$data = $cn->query("SELECT id FROM tbl_user WHERE email='$email'");
 
 		if ($data->num_rows > 0) {
 			$str = "0123456789QWERTYUIOPMNBVCXZ";
@@ -13,9 +13,9 @@
 
 			//mail($email, "Reset Password", "To reset your password, please click on the link below:", "From: blueoasis.dev@gmail.com\r\n");
 
-			$connection->query("UPDATE tbl_user SET token='$str' WHERE email='$email'");
+			$cn->query("UPDATE tbl_user SET token='$str' WHERE email='$email'");
 
-			echo "Your reset password code has been sent to your email.";
+			echo '<script> alert("Reset password code has been sent to your email");  window.location.href="index.php"; </script>';
 		}
 		else {
 			echo "Email not found.";

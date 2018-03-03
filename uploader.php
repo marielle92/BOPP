@@ -1,10 +1,7 @@
 <?php
   session_start();
 
-  $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
-  if($cn->connect_errno > 0) {
-    die('Unable to connect to database [' . $cn->connect_error . ']');
-  }
+  require 'connection.php';
 
   $id = $_SESSION["id"];
   $sql = "SELECT * FROM tbl_reservation where user_id='$id'";

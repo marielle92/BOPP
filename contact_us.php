@@ -169,7 +169,7 @@
                     Phone: (+632) 933-987-6515
                 </p>
                 <p><i class="fa fa-envelope-o"></i> 
-                    <a href="mailto:blueoasis.dev@gmail.com">blueoasis.dev@gmail.com</a>
+                    <a href="mailto:blueoasis.dev@gmail.com">blueoasis.dev2@gmail.com</a>
                 </p>
                 <ul class="list-unstyled list-inline list-social-icons">
                     <li>

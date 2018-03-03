@@ -1,10 +1,7 @@
 <?php
   session_start();
 
-  $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
-    if($cn->connect_errno > 0) {
-      die('Unable to connect to database [' . $cn->connect_error . ']');
-    }
+  require 'connection.php';
 
     $id = $_SESSION["id"];
     $reservationId = $_SESSION["reservationId"];
@@ -72,18 +69,6 @@
           <a class="nav-link" href="user_booking.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">My Booking</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="user_checkin.php">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Check In</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="user_checkout.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Check Out</span>
           </a>
         </li>
       </ul>

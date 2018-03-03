@@ -1,10 +1,7 @@
 <?php
   session_start();
 
-  $cn = mysqli_connect('localhost', 'root', '', 'blueoasis');
-    if($cn->connect_errno > 0) {
-      die('Unable to connect to database [' . $cn->connect_error . ']');
-    }
+  require 'connection.php';
 
     $id = $_SESSION["id"];
     $sql = "SELECT * FROM tbl_user where id='$id'";
@@ -73,18 +70,6 @@
             <span class="nav-link-text">My Booking</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="user_checkin.php">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Check In</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="user_checkout.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Check Out</span>
-          </a>
-        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -117,7 +102,7 @@
         <div class="row">
           <div class="offset-1 col-md-10">
             <label class="radio-inline">Rate Us<br>
-              <input type="radio" name="rating" value="5">5 &nbsp; &nbsp;
+              <input type="radio" name="rating" value="5" checked>5 &nbsp; &nbsp;
               <input type="radio" name="rating" value="4">4 &nbsp; &nbsp;
               <input type="radio" name="rating" value="3">3 &nbsp; &nbsp;
               <input type="radio" name="rating" value="2">2 &nbsp; &nbsp;
@@ -129,7 +114,7 @@
         <div class="row">
           <div class="offset-1 col-md-10">
             <label>Review:</label><br/>
-            <textarea rows="10" id="review" name="review" style="font-size: 12px; width: 90%;"></textarea>
+            <textarea rows="10" id="review" name="review" style="font-size: 12px; width: 90%;" required></textarea>
           </div>
         </div><br><br>
 
