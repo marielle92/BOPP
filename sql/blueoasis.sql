@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2018 at 06:52 AM
+-- Generation Time: Mar 03, 2018 at 10:18 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -28,7 +29,6 @@ USE `blueoasis`;
 -- Table structure for table `tbl_amenities`
 --
 
-DROP TABLE IF EXISTS `tbl_amenities`;
 CREATE TABLE `tbl_amenities` (
   `id` int(11) NOT NULL,
   `amenityName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -56,7 +56,6 @@ INSERT INTO `tbl_amenities` (`id`, `amenityName`, `amenityDescription`, `amenity
 -- Table structure for table `tbl_equipment`
 --
 
-DROP TABLE IF EXISTS `tbl_equipment`;
 CREATE TABLE `tbl_equipment` (
   `id` int(11) NOT NULL,
   `equipmentName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -99,7 +98,6 @@ INSERT INTO `tbl_equipment` (`id`, `equipmentName`, `quantity`, `buyingPrice`, `
 -- Table structure for table `tbl_feedback`
 --
 
-DROP TABLE IF EXISTS `tbl_feedback`;
 CREATE TABLE `tbl_feedback` (
   `id` int(11) NOT NULL,
   `rating` int(11) DEFAULT NULL,
@@ -126,7 +124,6 @@ INSERT INTO `tbl_feedback` (`id`, `rating`, `review`, `image`, `mgr_evaluation`,
 -- Table structure for table `tbl_gallery`
 --
 
-DROP TABLE IF EXISTS `tbl_gallery`;
 CREATE TABLE `tbl_gallery` (
   `id` int(11) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL
@@ -138,12 +135,19 @@ CREATE TABLE `tbl_gallery` (
 -- Table structure for table `tbl_home`
 --
 
-DROP TABLE IF EXISTS `tbl_home`;
 CREATE TABLE `tbl_home` (
   `id` int(8) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL,
   `imageDescription` varchar(255) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_home`
+--
+
+INSERT INTO `tbl_home` (`id`, `imageName`, `imageDescription`) VALUES
+(1, 'home1.jpg', 'Clear blue water'),
+(2, 'home2.jpg', 'AASDFGHJKL');
 
 -- --------------------------------------------------------
 
@@ -151,7 +155,6 @@ CREATE TABLE `tbl_home` (
 -- Table structure for table `tbl_logs`
 --
 
-DROP TABLE IF EXISTS `tbl_logs`;
 CREATE TABLE `tbl_logs` (
   `id` int(255) NOT NULL,
   `user_id` int(255) NOT NULL,
@@ -278,7 +281,10 @@ INSERT INTO `tbl_logs` (`id`, `user_id`, `log_dateTime`, `action`) VALUES
 (112, 7, '2018-03-03 14:24:34.000000', 'Log Out'),
 (113, 1, '2018-03-03 14:24:43.000000', 'Log In'),
 (114, 1, '2018-03-03 14:25:08.000000', 'Log Out'),
-(115, 7, '2018-03-03 14:29:02.000000', 'Log In');
+(115, 7, '2018-03-03 14:29:02.000000', 'Log In'),
+(116, 1, '2018-03-03 16:46:08.000000', 'Log In'),
+(117, 1, '2018-03-03 16:51:24.000000', 'Log Out'),
+(118, 7, '2018-03-03 16:51:34.000000', 'Log In');
 
 -- --------------------------------------------------------
 
@@ -286,7 +292,6 @@ INSERT INTO `tbl_logs` (`id`, `user_id`, `log_dateTime`, `action`) VALUES
 -- Table structure for table `tbl_payment`
 --
 
-DROP TABLE IF EXISTS `tbl_payment`;
 CREATE TABLE `tbl_payment` (
   `id` int(11) NOT NULL,
   `fullName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -361,7 +366,6 @@ INSERT INTO `tbl_payment` (`id`, `fullName`, `addressCountry`, `addressCity`, `a
 -- Table structure for table `tbl_ratesandamenities`
 --
 
-DROP TABLE IF EXISTS `tbl_ratesandamenities`;
 CREATE TABLE `tbl_ratesandamenities` (
   `id` int(8) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -376,7 +380,6 @@ CREATE TABLE `tbl_ratesandamenities` (
 -- Table structure for table `tbl_reservation`
 --
 
-DROP TABLE IF EXISTS `tbl_reservation`;
 CREATE TABLE `tbl_reservation` (
   `id` int(11) NOT NULL,
   `contactNumber` varchar(255) NOT NULL,
@@ -441,7 +444,6 @@ INSERT INTO `tbl_reservation` (`id`, `contactNumber`, `reservedDate`, `time`, `u
 -- Table structure for table `tbl_reservation_amenities`
 --
 
-DROP TABLE IF EXISTS `tbl_reservation_amenities`;
 CREATE TABLE `tbl_reservation_amenities` (
   `reservation_id` int(11) NOT NULL,
   `amenity_id` int(11) NOT NULL
@@ -572,7 +574,6 @@ INSERT INTO `tbl_reservation_amenities` (`reservation_id`, `amenity_id`) VALUES
 -- Table structure for table `tbl_user`
 --
 
-DROP TABLE IF EXISTS `tbl_user`;
 CREATE TABLE `tbl_user` (
   `id` int(11) NOT NULL,
   `levelOfAccess` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -707,12 +708,12 @@ ALTER TABLE `tbl_gallery`
 -- AUTO_INCREMENT for table `tbl_home`
 --
 ALTER TABLE `tbl_home`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 --
 -- AUTO_INCREMENT for table `tbl_payment`
 --
@@ -762,6 +763,7 @@ ALTER TABLE `tbl_reservation`
 ALTER TABLE `tbl_reservation_amenities`
   ADD CONSTRAINT `fk_tbl_ra_amenity` FOREIGN KEY (`amenity_id`) REFERENCES `tbl_amenities` (`id`),
   ADD CONSTRAINT `fk_tbl_ra_reservation` FOREIGN KEY (`reservation_id`) REFERENCES `tbl_reservation` (`id`);
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

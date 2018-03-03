@@ -142,7 +142,7 @@
 			<div class="carousel-inner">
 
 			  <div class="item active">
-				<img src="images/home1.jpg" alt="Los Angeles" style="width:100%;">
+				<img src="images/home1.JPG" style="width:100%;">
 				<div class="carousel-caption">
 				  <h3>Blue Oasis</h3>
 				  <p>Clear blue waters</p>
@@ -150,7 +150,7 @@
 			  </div>
 
 			  <div class="item">
-				<img src="images/home2.jpg" alt="Chicago" style="width:100%;">
+				<img src="images/home2.JPG" style="width:100%;">
 				<div class="carousel-caption">
 				  <h3>Blue Oasis</h3>
 				  <p>Modern style</p>
@@ -158,7 +158,7 @@
 			  </div>
 			
 			  <div class="item">
-				<img src="images/home3.jpg" alt="New York" style="width:100%;">
+				<img src="images/home3.JPG" style="width:100%;">
 				<div class="carousel-caption">
 				  <h3>Blue Oasis</h3>
 				  <p>Garden setting</p>
