@@ -1,14 +1,15 @@
 <?php
+
   session_start();
 
   require 'connection.php';
 
     $id = $_SESSION["id"];
-    $sql = "SELECT * FROM tbl_user where id='$id'";
-    $result = $cn->query($sql);
-      if ($result->num_rows > 0) {
+    $nameSql = "SELECT * FROM tbl_user where id='$id'";
+    $nameResult = $cn->query($nameSql);
+      if ($nameResult->num_rows > 0) {
 
-        while($row = $result->fetch_assoc()) {
+        while($row = $nameResult->fetch_assoc()) {
           $_SESSION["firstName"] = $row["firstName"];
           $_SESSION["middleName"] = $row["middleName"];
           $_SESSION["email"] = $row["email"];
@@ -29,7 +30,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Equipment Inventory</title>
+  <title>Reservation Records</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -51,22 +58,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item active"><a class="nav-link" href="#">Inventory<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="staff_amenities.php">Inventory</a></li>
       </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_amenities.php">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Amenities</span>
-          </a>
-        </li>
         <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Equipment</span>
+            <span class="nav-link-text">Reservations</span>
+          </a>
+        </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="staff_payments.php">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">Payments</span>
+            </a>
+          </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="staff_users.php">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Users</span>
           </a>
         </li>
       </ul>
@@ -90,7 +101,7 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Equipment</li>
+        <li class="breadcrumb-item active">Reservations</li>
       </ol>
     </div>
 
@@ -98,51 +109,51 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Equipment</div>
+          <i class="fa fa-table"></i> Reservations</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Equipment ID</th>
-                  <th>Equipment Name</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>managerNotes</th>
-                  <th>Amenity ID</th>
-                  <th>Status</th>
+                  <th>Reservation ID</th>
+                  <th>Contact Number</th>
+                  <th>Reserved Date</th>
+                  <th>Reserved Time</th>
+                  <th>User ID</th>
+                  <th>Payment ID</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $query = mysqli_query($cn, "SELECT * FROM tbl_equipment");
-                  while ($tblResult = mysqli_fetch_array($query)) {
-                    $equipmentId = $tblResult["id"];
-                    $equipmentName = $tblResult["equipmentName"];
-                    $quantity = $tblResult["quantity"];
-                    $buyingPrice = $tblResult["buyingPrice"];
-                    $managerNotes = $tblResult["managerNotes"];
-                    $amenity_id = $tblResult["amenity_id"];
-                    $equipmentStatus = $tblResult["equipmentStatus"];
+                  $sql = "SELECT * FROM tbl_reservation";
+                  $result = $cn->query($sql);
+                    if ($result->num_rows > 0) {
 
-                    echo '<tr>
-                      <td>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $equipmentId .'">
-                          Update
-                        </button>
+                      while($row = $result->fetch_assoc()) {
+                        $reservationId = $row["id"];
+                        $contactNumber = $row["contactNumber"];
+                        $reservedDate = $row["reservedDate"];
+                        $time = $row["time"];
+                        $userId = $row["user_id"];
+                        $paymentId = $row["payment_id"];
 
-                      </td>
-                      <td>' . $equipmentId . '</td>
-                      <td>' . $equipmentName . '</td>
-                      <td>' . $quantity . '</td>
-                      <td>' . $buyingPrice . '</td>
-                      <td>' . $managerNotes . '</td>
-                      <td>' . $amenity_id . '</td>
-                      <td>' . $equipmentStatus . '</td>
-                    </tr>';
-                  }
+                        //table rows
+                        echo '
+                          <tr>
+                            <td>' . $reservationId . '</td>
+                            <td>' . $contactNumber . '</td>
+                            <td>' . $reservedDate . '</td>
+                            <td>' . $time . '</td>
+                            <td>' . $userId . '</td>
+                            <td>' . $paymentId . '</td>
+                          </tr>
+                        ';
+                        }
+                      }
+
+                    else {
+                      echo "0 results";
+                      }
                 ?>
               </tbody>
             </table>
@@ -156,7 +167,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>by Marielle</small>
         </div>
       </div>
     </footer>
@@ -200,21 +211,19 @@
           <!-- $("input[name='reservationId']").val() -->
           <!-- Modal body -->
           <div class="modal-body">
-            <form action="equipment_update.php" method="post">
-              <label>Equipment ID</label>
-              <input type="text" name="equipmentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Equipment Name</label>
-              <input type="text" name="equipmentName" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Quantity</label>
-              <input type="text" name="quantity" required><br><br>
-              <label>Buying Price</label>
-              <input type="text" name="amenityDescription" required><br><br>
-              <label>Manager Notes</label>
-              <input type="text" name="managerNotes" required><br><br>
-              <label>Amenity ID</label>
-              <input type="text" name="amenityId" required><br><br>
-              <label>Status</label>
-              <input type="text" name="status" required><br><br>
+            <form action="reservation_update.php" method="post">
+              <label>Reservation ID</label>
+              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Contact Number</label>
+              <input type="text" name="contactNumber"><br><br>
+              <label>Reserved Date(YYYY-MM-DD)</label>
+              <input type="text" name="reservedDate" ><br><br>
+              <label>Time</label>
+              <input type="text" name="time"><br><br>
+              <label>User ID</label>
+              <input type="text" name="userId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Payment ID</label>
+              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
               <input type="Submit" value="Update">
             </form>
 
@@ -224,6 +233,9 @@
       </div>
     </div>
   </div>
+
+
+
 
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -239,7 +251,6 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
-  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
@@ -248,19 +259,6 @@
     });
   </script>
 
-  <script type="text/javascript" src="js/momentjs/moment.js"></script>
-  <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
-  <script type="text/javascript">
-    $(function () {
-      $('#reservationDate').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: moment().format('YYYY-MM-DD')
-      });
-    });
-  </script>
-
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -272,31 +270,28 @@
 
   <script type="text/javascript">
     $('#dataTable').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-         'excel', 'pdf', 'print'
-        ]
+      dom: 'Blfrtip',
+      buttons: [
+       'excel', 'pdf', 'print',]
     } );
   </script>
-
-<!--ajax -->
+  <!--ajax -->
   <script type="text/javascript">
     $(function(){
       $(document).on('click', '.btn_update', function(){
-        var equipmentId = $(this).attr('data-rId');
+        var reservationId = $(this).attr('data-rId');
         $.ajax({
-          url : "get_equipment.php?update=true&rid=" + equipmentId,
+          url : "get_reservations.php?update=true&rid=" + reservationId,
           type : "get",
           dataType : 'json',
           success : function(data){
             console.log(data);
-            $("input[name='equipmentId']").val(data.id);
-            $("input[name='equipmentName']").val(data.equipmentName);
-            $("input[name='quantity']").val(data.quantity);
-            $("input[name='buyingPrice']").val(data.buyingPrice);
-            $("input[name='managerNotes']").val(data.managerNotes);
-            $("input[name='amenity_id']").val(data.amenity_id);
-            $("input[name='equipmentStatus']").val(data.equipmentStatus);
+            $("input[name='reservationId']").val(data.id);
+            $("input[name='contactNumber']").val(data.contactNumber);
+            $("input[name='reservedDate']").val(data.reservedDate);
+             $("input[name='time']").val(data.time);
+              $("input[name='userId']").val(data.user_id);
+               $("input[name='paymentId']").val(data.payment_id);
 
           },
           error: function(err){

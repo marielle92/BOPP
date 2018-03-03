@@ -51,7 +51,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
         <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records<span class="sr-only">(current)</span></a></li>
         <li class="nav-item active"><a class="nav-link" href="#">Inventory<span class="sr-only">(current)</span></a></li>
         <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>

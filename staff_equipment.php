@@ -51,14 +51,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="staff_reservation.php">Records<span class="sr-only">(current)</span></a></li>
         <li class="nav-item active"><a class="nav-link" href="#">Inventory<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
       </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_amenities.php">
+          <a class="nav-link" href="staff_amenities.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Amenities</span>
           </a>
@@ -104,7 +102,6 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th></th>
                   <th>Equipment ID</th>
                   <th>Equipment Name</th>
                   <th>Quantity</th>
@@ -127,13 +124,6 @@
                     $equipmentStatus = $tblResult["equipmentStatus"];
 
                     echo '<tr>
-                      <td>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $equipmentId .'">
-                          Update
-                        </button>
-
-                      </td>
                       <td>' . $equipmentId . '</td>
                       <td>' . $equipmentName . '</td>
                       <td>' . $quantity . '</td>
@@ -156,7 +146,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>by Marielle</small>
         </div>
       </div>
     </footer>

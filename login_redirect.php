@@ -1,5 +1,5 @@
 <?php
-	
+
 ?>
 <?php
 	session_start();
@@ -22,7 +22,19 @@
       		if ($login_password == $row["password"]) {
             $accessLevel = $row["levelOfAccess"];
             if ($accessLevel == 'Manager') {
-        			header('Location: admin_notifications.php');
+        			header('Location: admin_reservations.php');
+              $_SESSION["id"] = $row["id"];
+
+              //tbl_logs
+              date_default_timezone_set("Asia/Manila");
+              $user_id = $_SESSION["id"];
+              $dateTime = date("Y-m-d ") . date("H:i:s");
+              $logSql = "INSERT INTO tbl_logs (user_id, log_dateTime, action) VALUES ('$user_id', '$dateTime', 'Log In')";
+              $cn->query($logSql);
+              exit();
+            }
+            if ($accessLevel == 'Staff') {
+              header('Location: staff_reservation.php');
               $_SESSION["id"] = $row["id"];
 
               //tbl_logs
@@ -54,7 +66,7 @@
     else {
       echo '<script> alert("User not registered"); window.location.href="index.php"; </script>';
       }
-					
+
 	?>
 </body>
 </html>

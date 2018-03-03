@@ -1,14 +1,15 @@
 <?php
+
   session_start();
 
   require 'connection.php';
 
     $id = $_SESSION["id"];
-    $sql = "SELECT * FROM tbl_user where id='$id'";
-    $result = $cn->query($sql);
-      if ($result->num_rows > 0) {
+    $nameSql = "SELECT * FROM tbl_user where id='$id'";
+    $nameResult = $cn->query($nameSql);
+      if ($nameResult->num_rows > 0) {
 
-        while($row = $result->fetch_assoc()) {
+        while($row = $nameResult->fetch_assoc()) {
           $_SESSION["firstName"] = $row["firstName"];
           $_SESSION["middleName"] = $row["middleName"];
           $_SESSION["email"] = $row["email"];
@@ -29,7 +30,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Equipment Inventory</title>
+  <title>Payment Records</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -51,22 +58,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item active"><a class="nav-link" href="#">Inventory<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="staff_amenities.php">Inventory</a></li>
       </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_amenities.php">
+          <a class="nav-link" href="staff_reservation.php">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Amenities</span>
+            <span class="nav-link-text">Reservations</span>
           </a>
         </li>
         <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Equipment</span>
+            <span class="nav-link-text">Payments</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="staff_users.php">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Users</span>
           </a>
         </li>
       </ul>
@@ -90,7 +101,7 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Equipment</li>
+        <li class="breadcrumb-item active">Payments</li>
       </ol>
     </div>
 
@@ -98,51 +109,72 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Equipment</div>
+          <i class="fa fa-table"></i> Payments</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Equipment ID</th>
-                  <th>Equipment Name</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>managerNotes</th>
-                  <th>Amenity ID</th>
-                  <th>Status</th>
+                  <th>Payment ID</th>
+                  <th>Full Name</th>
+                  <th>Country</th>
+                  <th>City</th>
+                  <th>Specific Address</th>
+                  <th>Total Amount</th>
+                  <th>Downpayment Amount</th>
+                  <th>Downpayment Paid On</th>
+                  <th>Remaining Balance</th>
+                  <th>Full Paid On</th>
+                  <th>Deposit Slip<th>
+                  <th>Payment Status</th>
+                  <th>Reservation ID</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $query = mysqli_query($cn, "SELECT * FROM tbl_equipment");
-                  while ($tblResult = mysqli_fetch_array($query)) {
-                    $equipmentId = $tblResult["id"];
-                    $equipmentName = $tblResult["equipmentName"];
-                    $quantity = $tblResult["quantity"];
-                    $buyingPrice = $tblResult["buyingPrice"];
-                    $managerNotes = $tblResult["managerNotes"];
-                    $amenity_id = $tblResult["amenity_id"];
-                    $equipmentStatus = $tblResult["equipmentStatus"];
+                  $sql = "SELECT * FROM tbl_payment";
+                  $result = $cn->query($sql);
+                    if ($result->num_rows > 0) {
 
-                    echo '<tr>
-                      <td>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $equipmentId .'">
-                          Update
-                        </button>
+                      while($row = $result->fetch_assoc()) {
+                        $paymentId = $row["id"];
+                        $fullName = $row["fullName"];
+                        $addressCountry = $row["addressCountry"];
+                        $addressCity = $row["addressCity"];
+                        $addressOthers = $row["addressOthers"];
+                        $totalAmount = $row["totalAmount"];
+                        $dpAmount = $row["dpAmount"];
+                        $dpPaidOn = $row["dpPaidOn"];
+                        $remainingBalance = $row["remainingBalance"];
+                        $fullPaidOn = $row["fullPaidOn"];
+                        $depositSlip = $row["depositSlip"];
+                        $paymentStatus = $row["paymentStatus"];
+                        $reservationId = $row["reservation_id"];
 
-                      </td>
-                      <td>' . $equipmentId . '</td>
-                      <td>' . $equipmentName . '</td>
-                      <td>' . $quantity . '</td>
-                      <td>' . $buyingPrice . '</td>
-                      <td>' . $managerNotes . '</td>
-                      <td>' . $amenity_id . '</td>
-                      <td>' . $equipmentStatus . '</td>
-                    </tr>';
-                  }
+                        //table rows
+                        echo '
+                          <tr>
+                            <td>' . $paymentId . '</td>
+                            <td>' . $fullName . '</td>
+                            <td>' . $addressCountry . '</td>
+                            <td>' . $addressCity . '</td>
+                            <td>' . $addressOthers . '</td>
+                            <td>' . $totalAmount . '</td>
+                            <td>' . $dpAmount . '</td>
+                            <td>' . $dpPaidOn . '</td>
+                            <td>' . $remainingBalance . '</td>
+                            <td>' . $fullPaidOn . '</td>
+                            <td> <img src="payments/' . $depositSlip . '" height="100" width="150" ></td>
+                            <td>' . $paymentStatus . '</td>
+                            <td>' . $reservationId . '</td>
+                          </tr>
+                        ';
+                        }
+                      }
+
+                    else {
+                      echo "0 results";
+                      }
                 ?>
               </tbody>
             </table>
@@ -156,7 +188,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>by Marielle</small>
         </div>
       </div>
     </footer>
@@ -200,21 +232,31 @@
           <!-- $("input[name='reservationId']").val() -->
           <!-- Modal body -->
           <div class="modal-body">
-            <form action="equipment_update.php" method="post">
-              <label>Equipment ID</label>
-              <input type="text" name="equipmentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Equipment Name</label>
-              <input type="text" name="equipmentName" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Quantity</label>
-              <input type="text" name="quantity" required><br><br>
-              <label>Buying Price</label>
-              <input type="text" name="amenityDescription" required><br><br>
-              <label>Manager Notes</label>
-              <input type="text" name="managerNotes" required><br><br>
-              <label>Amenity ID</label>
-              <input type="text" name="amenityId" required><br><br>
-              <label>Status</label>
-              <input type="text" name="status" required><br><br>
+            <form action="payment_update.php" method="post">
+              <label>Payment ID</label>
+              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Full Name</label>
+              <input type="text" name="fullName" required><br><br>
+              <label>Country</label>
+              <input type="text" name="addressCountry" required><br><br>
+              <label>City</label>
+              <input type="text" name="addressCity" required><br><br>
+              <label>Specific Address</label>
+              <input type="text" name="addressOthers" required><br><br>
+              <label>Total Amount</label>
+              <input type="text" name="totalAmount"><br><br>
+              <label>Downpayment Amount</label>
+              <input type="text" name="dpAmount" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Downpayment Paid On</label>
+              <input type="text" name="dpPaidOn" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Remaining Balance</label>
+              <input type="text" name="remainingBalance" required><br><br>
+              <label>Full Paid On</label>
+              <input type="text" name="fullPaidOn"><br><br>
+              <label>Payment Status</label>
+              <input type="text" name="paymentStatus" required><br><br>
+              <label>Reservation Id</label>
+              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
               <input type="Submit" value="Update">
             </form>
 
@@ -224,6 +266,9 @@
       </div>
     </div>
   </div>
+
+
+
 
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -239,7 +284,6 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
-  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
@@ -248,19 +292,6 @@
     });
   </script>
 
-  <script type="text/javascript" src="js/momentjs/moment.js"></script>
-  <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
-  <script type="text/javascript">
-    $(function () {
-      $('#reservationDate').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: moment().format('YYYY-MM-DD')
-      });
-    });
-  </script>
-
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -272,31 +303,34 @@
 
   <script type="text/javascript">
     $('#dataTable').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-         'excel', 'pdf', 'print'
-        ]
+      dom: 'Blfrtip',
+      buttons: [
+       'excel', 'pdf', 'print',]
     } );
   </script>
-
-<!--ajax -->
+  <!--ajax -->
   <script type="text/javascript">
     $(function(){
       $(document).on('click', '.btn_update', function(){
-        var equipmentId = $(this).attr('data-rId');
+        var paymentId = $(this).attr('data-rId');
         $.ajax({
-          url : "get_equipment.php?update=true&rid=" + equipmentId,
+          url : "get_payments.php?update=true&rid=" + paymentId,
           type : "get",
           dataType : 'json',
           success : function(data){
             console.log(data);
-            $("input[name='equipmentId']").val(data.id);
-            $("input[name='equipmentName']").val(data.equipmentName);
-            $("input[name='quantity']").val(data.quantity);
-            $("input[name='buyingPrice']").val(data.buyingPrice);
-            $("input[name='managerNotes']").val(data.managerNotes);
-            $("input[name='amenity_id']").val(data.amenity_id);
-            $("input[name='equipmentStatus']").val(data.equipmentStatus);
+            $("input[name='paymentId']").val(data.id);
+            $("input[name='fullName']").val(data.fullName);
+            $("input[name='addressCountry']").val(data.addressCountry);
+            $("input[name='addressCity']").val(data.addressCity);
+            $("input[name='addressOthers']").val(data.addressOthers);
+            $("input[name='totalAmount']").val(data.totalAmount);
+            $("input[name='dpAmount']").val(data.dpAmount);
+            $("input[name='dpPaidOn']").val(data.dpPaidOn);
+            $("input[name='remainingBalance']").val(data.remainingBalance);
+            $("input[name='fullPaidOn']").val(data.fullPaidOn);
+            $("input[name='paymentStatus']").val(data.paymentStatus);
+            $("input[name='reservationId']").val(data.reservation_id);
 
           },
           error: function(err){

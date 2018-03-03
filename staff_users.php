@@ -1,19 +1,15 @@
 <?php
-  
   session_start();
 
-  require 'connection.php';
+ require 'connection.php';
 
     $id = $_SESSION["id"];
-    $nameSql = "SELECT * FROM tbl_user where id='$id'";
-    $nameResult = $cn->query($nameSql);
-      if ($nameResult->num_rows > 0) {
+    $sql = "SELECT * FROM tbl_user where id='$id'";
+    $result = $cn->query($sql);
+      if ($result->num_rows > 0) {
 
-        while($row = $nameResult->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
           $_SESSION["firstName"] = $row["firstName"];
-          $_SESSION["middleName"] = $row["middleName"];
-          $_SESSION["email"] = $row["email"];
-          $_SESSION["username"] = $row["username"];
         }
       }
       else {
@@ -25,18 +21,13 @@
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Notifications</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
+  <title>User Records</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -58,13 +49,38 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item active"><a class="nav-link" href="#">Notifications<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records</a></li>
-        <li class="nav-item"><a class="nav-link" href="admin_amenities.php">Inventory</a></li>
-        <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+        <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="staff_amenities.php">Inventory</a></li>
+      </ul>
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="staff_reservation.php">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Reservations</span>
+          </a>
+        </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="staff_payments.php">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">Payments</span>
+            </a>
+          </li>
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="#">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Users</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -76,10 +92,55 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Notifications</li>
+        <li class="breadcrumb-item active">Users</li>
       </ol>
     </div>
-      
+
+    <!-- Example DataTables Card-->
+    <div class="container-fluid">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Users</div>
+        <div class="card-body">
+          <div class="table-responsive">
+              </div>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Level of Access</th>
+                  <th>First Name</th>
+                  <th>Middle Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Username</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
+                  $query = mysqli_query($con, "SELECT * FROM tbl_user");
+                  while ($tblResult = mysqli_fetch_array($query)) {
+                    echo '<tr>
+                      <td>' . $tblResult["id"] . '</td>
+                      <td>' . $tblResult["levelOfAccess"] . '</td>
+                      <td>' . $tblResult["firstName"] . '</td>
+                      <td>' . $tblResult["middleName"] . '</td>
+                      <td>' . $tblResult["lastName"] . '</td>
+                      <td>' . $tblResult["email"] . '</td>
+                      <td>' . $tblResult["username"] . '</td>
+                      <td>' . $tblResult["status"] . '</td>
+                    </tr>';
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -114,47 +175,6 @@
 
   </div>
 
-  <!-- insert modal here -->
-  <!-- The Modal -->
-  <div class="container-fluid">
-    <div class="modal fade" id="update">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-        
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Update Row</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <!-- $("input[name='reservationId']").val() -->
-          <!-- Modal body -->
-          <div class="modal-body">
-            <form action="reservation_update.php" method="post">
-              <label>Reservation ID</label>
-              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Contact Number</label>
-              <input type="text" name="contactNumber"><br><br>
-              <label>Reserved Date(YYYY-MM-DD)</label>
-              <input type="text" name="reservedDate" ><br><br>
-              <label>Time</label>
-              <input type="text" name="time"><br><br>
-              <label>User ID</label>
-              <input type="text" name="userId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Payment ID</label>
-              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <input type="Submit" value="Update">
-            </form>
-
-          </div>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-
-  
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -169,14 +189,15 @@
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
+  <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
+    $(function () {
+      $("input,select,text").not("[type=submit]").jqBootstrapValidation();
     });
   </script>
-  
+
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -185,40 +206,17 @@
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
-  
+
   <script type="text/javascript">
     $('#dataTable').DataTable( {
-      dom: 'Blfrtip',  
-      buttons: [
-       'excel', 'pdf', 'print',]
+        dom: 'Blfrtip',
+        buttons: [
+         'excel', 'pdf', 'print'
+        ]
     } );
   </script>
-  <!--ajax -->
-  <script type="text/javascript">
-    $(function(){
-      $(document).on('click', '.btn_update', function(){
-        var reservationId = $(this).attr('data-rId');
-        $.ajax({
-          url : "get_reservations.php?update=true&rid=" + reservationId,
-          type : "get",
-          dataType : 'json',
-          success : function(data){
-            console.log(data);
-            $("input[name='reservationId']").val(data.id);
-            $("input[name='contactNumber']").val(data.contactNumber);
-            $("input[name='reservedDate']").val(data.reservedDate);
-             $("input[name='time']").val(data.time);
-              $("input[name='userId']").val(data.user_id);
-               $("input[name='paymentId']").val(data.payment_id);
 
-          },
-          error: function(err){
-            console.log(err);
-          }
-        })
-      })
-    });
-  </script>
+
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 <?php
-  
+
   session_start();
 
   require 'connection.php';
@@ -58,7 +58,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
         <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
         <li class="nav-item"><a class="nav-link" href="#">Inventory</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Content</a></li>
@@ -112,7 +111,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -160,7 +159,7 @@
                         $time = $row["time"];
                         $userId = $row["user_id"];
                         $paymentId = $row["payment_id"];
-                        
+
                         //table rows
                         echo '
                           <tr>
@@ -169,7 +168,7 @@
                               <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $reservationId .'">
                                 Update
                               </button>
-                              
+
                             </td>
                             <td>' . $reservationId . '</td>
                             <td>' . $contactNumber . '</td>
@@ -179,9 +178,9 @@
                             <td>' . $paymentId . '</td>
                           </tr>
                         ';
-                        }   
+                        }
                       }
-                      
+
                     else {
                       echo "0 results";
                       }
@@ -192,7 +191,7 @@
         </div>
       </div>
     </div>
-      
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -233,7 +232,7 @@
     <div class="modal fade" id="update">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-        
+
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">Update Row</h4>
@@ -259,15 +258,15 @@
             </form>
 
           </div>
-          
+
         </div>
       </div>
     </div>
   </div>
 
-  
 
-  
+
+
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -285,11 +284,11 @@
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
+    $(function () {
+      $("input,select,text").not("[type=submit]").jqBootstrapValidation();
     });
   </script>
-  
+
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -298,10 +297,10 @@
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
-  
+
   <script type="text/javascript">
     $('#dataTable').DataTable( {
-      dom: 'Blfrtip',  
+      dom: 'Blfrtip',
       buttons: [
        'excel', 'pdf', 'print',]
     } );

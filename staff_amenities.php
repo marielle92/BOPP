@@ -29,7 +29,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Equipment Inventory</title>
+  <title>Amenities Inventory</title>
   <!-- Bootstrap core CSS-->
   <link href="startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -51,20 +51,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="staff_reservation.php">Records<span class="sr-only">(current)</span></a></li>
         <li class="nav-item active"><a class="nav-link" href="#">Inventory<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
       </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_amenities.php">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Amenities</span>
           </a>
         </li>
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="#">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="staff_equipment.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Equipment</span>
           </a>
@@ -86,11 +84,12 @@
       </ul>
     </div>
   </nav>
+
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Equipment</li>
+        <li class="breadcrumb-item active">Amenities</li>
       </ol>
     </div>
 
@@ -98,49 +97,28 @@
     <div class="container-fluid">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Equipment</div>
+          <i class="fa fa-table"></i> Amenities</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Equipment ID</th>
-                  <th>Equipment Name</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>managerNotes</th>
                   <th>Amenity ID</th>
-                  <th>Status</th>
+                  <th>Amenity Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $query = mysqli_query($cn, "SELECT * FROM tbl_equipment");
+                  $query = mysqli_query($cn, "SELECT * FROM tbl_amenities");
                   while ($tblResult = mysqli_fetch_array($query)) {
-                    $equipmentId = $tblResult["id"];
-                    $equipmentName = $tblResult["equipmentName"];
-                    $quantity = $tblResult["quantity"];
-                    $buyingPrice = $tblResult["buyingPrice"];
-                    $managerNotes = $tblResult["managerNotes"];
-                    $amenity_id = $tblResult["amenity_id"];
-                    $equipmentStatus = $tblResult["equipmentStatus"];
-
+                    $amenityId = $tblResult["id"];
                     echo '<tr>
-                      <td>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $equipmentId .'">
-                          Update
-                        </button>
-
-                      </td>
-                      <td>' . $equipmentId . '</td>
-                      <td>' . $equipmentName . '</td>
-                      <td>' . $quantity . '</td>
-                      <td>' . $buyingPrice . '</td>
-                      <td>' . $managerNotes . '</td>
-                      <td>' . $amenity_id . '</td>
-                      <td>' . $equipmentStatus . '</td>
+                      <td>' . $amenityId . '</td>
+                      <td>' . $tblResult["amenityName"] . '</td>
+                      <td>' . $tblResult["amenityDescription"] . '</td>
+                      <td>' . $tblResult["amenityPrice"] . '</td>
                     </tr>';
                   }
                 ?>
@@ -156,7 +134,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>by Marielle</small>
         </div>
       </div>
     </footer>
@@ -185,7 +163,7 @@
 
   </div>
 
-  <!-- insert modal here -->
+   <!-- insert modal here -->
   <!-- The Modal -->
   <div class="container-fluid">
     <div class="modal fade" id="update">
@@ -200,21 +178,15 @@
           <!-- $("input[name='reservationId']").val() -->
           <!-- Modal body -->
           <div class="modal-body">
-            <form action="equipment_update.php" method="post">
-              <label>Equipment ID</label>
-              <input type="text" name="equipmentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Equipment Name</label>
-              <input type="text" name="equipmentName" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Quantity</label>
-              <input type="text" name="quantity" required><br><br>
-              <label>Buying Price</label>
-              <input type="text" name="amenityDescription" required><br><br>
-              <label>Manager Notes</label>
-              <input type="text" name="managerNotes" required><br><br>
+            <form action="admin_amenities_update.php" method="post">
               <label>Amenity ID</label>
-              <input type="text" name="amenityId" required><br><br>
-              <label>Status</label>
-              <input type="text" name="status" required><br><br>
+              <input type="text" name="amenityId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Amenity Name</label>
+              <input type="text" name="amenityName" required><br><br>
+              <label>Description</label>
+              <input type="text" name="amenityDescription" required><br><br>
+              <label>Price</label>
+              <input type="text" name="amenityPrice" required><br><br>
               <input type="Submit" value="Update">
             </form>
 
@@ -283,20 +255,17 @@
   <script type="text/javascript">
     $(function(){
       $(document).on('click', '.btn_update', function(){
-        var equipmentId = $(this).attr('data-rId');
+        var amenityId = $(this).attr('data-rId');
         $.ajax({
-          url : "get_equipment.php?update=true&rid=" + equipmentId,
+          url : "get_amenities.php?update=true&rid=" + amenityId,
           type : "get",
           dataType : 'json',
           success : function(data){
             console.log(data);
-            $("input[name='equipmentId']").val(data.id);
-            $("input[name='equipmentName']").val(data.equipmentName);
-            $("input[name='quantity']").val(data.quantity);
-            $("input[name='buyingPrice']").val(data.buyingPrice);
-            $("input[name='managerNotes']").val(data.managerNotes);
-            $("input[name='amenity_id']").val(data.amenity_id);
-            $("input[name='equipmentStatus']").val(data.equipmentStatus);
+            $("input[name='amenityId']").val(data.id);
+            $("input[name='amenityName']").val(data.amenityName);
+            $("input[name='amenityDescription']").val(data.amenityDescription);
+            $("input[name='amenityPrice']").val(data.amenityPrice);
 
           },
           error: function(err){

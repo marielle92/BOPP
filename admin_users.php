@@ -49,7 +49,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
         <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
         <li class="nav-item"><a class="nav-link" href="admin_amenities.php">Inventory</a></li>
         <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>
@@ -89,7 +88,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -123,15 +122,15 @@
                 <div class="modal fade" id="myModal">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
-                    
+
                       <!-- Modal Header -->
                       <div class="modal-header">
                         <h4 class="modal-title">Add New User</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                       </div>
-                      
+
                       <!-- Modal body -->
-                      
+
                         <div class"row">
                           <div class="modal-body">
                             <form method="post" action="addNewUser_redirect.php"> <!-- class="modal-content" -->
@@ -160,7 +159,7 @@
                     </div>
                   </div> <!-- myModal -->
                 </div> <!-- container -->
-                
+
               </div>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -198,7 +197,7 @@
         </div>
       </div>
     </div>
-      
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -232,7 +231,7 @@
     </div>
 
   </div>
-  
+
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -251,8 +250,8 @@
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
+    $(function () {
+      $("input,select,text").not("[type=submit]").jqBootstrapValidation();
     });
   </script>
 
