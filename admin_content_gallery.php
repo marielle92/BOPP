@@ -78,7 +78,7 @@
             </a>
           </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_users.php">
+          <a class="nav-link" href="admin_content_amenities.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Rates And Amenities</span>
           </a>

@@ -46,10 +46,10 @@
             <li><a href="contact_us.php">Contact Us</a></li>
           </ul>
 
-          
+
           <div>
             <ul class="nav navbar-nav navbar-right">
-              <!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->   
+              <!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->
                   <li>
                       <link rel="stylesheet" href="css/signup.css">
                       <button class="btn btn-default" onclick="document.getElementById('signup').style.display='block'" style="width:auto; margin-left:10px;">Sign Up</button>
@@ -101,7 +101,7 @@
                   <link rel="stylesheet" href="css/login.css">
 
                       <button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin-left: 10px">Log In</button>
-                      <div id="id01" class="modal">  
+                      <div id="id01" class="modal">
                         <form class="modal-content animate" action="login_redirect.php" method="post">
                           <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
                             <label><b>Username</b></label>
@@ -141,79 +141,36 @@
         </div>
         <!-- /.row -->
 
-        <!-- Project One -->
         <div class="row">
-            <div class="col-md-7">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4642.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-5">
-                <h3>Adult and children swimming Pool</h3>
-                <h4>Day: 9,000Php / Night: 10,000Php</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-            </div>
-        </div>
-        <!-- /.row -->
+        <?php
+          require 'connection.php';
+            $amenitiesQuery = mysqli_query($cn, "SELECT * FROM tbl_ratesandamenities");
+            while ($amenitiesResult = mysqli_fetch_array($amenitiesQuery)) {
+              $imageName = $amenitiesResult["imageName"];
+              $amenityName = $amenitiesResult["amenityName"];
+              $description = $amenitiesResult["description"];
+              $price = $amenitiesResult["price"];
 
-        <hr>
+              echo '
+                  <!-- Project One -->
+                  <div class="row">
+                      <div class="col-md-7">
+                          <a href="#">
+                              <img class="img-responsive" src="content/ratesAndAmenities/' . $imageName . '">
+                          </a>
+                      </div>
+                      <div class="col-md-5">
+                          <h3>' . $amenityName . '</h3>
+                          <h4>' . $price . '</h4>
+                          <p>' . $description . '</p>
+                      </div>
+                  </div>
+                  <!-- /.row -->
 
-        <!-- Project Two -->
-        <div class="row">
-            <div class="col-md-7">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4648.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-5">
-                <h3>Room with Veranda</h3>
-                <h4>3,000Php</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Project Three -->
-        <div class="row">
-            <div class="col-md-7">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4660.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-5">
-                <h3>Room by the Pool</h3>
-                <h4>2,000Php</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Project Four -->
-        <div class="row">
-
-            <div class="col-md-7">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4659.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-5">
-                <h3>Jacuzzi</h3>
-                <h4>600Php / Hour</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?</p>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        
-
- 
-
+                  <hr>
+              ';
+            }
+        ?>
 
     </div>
     <!-- /.container -->

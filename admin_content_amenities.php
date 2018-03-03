@@ -30,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Gallery Content</title>
+  <title>Amenity Content</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -66,19 +66,19 @@
       </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_content_home.php">
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Home</span>
           </a>
         </li>
-          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="#">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="admin_content_gallery.php">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">Gallery</span>
             </a>
           </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_users.php">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="#.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Rates And Amenities</span>
           </a>
@@ -100,13 +100,47 @@
       </ol>
     </div>
 
-    <form method="post" action="gallery_uploader.php" enctype="multipart/form-data"> <!-- class="modal-content" -->
-      <div class="col-md-12 col-md-offset-12">
-        <label><b>Choose photo</b></label><br>
-        <input name="photo" type="file" accept="image/jpeg, image/png, image/jpg" required/><br><br>
-        <button type="submit" class="btn btn-success">Add</button>
-      </div>
-    </form>
+    <!-- ADD NEW PHOTO BUTTON -->
+     <div class="container">
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+          Add Amenity
+        </button></br></br>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Add Amenity</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+
+                <div class"row">
+                  <div class="modal-body">
+                    <form method="post" action="amenities_uploader.php" enctype="multipart/form-data"> <!-- class="modal-content" -->
+                      <div class="col-md-12 col-md-offset-12">
+                        <label><b>Choose photo</b></label><br>
+                        <input name="photo" type="file" accept="image/jpeg, image/png, image/jpg" required/><br><br>
+                        <label><b>Amenity Name</b></label><br>
+                        <input type="text" name="newName"><br><br>
+                        <label><b>Price</b></label><br>
+                        <input type="text" name="newPrice"><br><br>
+                        <label><b>Description</b></label><br>
+                        <textarea class="form-control" rows="6" name="newDescription" style="font-size: 12px; width: 100%;"></textarea><br>
+                        <button type="submit" class="btn btn-success">Add</button>
+                      </div>
+                    </form>
+                  </div>
+                </div> <!-- row -->
+              </div>
+            </div>
+          </div> <!-- myModal -->
+        </div> <!-- container -->
 
     <!-- BODY -->
     <div class="container">
@@ -114,17 +148,32 @@
         <tbody>
         <?php
           require 'connection.php';
-            $galleryQuery = mysqli_query($cn, "SELECT * FROM tbl_gallery");
-            while ($galleryResult = mysqli_fetch_array($galleryQuery)) {
-              $galleryId = $galleryResult["id"];
-              $galleryImageName = $galleryResult["imageName"];
+            $amenitiesQuery = mysqli_query($cn, "SELECT * FROM tbl_ratesandamenities");
+            while ($amenitiesResult = mysqli_fetch_array($amenitiesQuery)) {
+              $amenitiesId = $amenitiesResult["id"];
+              $amenitiesImageName = $amenitiesResult["imageName"];
+              $amenitiesName = $amenitiesResult["amenityName"];
+              $description = $amenitiesResult["description"];
+              $price = $amenitiesResult["price"];
 
               echo '
                 <tr class="row">
-                  <td class="col-md-3">
-                    <img src="content/galleryTest/' . $galleryImageName .'" class="img-fluid">
-                    <form method="post" action="gallery_delete.php">
-                      <input value="' . $galleryId . '" name="galleryId" type="hidden" />
+                  <td class="col-md-6">
+                    <img src="content/ratesAndAmenities/' . $amenitiesImageName .'" class="img-fluid">
+                  </td>
+                  <td class="col-md-5">
+                    <form method="post" action="amenities_update.php">
+                      <input type="hidden" value="' . $amenitiesId . '" name="amenitiesId" readonly />
+                      <label>Amenity Name:</label>
+                      <input type="text" name="amenitiesName" value="' . $amenitiesName . '"><br>
+                      <label>Price:</label>
+                      <input type="text" name="price" value="' . $price . '"><br>
+                      <label>Description:</label><br/>
+                      <textarea class="form-control" rows="6" name="description" style="font-size: 12px; width: 100%;">' . $description . '</textarea><br>
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </form><br>
+                    <form method="post" action="amenities_delete.php">
+                      <input value="' . $amenitiesId . '" name="amenitiesId" type="hidden" />
                       <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                   </td>
@@ -169,8 +218,6 @@
     </div>
 
   </div>
-
-
 
 
   <!-- jQuery -->

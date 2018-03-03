@@ -78,7 +78,7 @@
             </a>
           </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="admin_users.php">
+          <a class="nav-link" href="admin_content_amenities.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Rates And Amenities</span>
           </a>
@@ -209,47 +209,6 @@
     </div>
 
   </div>
-
-  <!-- insert modal here -->
-  <!-- The Modal -->
-  <div class="container-fluid">
-    <div class="modal fade" id="update">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Update Row</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <!-- $("input[name='reservationId']").val() -->
-          <!-- Modal body -->
-          <div class="modal-body">
-            <form action="reservation_update.php" method="post">
-              <label>Reservation ID</label>
-              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Contact Number</label>
-              <input type="text" name="contactNumber"><br><br>
-              <label>Reserved Date(YYYY-MM-DD)</label>
-              <input type="text" name="reservedDate" ><br><br>
-              <label>Time</label>
-              <input type="text" name="time"><br><br>
-              <label>User ID</label>
-              <input type="text" name="userId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Payment ID</label>
-              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <input type="Submit" value="Update">
-            </form>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
 
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
