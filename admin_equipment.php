@@ -117,8 +117,7 @@
               </thead>
               <tbody>
                 <?php
-                  $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
-                  $query = mysqli_query($con, "SELECT * FROM tbl_equipment");
+                  $query = mysqli_query($cn, "SELECT * FROM tbl_equipment");
                   while ($tblResult = mysqli_fetch_array($query)) {
                     echo '<tr>
                       <td>' . $tblResult["id"] . '</td>
