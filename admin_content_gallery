@@ -30,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Home Content</title>
+  <title>Gallery Content</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -65,14 +65,14 @@
         <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
       </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="#">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="admin_content_home.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Home</span>
           </a>
         </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="admin_content_gallery.php">
+          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="#">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">Gallery</span>
             </a>
@@ -100,43 +100,13 @@
       </ol>
     </div>
 
-    <!-- ADD NEW PHOTO BUTTON -->
-     <div class="container">
-        <!-- Button to Open the Modal -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-          Add Photo
-        </button></br></br>
-
-        <!-- The Modal -->
-        <div class="modal fade" id="myModal">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">Add Photo</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-
-              <!-- Modal body -->
-
-                <div class"row">
-                  <div class="modal-body">
-                    <form method="post" action="home_uploader.php" enctype="multipart/form-data"> <!-- class="modal-content" -->
-                      <div class="col-md-12 col-md-offset-12">
-                        <label><b>Choose photo</b></label><br>
-                        <input name="photo" type="file" accept="image/jpeg, image/png, image/jpg" required/><br><br>
-                        <label><b>Description</b></label><br>
-                        <textarea class="form-control" rows="6" name="newDescription" style="font-size: 12px; width: 100%;"></textarea><br>
-                        <button type="submit" class="btn btn-success">Add</button>
-                      </div>
-                    </form>
-                  </div>
-                </div> <!-- row -->
-              </div>
-            </div>
-          </div> <!-- myModal -->
-        </div> <!-- container -->
+    <form method="post" action="gallery_uploader.php" enctype="multipart/form-data"> <!-- class="modal-content" -->
+      <div class="col-md-12 col-md-offset-12">
+        <label><b>Choose photo</b></label><br>
+        <input name="photo" type="file" accept="image/jpeg, image/png, image/jpg" required/><br><br>
+        <button type="submit" class="btn btn-success">Add</button>
+      </div>
+    </form>
 
     <!-- BODY -->
     <div class="container">
@@ -144,27 +114,17 @@
         <tbody>
         <?php
           require 'connection.php';
-            $homeQuery = mysqli_query($cn, "SELECT * FROM tbl_home");
-            while ($homeResult = mysqli_fetch_array($homeQuery)) {
-              $homeId = $homeResult["id"];
-              $homeImageName = $homeResult["imageName"];
-              $homeImageDescription = $homeResult["imageDescription"];
+            $galleryQuery = mysqli_query($cn, "SELECT * FROM tbl_gallery");
+            while ($galleryResult = mysqli_fetch_array($galleryQuery)) {
+              $galleryId = $galleryResult["id"];
+              $galleryImageName = $galleryResult["imageName"];
 
               echo '
                 <tr class="row">
-                  <td class="col-md-6">
-                    <img src="content/home/' . $homeImageName .'" class="img-fluid">
-
-                  </td>
-                  <td class="col-md-5">
-                    <form method="post" action="home_update.php">
-                      <input type="hidden" value="' . $homeId . '" name="homeId" readonly />
-                      <label>Description:</label><br/>
-                      <textarea class="form-control" rows="6" name="homeImageDescription" style="font-size: 12px; width: 100%;">' . $homeImageDescription . '</textarea><br>
-                      <button type="submit" class="btn btn-primary">Update</button>
-                    </form><br>
-                    <form method="post" action="home_delete.php">
-                      <input value="' . $homeId . '" name="homeId" type="hidden" />
+                  <td class="col-md-3">
+                    <img src="content/galleryTest/' . $galleryImageName .'" class="img-fluid">
+                    <form method="post" action="gallery_delete.php">
+                      <input value="' . $galleryId . '" name="galleryId" type="hidden" />
                       <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                   </td>
@@ -208,44 +168,6 @@
       </div>
     </div>
 
-  </div>
-
-  <!-- insert modal here -->
-  <!-- The Modal -->
-  <div class="container-fluid">
-    <div class="modal fade" id="update">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Update Row</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <!-- $("input[name='reservationId']").val() -->
-          <!-- Modal body -->
-          <div class="modal-body">
-            <form action="reservation_update.php" method="post">
-              <label>Reservation ID</label>
-              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Contact Number</label>
-              <input type="text" name="contactNumber"><br><br>
-              <label>Reserved Date(YYYY-MM-DD)</label>
-              <input type="text" name="reservedDate" ><br><br>
-              <label>Time</label>
-              <input type="text" name="time"><br><br>
-              <label>User ID</label>
-              <input type="text" name="userId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Payment ID</label>
-              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <input type="Submit" value="Update">
-            </form>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
   </div>
 
 

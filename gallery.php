@@ -46,10 +46,10 @@
                 <li><a href="contact_us.php">Contact Us</a></li>
               </ul>
 
-              
+
               <div>
                 <ul class="nav navbar-nav navbar-right">
-                  <!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->   
+                  <!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->
                   <li>
                       <link rel="stylesheet" href="css/signup.css">
                       <button class="btn btn-default" onclick="document.getElementById('signup').style.display='block'" style="width:auto; margin-left:10px;">Sign Up</button>
@@ -101,7 +101,7 @@
                     <link rel="stylesheet" href="css/login.css">
 
                       <button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin-left: 10px">Log In</button>
-                      <div id="id01" class="modal">  
+                      <div id="id01" class="modal">
                         <form class="modal-content animate" action="login_redirect.php" method="post">
                           <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
                             <label><b>Username</b></label>
@@ -141,83 +141,23 @@
         </div>
         <!-- /.row -->
 
-        <!-- Projects Row -->
         <div class="row">
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4642.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4643.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4644.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4645.jpg" alt="">
-                </a>
-            </div>
-        </div>
-        <!-- /.row -->
+        <?php
+          require 'connection.php';
+            $galleryQuery = mysqli_query($cn, "SELECT * FROM tbl_gallery");
+            while ($galleryResult = mysqli_fetch_array($galleryQuery)) {
+              $imageName = $galleryResult["imageName"];
 
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4646.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4647.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4648.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4649.jpg" alt="">
-                </a>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4650.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4651.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4652.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="evidences/DSC_4656.jpg" alt="">
-                </a>
-            </div>
-        </div>
+              echo '
+                  <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="content/galleryTest/' . $imageName . '">
+                    </a>
+                  </div>
+              ';
+            }
+        ?>
       </div>
-        <!-- /.row -->
-
-        <hr>
 
 
         <hr>
