@@ -120,7 +120,7 @@
 
         <div class="row">
           <div class="offset-1 col-md-10">
-            Choose a photo to upload (you can only upload 1): &nbsp; <input name="uploadedfile" type="file" accept="image/jpeg, image/png, image/jpg" />
+            Choose photo: &nbsp; <input name="uploadedfile" type="file" accept="image/jpeg, image/png, image/jpg" />
           </div>
         </div><br><br><br>
         <div class="row">

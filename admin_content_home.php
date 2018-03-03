@@ -30,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Home</title>
+  <title>Home Content</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -98,6 +98,40 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item active">Home Content</li>
       </ol>
+    </div>
+
+    <!-- BODY -->
+    <div class="container">
+      <table class="table table-condensed" id="dataTable" cellspacing="0">
+        <tbody>
+        <?php
+          require 'connection.php';
+            $homeQuery = mysqli_query($cn, "SELECT * FROM tbl_home");
+            while ($homeResult = mysqli_fetch_array($homeQuery)) {
+              $homeId = $homeResult["id"];
+              $homeImageName = $homeResult["imageName"];
+              $homeImageDescription = $homeResult["imageDescription"];
+
+              echo '
+                <tr class="row">
+                  <form type="post" action="home_uploader.php">
+                  <td class="col-md-6">
+                    <img src="content/home/' . $homeImageName .'" class="img-fluid">
+                    <input type="hidden" value="' . $homeImageName . '" name="homeImageName" readonly />
+                    <input type="hidden" value="' . $homeId . '" name="homeId" readonly />
+                  </td>
+                  <td class="col-md-5">
+                    <label>Description:</label><br/>
+                    <textarea class="form-control" rows="6" name="" id="review" style="font-size: 12px; width: 100%;">' . $homeImageDescription . '</textarea><br>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                  </td>
+                  </form>
+                </tr>
+              ';
+            }
+          ?>
+        </tbody>
+      </table>
     </div>
       
     <!-- /.container-fluid-->
