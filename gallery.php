@@ -151,7 +151,7 @@
               echo '
                   <div class="col-md-3 portfolio-item">
                     <a href="#">
-                        <img class="img-responsive" src="content/galleryTest/' . $imageName . '">
+                        <img class="img-responsive" src="content/gallery/' . $imageName . '">
                     </a>
                   </div>
               ';

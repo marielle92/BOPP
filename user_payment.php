@@ -80,7 +80,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -96,7 +96,7 @@
       </ol>
     </div>
 
-    
+
     <div class="container-fluid" style="padding-bottom: 3px; padding-top: 3px;">
       <!-- Booking Summary -->
       <div class="row">
@@ -107,7 +107,7 @@
       <div class="row">
           <div class="offset-1 col-md-10">
             <?php
-              
+
               if ($reservationTime == "Day") {
                 $reservationTimePrice = 9000;
               }
@@ -121,7 +121,7 @@
               $sql = "SELECT * FROM tbl_reservation_amenities WHERE reservation_id='$reservationId'"; //reservation id
               $result = $cn->query($sql);
               if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) { 
+                while($row = $result->fetch_assoc()) {
                   $amenityId = $row["amenity_id"];
                   //echo $amenityId;
                   $tblAmenitySql = "SELECT * FROM tbl_amenities WHERE id='$amenityId'";
@@ -131,7 +131,7 @@
                     while($row1 = $result1->fetch_assoc()) {
                       echo $row1["amenityName"] . ': <b>' . $row1["amenityPrice"] . '.00Php</b><br>';
                       $totalAmenityPrice = $totalAmenityPrice + $row1["amenityPrice"];
-                     
+
                     }
                 }
                 echo "<br>";
@@ -153,7 +153,7 @@
           </div>
         </div><br/>
       <!-- RESERVATION FORM -->
-      <form method="post" action="payment_redirect.php">
+      <form method="post" action="payment_redirect2.php" enctype="multipart/form-data">
         <div class="row">
           <div class="offset-1 col-10">
             <h3>Bill to:</h3>
@@ -199,8 +199,9 @@
             <div id="success"></div>
             <div class="control-group form-group">
               <div class="controls">
-                <!-- For success/fail messages -->
-                <button type="submit" class="btn btn-primary" id="btnSubmit">Pay with PayPal</button>
+                <label><b>UPLOAD DEPOSIT SLIP PHOTO</b></label><br>
+                <input name="photo" type="file" accept="image/jpeg, image/png, image/jpg" required/><br><br>
+                <button type="submit" class="btn btn-success">Submit</button>
               </div>
             </div>
           </div>
@@ -210,7 +211,7 @@
     </div>
 
       <!-- Example DataTables Card-->
-      
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -244,7 +245,7 @@
     </div>
 
   </div>
-  
+
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -263,8 +264,8 @@
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
+    $(function () {
+      $("input,select,text").not("[type=submit]").jqBootstrapValidation();
     });
   </script>
 
