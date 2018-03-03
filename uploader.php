@@ -51,7 +51,7 @@
       }  
     }
     else{
-      echo '<script> alert("Error in uploading file"); window.location.href="user_feedback.php"; </script>';
+      echo '<script> alert("Error upload. Maximun size exceded."); window.location.href="user_feedback.php"; </script>';
     }
   }
 

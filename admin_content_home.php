@@ -58,7 +58,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="#">Notifications</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
         <li class="nav-item"><a class="nav-link" href="admin_reservations.php">Records</a></li>
         <li class="nav-item"><a class="nav-link" href="admin_amenities.php">Inventory</a></li>
         <li class="nav-item active"><a class="nav-link" href="#">Content<span class="sr-only">(current)</span></a></li>
@@ -100,6 +100,44 @@
       </ol>
     </div>
 
+    <!-- ADD NEW PHOTO BUTTON -->
+     <div class="container">
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+          Add Photo
+        </button></br></br>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Add Photo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              
+                <div class"row">
+                  <div class="modal-body">
+                    <form method="post" action="home_uploader.php" enctype="multipart/form-data"> <!-- class="modal-content" -->
+                      <div class="col-md-12 col-md-offset-12">
+                        <label><b>Choose photo</b></label><br>
+                        <input name="photo" type="file" accept="image/jpeg, image/png, image/jpg" required/><br><br>
+                        <label><b>Description</b></label><br>
+                        <textarea class="form-control" rows="6" name="newDescription" style="font-size: 12px; width: 100%;"></textarea><br>
+                        <button type="submit" class="btn btn-success">Add</button>
+                      </div>
+                    </form>
+                  </div>
+                </div> <!-- row -->
+              </div>
+            </div>
+          </div> <!-- myModal -->
+        </div> <!-- container -->
+
     <!-- BODY -->
     <div class="container">
       <table class="table table-condensed" id="dataTable" cellspacing="0">
@@ -114,18 +152,22 @@
 
               echo '
                 <tr class="row">
-                  <form type="post" action="home_uploader.php">
                   <td class="col-md-6">
                     <img src="content/home/' . $homeImageName .'" class="img-fluid">
-                    <input type="hidden" value="' . $homeImageName . '" name="homeImageName" readonly />
-                    <input type="hidden" value="' . $homeId . '" name="homeId" readonly />
+                    
                   </td>
                   <td class="col-md-5">
-                    <label>Description:</label><br/>
-                    <textarea class="form-control" rows="6" name="" id="review" style="font-size: 12px; width: 100%;">' . $homeImageDescription . '</textarea><br>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <form method="post" action="home_update.php">
+                      <input type="hidden" value="' . $homeId . '" name="homeId" readonly />
+                      <label>Description:</label><br/>
+                      <textarea class="form-control" rows="6" name="homeImageDescription" style="font-size: 12px; width: 100%;">' . $homeImageDescription . '</textarea><br>
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </form><br>
+                    <form method="post" action="home_delete.php">
+                      <input value="' . $homeId . '" name="homeId" type="hidden" />
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                   </td>
-                  </form>
                 </tr>
               ';
             }

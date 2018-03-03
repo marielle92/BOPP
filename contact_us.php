@@ -5,7 +5,7 @@
 <html lang="en">
 	<head>
 		<title>Contact Us</title>
-	
+
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="css/bootstrap337/bootstrap.min.css">
@@ -21,7 +21,7 @@
 
 	</head>
 	<body>
-	
+
 		<!-- NAVBAR FIXED TOP RESPONSIVE -->
 		<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -44,10 +44,10 @@
 		        <li class="active"><a href="#">Contact Us<span class="sr-only">(current)</span></a></li>
 		      </ul>
 
-		      
+
 		      <div>
 			      <ul class="nav navbar-nav navbar-right">
-			      	<!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->  	
+			      	<!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->
 						<li>
 							<link rel="stylesheet" href="css/signup.css">
 							<button class="btn btn-default" onclick="document.getElementById('signup').style.display='block'" style="width:auto; margin-left:10px;">Sign Up</button>
@@ -99,7 +99,7 @@
 			        	<link rel="stylesheet" href="css/login.css">
 
 						    <button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin-left: 10px">Log In</button>
-						    <div id="id01" class="modal">  
+						    <div id="id01" class="modal">
 						      <form class="modal-content animate" action="login_redirect.php" method="post">
 						        <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
 						          <label><b>Username</b></label>
@@ -134,7 +134,7 @@
         <!-- Content Row -->
         <div class="row">
         <!-- Map Column -->
-        <!-- GOOGLE MAP --> 
+        <!-- GOOGLE MAP -->
         	<div class="col-md-8">
 	          <div id="map" style="height:500px;background:yellow;"></div>
 
@@ -162,13 +162,13 @@
                     <br>NCR, Philippines
                     <br>
                 </p>
-                <p><i class="fa fa-phone"></i> 
+                <p><i class="fa fa-phone"></i>
                     Landline: (02) 985-2052
                 </p>
-                <p><i class="fa fa-phone"></i> 
+                <p><i class="fa fa-phone"></i>
                     Phone: (+632) 933-987-6515
                 </p>
-                <p><i class="fa fa-envelope-o"></i> 
+                <p><i class="fa fa-envelope-o"></i>
                     <a href="mailto:blueoasis.dev@gmail.com">blueoasis.dev2@gmail.com</a>
                 </p>
                 <ul class="list-unstyled list-inline list-social-icons">
@@ -185,34 +185,32 @@
         <div class="row">
             <div class="col-md-8">
                 <h3>Send us a Message</h3>
-                <form name="sentMessage" id="contactForm" novalidate>
+                <form method="post" action="send_email.php">
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Full Name:</label>
-                            <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
+                            <input type="text" class="form-control" name="name" required data-validation-required-message="Please enter your name.">
                             <p class="help-block"></p>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Phone Number:</label>
-                            <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
+                            <input type="tel" class="form-control" name="phone" required data-validation-required-message="Please enter your phone number.">
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email Address:</label>
-                            <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
+                            <input type="email" class="form-control" name="email" required data-validation-required-message="Please enter your email address.">
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Message:</label>
-                            <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                            <textarea rows="10" cols="100" class="form-control" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
                         </div>
                     </div>
-                    <div id="success"></div>
-                    <!-- For success/fail messages -->
                     <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
@@ -234,7 +232,7 @@
     <!-- Contact Form JavaScript -->
     <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
     <script src="startbootstrap-modern-business-3.3.7/js/jqBootstrapValidation.js"></script>
-    
-		
+
+
 	</body>
 </html>

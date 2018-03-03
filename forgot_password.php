@@ -11,7 +11,7 @@
 			$str = substr($str, 0, 10);
 			$url = "reset_password.php?token=" . $str . "&email=" . $email;
 
-			//mail($email, "Reset Password", "To reset your password, please click on the link below:", "From: blueoasis.dev@gmail.com\r\n");
+			mail($email, "Reset Password", "To reset your password, please click on the link below:", "From: blueoasis.dev2@gmail.com\r\n");
 
 			$cn->query("UPDATE tbl_user SET token='$str' WHERE email='$email'");
 

@@ -1,6 +1,6 @@
 <?php
 	session_unset();
-	
+
 	session_start();
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 
 	</head>
 	<body>
-	
+
 		<!-- NAVBAR FIXED TOP RESPONSIVE -->
 		<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -45,10 +45,10 @@
 					<li><a href="contact_us.php">Contact Us</a></li>
 			  </ul>
 
-			  
+
 			  <div>
 				  <ul class="nav navbar-nav navbar-right">
-					<!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->  	
+					<!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->
 						<li>
 							<link rel="stylesheet" href="css/signup.css">
 							<button class="btn btn-default" onclick="document.getElementById('signup').style.display='block'" style="width:auto; margin-left:10px;">Sign Up</button>
@@ -100,7 +100,7 @@
 						<link rel="stylesheet" href="css/login.css">
 
 							<button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin-left: 10px">Log In</button>
-							<div id="id01" class="modal">  
+							<div id="id01" class="modal">
 							  <form class="modal-content animate" action="login_redirect.php" method="post">
 								<div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
 								  <label><b>Username</b></label>
@@ -131,40 +131,32 @@
 		<!-- CAROUSEL -->
 		<div class="container">
 		  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-			  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			  <li data-target="#myCarousel" data-slide-to="1"></li>
-			  <li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>
 
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
+				<div class="item active">
 
-			  <div class="item active">
-				<img src="images/home1.JPG" style="width:100%;">
-				<div class="carousel-caption">
-				  <h3>Blue Oasis</h3>
-				  <p>Clear blue waters</p>
-				</div>
-			  </div>
+				<?php
+	      	require 'connection.php';
+	          $homeQuery = mysqli_query($cn, "SELECT * FROM tbl_home");
+	          while ($homeResult = mysqli_fetch_array($homeQuery)) {
+	          	$imageName = $homeResult["imageName"];
+	          	$imageDescription = $homeResult["imageDescription"];
 
-			  <div class="item">
-				<img src="images/home2.JPG" style="width:100%;">
-				<div class="carousel-caption">
-				  <h3>Blue Oasis</h3>
-				  <p>Modern style</p>
-				</div>
-			  </div>
-			
-			  <div class="item">
-				<img src="images/home3.JPG" style="width:100%;">
-				<div class="carousel-caption">
-				  <h3>Blue Oasis</h3>
-				  <p>Garden setting</p>
-				</div>
-			  </div>
-		  
+	          	//echo '<img src="content/home/' . $imageName . '" style="width:100%;">';
+
+	            echo '
+									<img src="content/home/' . $imageName . '" style="width:100%;">
+									<div class="carousel-caption">
+									  <h3>' . $imageDescription . '</h3>
+									</div>
+							  </div>
+
+							  <div class="item">
+	            ';
+	          }
+	        ?>
+
 			</div>
 
 			<!-- Left and right controls -->
@@ -188,7 +180,7 @@
 	          $feedbackQuery = mysqli_query($cn, "SELECT * FROM tbl_feedback WHERE mgr_evaluation='Approved'");
 	          while ($feedbackResult = mysqli_fetch_array($feedbackQuery)) {
 	          	$userId = $feedbackResult["user_id"];
-	          	$userQuery = mysqli_query($cn, "SELECT * FROM tbl_user WHERE id='$userId'"); 
+	          	$userQuery = mysqli_query($cn, "SELECT * FROM tbl_user WHERE id='$userId'");
 	          		while ($userResult = mysqli_fetch_array($userQuery)) {
 	          			$firstName = $userResult["firstName"];
 	          			$lastName = $userResult["lastName"];
@@ -197,13 +189,13 @@
 	            echo '
 	              <tr>
 		              <td>
-		              	<img src="uploads/' . $feedbackResult["image"] .'" height="100" width="100">   	
+		              	<img src="uploads/' . $feedbackResult["image"] .'" height="100" width="100">
 		              </td>
 		              <td>
 		              <b>'. $firstName . ' ' . $lastName . '</b><br>'
 		              	. $feedbackResult["rating"] . ' Stars <br>'
 		              	. $feedbackResult["review"] . '
-		         				
+
 		              </td>
 	              </tr>
 	            ';
@@ -212,7 +204,7 @@
 	      </tbody>
 	    </table>
   	</div>
-        
+
 
 	</body>
 </html>

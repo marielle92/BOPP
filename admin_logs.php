@@ -54,7 +54,7 @@
         <li class="nav-item"><a class="nav-link" href="admin_notifications.php">Notifications</a></li>
         <li class="nav-item active"><a class="nav-link" href="#">Records<span class="sr-only">(current)</span></a></li>
         <li class="nav-item"><a class="nav-link" href="admin_amenities.php">Inventory</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Content</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin_content_home.php">Content</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
       </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
