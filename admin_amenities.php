@@ -79,7 +79,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -106,6 +106,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th>
                   <th>Amenity ID</th>
                   <th>Amenity Name</th>
                   <th>Description</th>
@@ -116,8 +117,16 @@
                 <?php
                   $query = mysqli_query($cn, "SELECT * FROM tbl_amenities");
                   while ($tblResult = mysqli_fetch_array($query)) {
+                    $amenityId = $tblResult["id"];
                     echo '<tr>
-                      <td>' . $tblResult["id"] . '</td>
+                      <td>
+                        <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $amenityId .'">
+                          Update
+                        </button>
+
+                      </td>
+                      <td>' . $amenityId . '</td>
                       <td>' . $tblResult["amenityName"] . '</td>
                       <td>' . $tblResult["amenityDescription"] . '</td>
                       <td>' . $tblResult["amenityPrice"] . '</td>
@@ -130,7 +139,7 @@
         </div>
       </div>
     </div>
-      
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -164,7 +173,41 @@
     </div>
 
   </div>
-  
+
+   <!-- insert modal here -->
+  <!-- The Modal -->
+  <div class="container-fluid">
+    <div class="modal fade" id="update">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Update Row</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- $("input[name='reservationId']").val() -->
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form action="admin_amenities_update.php" method="post">
+              <label>Amenity ID</label>
+              <input type="text" name="amenityId" style="background-color:#C0C0C0;" readonly><br><br>
+              <label>Amenity Name</label>
+              <input type="text" name="amenityName" required><br><br>
+              <label>Description</label>
+              <input type="text" name="amenityDescription" required><br><br>
+              <label>Price</label>
+              <input type="text" name="amenityPrice" required><br><br>
+              <input type="Submit" value="Update">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -183,8 +226,8 @@
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
+    $(function () {
+      $("input,select,text").not("[type=submit]").jqBootstrapValidation();
     });
   </script>
 
@@ -219,7 +262,30 @@
     } );
   </script>
 
+<!--ajax -->
+  <script type="text/javascript">
+    $(function(){
+      $(document).on('click', '.btn_update', function(){
+        var amenityId = $(this).attr('data-rId');
+        $.ajax({
+          url : "get_amenities.php?update=true&rid=" + amenityId,
+          type : "get",
+          dataType : 'json',
+          success : function(data){
+            console.log(data);
+            $("input[name='amenityId']").val(data.id);
+            $("input[name='amenityName']").val(data.amenityName);
+            $("input[name='amenityDescription']").val(data.amenityDescription);
+            $("input[name='amenityPrice']").val(data.amenityPrice);
 
+          },
+          error: function(err){
+            console.log(err);
+          }
+        })
+      })
+    });
+  </script>
 </body>
 
 </html>

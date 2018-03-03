@@ -1,5 +1,5 @@
 <?php
-  
+
   session_start();
 
   require 'connection.php';
@@ -85,7 +85,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -101,6 +101,44 @@
         <li class="breadcrumb-item active">My Booking</li>
       </ol>
     </div>
+
+    <form method="post" action="modify_booking.php">
+      <button type="submit">Modify Booking</button>
+    </form>
+    <form method="post" action="cancel_booking.php">
+      <button type="submit">Cancel</button>
+    </form>
+
+    <a href="modify_reservation.php"></a>
+
+    <table>
+    <?php
+
+    $reservationsSql = "SELECT * FROM tbl_reservation where user_id='$id'";
+    $reservationsResult = $cn->query($reservationsSql);
+      if ($reservationsResult->num_rows > 0) {
+
+        while($row = $reservationsResult->fetch_assoc()) {
+          $reservationId = $row["id"];
+          $reservedDate = $row["reservedDate"];
+          $time = $row["time"];
+          $payment_id = $row["payment_id"];
+
+          echo '
+            <tr>
+              <td>
+                <a href="modify_reservation.php?id='. $reservationId .'">' . $reservationId . '</a>
+              </td>
+            </tr>
+          ';
+
+        }
+      }
+      else {
+        echo '<script> alert("Non-existent in DB"); window.location.href="index.php"; </script>';
+        }
+?>
+    </table>
 
     <!-- Example DataTables Card-->
     <div class="container-fluid">
@@ -131,7 +169,7 @@
                   while ($reservationResult = mysqli_fetch_array($reservationQuery)) {
                     $reservationId = $reservationResult["id"];
                     echo '
-                      
+
                       <td><b>Reservation ID<b></td>
                       <td>' . $reservationResult["id"] . '</td>
                       </tr>
@@ -185,7 +223,7 @@
         </div>
       </div>
     </div>
-      
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -226,7 +264,7 @@
     <div class="modal fade" id="update">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-        
+
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">Update Row</h4>
@@ -251,15 +289,15 @@
             </form>
 
           </div>
-          
+
         </div>
       </div>
     </div>
   </div>
 
-  
 
-  
+
+
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -277,11 +315,11 @@
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
+    $(function () {
+      $("input,select,text").not("[type=submit]").jqBootstrapValidation();
     });
   </script>
-  
+
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -291,10 +329,10 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 
-  
+
   <script type="text/javascript">
     $('#dataTable').DataTable( {
-      dom: 'Brt',  
+      dom: 'Brt',
       buttons: [
        'print']
     } );

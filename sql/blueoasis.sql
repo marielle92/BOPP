@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2018 at 10:18 AM
+-- Generation Time: Mar 03, 2018 at 10:25 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -29,6 +28,7 @@ USE `blueoasis`;
 -- Table structure for table `tbl_amenities`
 --
 
+DROP TABLE IF EXISTS `tbl_amenities`;
 CREATE TABLE `tbl_amenities` (
   `id` int(11) NOT NULL,
   `amenityName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -56,6 +56,7 @@ INSERT INTO `tbl_amenities` (`id`, `amenityName`, `amenityDescription`, `amenity
 -- Table structure for table `tbl_equipment`
 --
 
+DROP TABLE IF EXISTS `tbl_equipment`;
 CREATE TABLE `tbl_equipment` (
   `id` int(11) NOT NULL,
   `equipmentName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -63,34 +64,33 @@ CREATE TABLE `tbl_equipment` (
   `buyingPrice` decimal(6,0) NOT NULL,
   `managerNotes` text CHARACTER SET utf8,
   `amenity_id` int(11) NOT NULL,
-  `latestStatus` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `latestComment` varchar(255) CHARACTER SET utf8 DEFAULT NULL
+  `equipmentStatus` varchar(255) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_equipment`
 --
 
-INSERT INTO `tbl_equipment` (`id`, `equipmentName`, `quantity`, `buyingPrice`, `managerNotes`, `amenity_id`, `latestStatus`, `latestComment`) VALUES
-(1, 'Wireless Bluetooth Speakers', 2, '10000', '', 6, NULL, NULL),
-(2, 'Hot/cold Water Dispenser', 1, '2000', '', 6, NULL, NULL),
-(3, 'Barbecue Grill', 1, '700', '', 6, NULL, NULL),
-(4, 'Picnic Table Set', 1, '10000', '', 6, NULL, NULL),
-(5, 'Tables', 4, '500', '', 6, NULL, NULL),
-(6, 'Chairs', 30, '150', '3 missing', 6, NULL, NULL),
-(7, 'Large cooler', 3, '500', NULL, 6, NULL, NULL),
-(8, 'Pillows', 2, '1000', NULL, 1, NULL, NULL),
-(9, 'Blanket', 1, '500', NULL, 1, NULL, NULL),
-(10, 'Towels', 2, '250', NULL, 1, NULL, NULL),
-(11, 'Aircon Remote', 1, '0', NULL, 1, NULL, NULL),
-(12, 'Karaoke', 1, '5000', NULL, 3, NULL, NULL),
-(13, 'Hydro Jet', 1, '10000', NULL, 5, NULL, NULL),
-(14, 'Pillows', 4, '500', NULL, 2, 'Complete', 'asdasasdd'),
-(15, 'Blanket', 2, '500', NULL, 2, 'Complete', ''),
-(16, 'Towels', 3, '250', NULL, 2, 'Complete', ''),
-(17, 'Lamp light bulb', 2, '350', NULL, 2, 'Complete', ''),
-(18, 'Aircon Remote', 1, '0', NULL, 2, 'Complete', ''),
-(19, 'Jacuzzi', 1, '50000', NULL, 4, NULL, NULL);
+INSERT INTO `tbl_equipment` (`id`, `equipmentName`, `quantity`, `buyingPrice`, `managerNotes`, `amenity_id`, `equipmentStatus`) VALUES
+(1, 'Wireless Bluetooth Speakers', 2, '10000', '', 6, NULL),
+(2, 'Hot/cold Water Dispenser', 1, '2000', '', 6, NULL),
+(3, 'Barbecue Grill', 1, '700', '', 6, NULL),
+(4, 'Picnic Table Set', 1, '10000', '', 6, NULL),
+(5, 'Tables', 4, '500', '', 6, NULL),
+(6, 'Chairs', 30, '150', '3 missing', 6, NULL),
+(7, 'Large cooler', 3, '500', NULL, 6, NULL),
+(8, 'Pillows', 2, '1000', NULL, 1, NULL),
+(9, 'Blanket', 1, '500', NULL, 1, NULL),
+(10, 'Towels', 2, '250', NULL, 1, NULL),
+(11, 'Aircon Remote', 1, '0', NULL, 1, NULL),
+(12, 'Karaoke', 1, '5000', NULL, 3, NULL),
+(13, 'Hydro Jet', 1, '10000', NULL, 5, NULL),
+(14, 'Pillows', 4, '500', NULL, 2, 'Complete'),
+(15, 'Blanket', 2, '500', NULL, 2, 'Complete'),
+(16, 'Towels', 3, '250', NULL, 2, 'Complete'),
+(17, 'Lamp light bulb', 2, '350', NULL, 2, 'Complete'),
+(18, 'Aircon Remote', 1, '0', NULL, 2, 'Complete'),
+(19, 'Jacuzzi', 1, '50000', NULL, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -98,6 +98,7 @@ INSERT INTO `tbl_equipment` (`id`, `equipmentName`, `quantity`, `buyingPrice`, `
 -- Table structure for table `tbl_feedback`
 --
 
+DROP TABLE IF EXISTS `tbl_feedback`;
 CREATE TABLE `tbl_feedback` (
   `id` int(11) NOT NULL,
   `rating` int(11) DEFAULT NULL,
@@ -116,7 +117,9 @@ INSERT INTO `tbl_feedback` (`id`, `rating`, `review`, `image`, `mgr_evaluation`,
 (8, 5, 'The quick brown fox jumps over the lazy dog.', 'Chrysanthemum.jpg', 'Approved', 9, 38),
 (7, 5, 'asdasdsadasd', 'Jellyfish.jpg', 'Approved', 3, 37),
 (9, 3, 'qwertyuiop', 'Tulips.jpg', 'Pending', 1, 21),
-(5, 2, 'qwefgqewrgqergwfQSCAsdqw', '1237986_10201840234548097_1855117171_n.jpg', 'Pending', 8, 28);
+(5, 2, 'qwefgqewrgqergwfQSCAsdqw', '1237986_10201840234548097_1855117171_n.jpg', 'Pending', 8, 28),
+(10, 5, '12345', NULL, 'Pending', 1, 43),
+(11, 5, '12345', 'Lighthouse.jpg', 'Pending', 1, 43);
 
 -- --------------------------------------------------------
 
@@ -124,10 +127,22 @@ INSERT INTO `tbl_feedback` (`id`, `rating`, `review`, `image`, `mgr_evaluation`,
 -- Table structure for table `tbl_gallery`
 --
 
+DROP TABLE IF EXISTS `tbl_gallery`;
 CREATE TABLE `tbl_gallery` (
   `id` int(11) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_gallery`
+--
+
+INSERT INTO `tbl_gallery` (`id`, `imageName`) VALUES
+(6, 'DSC_4644.jpg'),
+(2, 'DSC_4647.JPG'),
+(3, 'DSC_4648.JPG'),
+(4, 'DSC_4658.JPG'),
+(5, 'DSC_4659.JPG');
 
 -- --------------------------------------------------------
 
@@ -135,6 +150,7 @@ CREATE TABLE `tbl_gallery` (
 -- Table structure for table `tbl_home`
 --
 
+DROP TABLE IF EXISTS `tbl_home`;
 CREATE TABLE `tbl_home` (
   `id` int(8) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -146,8 +162,9 @@ CREATE TABLE `tbl_home` (
 --
 
 INSERT INTO `tbl_home` (`id`, `imageName`, `imageDescription`) VALUES
-(1, 'home1.jpg', 'Clear blue water'),
-(2, 'home2.jpg', 'AASDFGHJKL');
+(1, 'home1.JPG', 'Clear blue waters'),
+(2, 'home2.JPG', 'Modern style'),
+(5, 'home3.JPG', 'Garden setting');
 
 -- --------------------------------------------------------
 
@@ -155,6 +172,7 @@ INSERT INTO `tbl_home` (`id`, `imageName`, `imageDescription`) VALUES
 -- Table structure for table `tbl_logs`
 --
 
+DROP TABLE IF EXISTS `tbl_logs`;
 CREATE TABLE `tbl_logs` (
   `id` int(255) NOT NULL,
   `user_id` int(255) NOT NULL,
@@ -284,7 +302,38 @@ INSERT INTO `tbl_logs` (`id`, `user_id`, `log_dateTime`, `action`) VALUES
 (115, 7, '2018-03-03 14:29:02.000000', 'Log In'),
 (116, 1, '2018-03-03 16:46:08.000000', 'Log In'),
 (117, 1, '2018-03-03 16:51:24.000000', 'Log Out'),
-(118, 7, '2018-03-03 16:51:34.000000', 'Log In');
+(118, 7, '2018-03-03 16:51:34.000000', 'Log In'),
+(119, 7, '2018-03-03 18:27:33.000000', 'Log In'),
+(120, 7, '2018-03-03 18:37:31.000000', 'Log Out'),
+(121, 7, '2018-03-03 18:46:30.000000', 'Log In'),
+(122, 1, '2018-03-03 20:10:36.000000', 'Log In'),
+(123, 1, '2018-03-03 21:35:04.000000', 'Log Out'),
+(124, 7, '2018-03-03 21:35:13.000000', 'Log In'),
+(125, 7, '2018-03-03 21:58:38.000000', 'Log Out'),
+(126, 1, '2018-03-03 21:58:52.000000', 'Log In'),
+(127, 1, '2018-03-03 22:57:25.000000', 'Log Out'),
+(128, 7, '2018-03-04 01:03:13.000000', 'Log In'),
+(129, 7, '2018-03-04 01:04:47.000000', 'Log Out'),
+(130, 7, '2018-03-04 01:05:36.000000', 'Log In'),
+(131, 7, '2018-03-04 01:05:48.000000', 'Log Out'),
+(132, 7, '2018-03-04 01:20:10.000000', 'Log In'),
+(133, 7, '2018-03-04 01:36:55.000000', 'Log Out'),
+(134, 7, '2018-03-04 01:37:16.000000', 'Log In'),
+(135, 7, '2018-03-04 01:41:03.000000', 'Log Out'),
+(136, 7, '2018-03-04 01:41:36.000000', 'Log In'),
+(137, 7, '2018-03-04 02:01:02.000000', 'Log Out'),
+(138, 7, '2018-03-04 02:01:16.000000', 'Log In'),
+(139, 7, '2018-03-04 02:28:17.000000', 'Log Out'),
+(140, 7, '2018-03-04 02:36:09.000000', 'Log In'),
+(141, 7, '2018-03-04 03:10:54.000000', 'Log Out'),
+(142, 7, '2018-03-04 03:11:17.000000', 'Log In'),
+(143, 7, '2018-03-04 03:12:40.000000', 'Log Out'),
+(144, 1, '2018-03-04 03:15:32.000000', 'Log In'),
+(145, 7, '2018-03-04 03:36:49.000000', 'Log In'),
+(146, 7, '2018-03-04 04:24:52.000000', 'Log Out'),
+(147, 1, '2018-03-04 04:25:02.000000', 'Log In'),
+(148, 1, '2018-03-04 04:42:12.000000', 'Log In'),
+(149, 1, '2018-03-04 04:43:46.000000', 'Log In');
 
 -- --------------------------------------------------------
 
@@ -292,6 +341,7 @@ INSERT INTO `tbl_logs` (`id`, `user_id`, `log_dateTime`, `action`) VALUES
 -- Table structure for table `tbl_payment`
 --
 
+DROP TABLE IF EXISTS `tbl_payment`;
 CREATE TABLE `tbl_payment` (
   `id` int(11) NOT NULL,
   `fullName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -303,6 +353,7 @@ CREATE TABLE `tbl_payment` (
   `dpPaidOn` datetime DEFAULT NULL,
   `remainingBalance` int(11) NOT NULL,
   `fullPaidOn` date DEFAULT NULL,
+  `depositSlip` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `paymentStatus` varchar(255) CHARACTER SET utf8 NOT NULL,
   `reservation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -311,54 +362,57 @@ CREATE TABLE `tbl_payment` (
 -- Dumping data for table `tbl_payment`
 --
 
-INSERT INTO `tbl_payment` (`id`, `fullName`, `addressCountry`, `addressCity`, `addressOthers`, `totalAmount`, `dpAmount`, `dpPaidOn`, `remainingBalance`, `fullPaidOn`, `paymentStatus`, `reservation_id`) VALUES
-(1, 'Marielle S. Banares', 'Philippines', 'Quezon City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(2, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(3, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(4, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(5, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(6, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(7, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(8, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(9, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(10, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(11, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(12, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(13, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(14, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(15, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(16, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(17, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(18, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(19, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(20, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(21, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, 'Pending', 18),
-(22, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15000, 7500, NULL, 7500, NULL, 'Pending', 19),
-(23, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, '2018-01-28 22:36:55', 7000, NULL, 'DPpaid', 20),
-(24, '', '', '', '', 14000, 7000, NULL, 7000, NULL, 'Pending', 20),
-(25, '', '', '', '', 14000, 7000, NULL, 7000, NULL, 'Pending', 20),
-(26, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, 'Pending', 21),
-(27, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, 'Pending', 21),
-(28, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, 'Pending', 21),
-(29, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, 'Pending', 21),
-(30, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, 'Pending', 21),
-(31, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15400, 7700, NULL, 7700, NULL, 'Pending', 22),
-(32, 'Lhiana Reign Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15400, 7700, '2018-01-29 18:06:54', 7700, NULL, 'DPpaid', 23),
-(33, 'Reji Acuna', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15600, 7800, '2018-01-29 21:52:01', 7800, NULL, 'DPpaid', 24),
-(34, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, '2018-02-02 08:29:13', 6500, NULL, 'DPpaid', 26),
-(36, 'User One', 'Philippines', 'Quezon City', 'Diliman', 15000, 7500, '2018-02-03 00:00:00', 7500, NULL, 'DPpaid', 28),
-(37, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, 'Pending', 29),
-(38, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, 'Pending', 30),
-(39, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, 'Pending', 31),
-(40, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, 'Pending', 32),
-(41, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, 'Pending', 33),
-(42, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, 'Pending', 35),
-(43, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, 'Pending', 36),
-(44, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11600, 5800, NULL, 5800, NULL, 'Pending', 37),
-(45, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11600, 5800, '2018-02-04 08:40:26', 5800, NULL, 'DPpaid', 37),
-(46, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15400, 7700, '2018-02-04 11:18:27', 7700, NULL, 'DPpaid', 38),
-(47, 'Lucita BaÃ±ares', 'Philippines', 'Manila', '3f NAESS House, 2215 Leon Guinto St., Malate', 15600, 7800, '2018-02-04 13:16:08', 7800, NULL, 'DPpaid', 40),
-(48, 'Lucita BaÃ±ares', 'Philippines', 'Manila', '3f NAESS House, 2215 Leon Guinto St., Malate', 15000, 7500, '2018-02-04 13:26:16', 7500, NULL, 'DPpaid', 42);
+INSERT INTO `tbl_payment` (`id`, `fullName`, `addressCountry`, `addressCity`, `addressOthers`, `totalAmount`, `dpAmount`, `dpPaidOn`, `remainingBalance`, `fullPaidOn`, `depositSlip`, `paymentStatus`, `reservation_id`) VALUES
+(1, 'Marielle S. Banares', 'Philippines', 'Quezon City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(2, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(3, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(4, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(5, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(6, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(7, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(8, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(9, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(10, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(11, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(12, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(13, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(14, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(15, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(16, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(17, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(18, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(19, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(20, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(21, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, NULL, 6500, NULL, NULL, 'Pending', 18),
+(22, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15000, 7500, NULL, 7500, NULL, NULL, 'Pending', 19),
+(23, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, '2018-01-28 22:36:55', 7000, NULL, NULL, 'DPpaid', 20),
+(24, '', '', '', '', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 20),
+(25, '', '', '', '', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 20),
+(26, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, NULL, 'Pending', 21),
+(27, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, NULL, 'Pending', 21),
+(28, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, NULL, 'Pending', 21),
+(29, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, NULL, 'Pending', 21),
+(30, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12400, 6200, NULL, 6200, NULL, NULL, 'Pending', 21),
+(31, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15400, 7700, NULL, 7700, NULL, NULL, 'Pending', 22),
+(32, 'Lhiana Reign Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15400, 7700, '2018-01-29 18:06:54', 7700, NULL, NULL, 'DPpaid', 23),
+(33, 'Reji Acuna', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15600, 7800, '2018-01-29 21:52:01', 7800, NULL, NULL, 'DPpaid', 24),
+(34, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 13000, 6500, '2018-02-02 08:29:13', 6500, NULL, NULL, 'DPpaid', 26),
+(36, 'User One', 'Philippines', 'Quezon City', 'Diliman', 15000, 7500, '2018-02-03 00:00:00', 7500, NULL, NULL, 'DPpaid', 28),
+(37, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 29),
+(38, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 30),
+(39, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 31),
+(40, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 32),
+(41, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 33),
+(42, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 35),
+(43, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 14000, 7000, NULL, 7000, NULL, NULL, 'Pending', 36),
+(44, 'Rhouwelle B. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11600, 5800, NULL, 5800, NULL, NULL, 'Pending', 37),
+(45, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11600, 5800, '2018-02-04 08:40:26', 5800, NULL, NULL, 'DPpaid', 37),
+(46, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15400, 7700, '2018-02-04 11:18:27', 7700, NULL, NULL, 'DPpaid', 38),
+(47, 'Lucita BaÃ±ares', 'Philippines', 'Manila', '3f NAESS House, 2215 Leon Guinto St., Malate', 15600, 7800, '2018-02-04 13:16:08', 7800, NULL, NULL, 'DPpaid', 40),
+(48, 'Lucita BaÃ±ares', 'Philippines', 'Manila', '3f NAESS House, 2215 Leon Guinto St., Malate', 15000, 7500, '2018-02-04 13:26:16', 7500, NULL, NULL, 'DPpaid', 42),
+(49, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11000, 5500, NULL, 5500, NULL, 'DSC_4660.jpg', 'Pending', 44),
+(50, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11000, 5500, NULL, 5500, NULL, 'DSC_4660.jpg', 'DPPaid', 44),
+(51, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11000, 5500, '2018-03-04 03:33:53', 5500, NULL, 'DSC_4660.jpg', 'DPpaid', 44);
 
 -- --------------------------------------------------------
 
@@ -366,13 +420,23 @@ INSERT INTO `tbl_payment` (`id`, `fullName`, `addressCountry`, `addressCity`, `a
 -- Table structure for table `tbl_ratesandamenities`
 --
 
+DROP TABLE IF EXISTS `tbl_ratesandamenities`;
 CREATE TABLE `tbl_ratesandamenities` (
   `id` int(8) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `amenityName` varchar(255) CHARACTER SET utf8 NOT NULL,
   `description` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `price` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `display` tinyint(1) NOT NULL
+  `price` varchar(255) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_ratesandamenities`
+--
+
+INSERT INTO `tbl_ratesandamenities` (`id`, `imageName`, `amenityName`, `description`, `price`) VALUES
+(3, 'DSC_4648.jpg', 'Room with Veranda', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at', 'P9,000.00'),
+(2, 'DSC_4659.jpg', 'Jacuzzi', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at', 'P600.00 / hr'),
+(4, 'DSC_4642.jpg', 'Adult and Children Swimming Pool', 'The quick brown fox jumps over the lazy dog', 'Day: P9,000.00 / Night: P10,000.00');
 
 -- --------------------------------------------------------
 
@@ -380,6 +444,7 @@ CREATE TABLE `tbl_ratesandamenities` (
 -- Table structure for table `tbl_reservation`
 --
 
+DROP TABLE IF EXISTS `tbl_reservation`;
 CREATE TABLE `tbl_reservation` (
   `id` int(11) NOT NULL,
   `contactNumber` varchar(255) NOT NULL,
@@ -396,7 +461,7 @@ CREATE TABLE `tbl_reservation` (
 INSERT INTO `tbl_reservation` (`id`, `contactNumber`, `reservedDate`, `time`, `user_id`, `payment_id`) VALUES
 (1, '09273535869', '2018-01-31', 'Day', 1, NULL),
 (2, '09273535869', '2018-01-30', 'Day', 1, NULL),
-(3, '09273535869', '2018-01-29', 'Day', 1, NULL),
+(3, '09179876543', '2018-01-29', 'Night', 1, NULL),
 (4, '09273535869', '2018-01-28', 'Day', 1, NULL),
 (5, '09951112233', '2018-01-28', 'Night', 3, NULL),
 (6, 'ascacwec', '2018-01-31', 'Night', 1, NULL),
@@ -436,7 +501,8 @@ INSERT INTO `tbl_reservation` (`id`, `contactNumber`, `reservedDate`, `time`, `u
 (40, '09177001502', '2018-03-16', 'Day', 10, 47),
 (41, '12345678', '2018-02-05', 'Day', 10, NULL),
 (42, '12345678', '2018-02-05', 'Night', 10, 48),
-(43, '09273535869', '2018-02-28', 'Night', 1, NULL);
+(43, '09273535869', '2018-02-28', 'Night', 1, NULL),
+(44, '0912232312', '2018-03-20', 'Night', 1, 51);
 
 -- --------------------------------------------------------
 
@@ -444,6 +510,7 @@ INSERT INTO `tbl_reservation` (`id`, `contactNumber`, `reservedDate`, `time`, `u
 -- Table structure for table `tbl_reservation_amenities`
 --
 
+DROP TABLE IF EXISTS `tbl_reservation_amenities`;
 CREATE TABLE `tbl_reservation_amenities` (
   `reservation_id` int(11) NOT NULL,
   `amenity_id` int(11) NOT NULL
@@ -454,11 +521,6 @@ CREATE TABLE `tbl_reservation_amenities` (
 --
 
 INSERT INTO `tbl_reservation_amenities` (`reservation_id`, `amenity_id`) VALUES
-(3, 1),
-(3, 2),
-(3, 3),
-(3, 4),
-(3, 5),
 (4, 1),
 (4, 2),
 (4, 3),
@@ -566,7 +628,16 @@ INSERT INTO `tbl_reservation_amenities` (`reservation_id`, `amenity_id`) VALUES
 (42, 1),
 (42, 2),
 (43, 3),
-(43, 5);
+(43, 5),
+(44, 3),
+(44, 5),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(2, 1),
+(2, 2),
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -574,6 +645,7 @@ INSERT INTO `tbl_reservation_amenities` (`reservation_id`, `amenity_id`) VALUES
 -- Table structure for table `tbl_user`
 --
 
+DROP TABLE IF EXISTS `tbl_user`;
 CREATE TABLE `tbl_user` (
   `id` int(11) NOT NULL,
   `levelOfAccess` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -698,37 +770,37 @@ ALTER TABLE `tbl_equipment`
 -- AUTO_INCREMENT for table `tbl_feedback`
 --
 ALTER TABLE `tbl_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_gallery`
 --
 ALTER TABLE `tbl_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_home`
 --
 ALTER TABLE `tbl_home`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 --
 -- AUTO_INCREMENT for table `tbl_payment`
 --
 ALTER TABLE `tbl_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `tbl_ratesandamenities`
 --
 ALTER TABLE `tbl_ratesandamenities`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
@@ -763,7 +835,6 @@ ALTER TABLE `tbl_reservation`
 ALTER TABLE `tbl_reservation_amenities`
   ADD CONSTRAINT `fk_tbl_ra_amenity` FOREIGN KEY (`amenity_id`) REFERENCES `tbl_amenities` (`id`),
   ADD CONSTRAINT `fk_tbl_ra_reservation` FOREIGN KEY (`reservation_id`) REFERENCES `tbl_reservation` (`id`);
-SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
