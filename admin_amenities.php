@@ -189,7 +189,9 @@
           <!-- Modal body -->
           <div class="modal-body">
             <form action="admin_amenities_update.php" method="post">
+              <div class="col-md-3">
               <label>Amenity ID</label>
+              </div>
               <input type="text" name="amenityId" style="background-color:#C0C0C0;" readonly><br><br>
               <label>Amenity Name</label>
               <input type="text" name="amenityName" required><br><br>

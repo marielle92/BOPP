@@ -21,6 +21,9 @@
 		<li>The use of ELECTRIC and GAS stove with LPG tank is strictly prohibited inside the premises.</li>
 		<li>The GUESTS  shall be held liable and pay damages to Furnitures, Fixtures, Equipments and Accessories of the private facility due to inappropriate action. (Vandalism, Arson, Theft and others.) or UNAUTHORIZED use or DIRECT MANIPULATIONS of equipments such as Electrical and Mechanical.</li>
 		<li>The owner shall not be held liable for damages if any unwanted incident arises from non-compliance with the said HOUSE RULES and CONDITIONS.</li>
+
+		<li>Cancellation Policy: clients will be given a 100% refund if the cancellation is done 7 days prior to the booked date</li>
+		<li>Reservation Modification Policy: clients can only modify their booking after downpayment. Addition to or deduction from the accomplished changes will be incurred and are to be paid in full upon check out.</li>
 	<ul>
 	<h3 align="center">We have made these rules to protect you and make your stay truly relaxing and enjoyable.</h3>
 

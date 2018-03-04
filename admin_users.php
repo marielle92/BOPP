@@ -136,8 +136,8 @@
                             <form method="post" action="addNewUser_redirect.php"> <!-- class="modal-content" -->
                               <div class="col-md-12 col-md-offset-12">
                               <label><b>Level of Acess</b></label></br>
-                              <!--<label class="radio-inline"><input type="radio" name="levelOfAccess" value="Staff" checked>Staff</label> &nbsp; &nbsp; -->
-                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Manager" checked>Manager</label></br>
+                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Staff" checked>Staff</label> &nbsp; &nbsp;
+                              <label class="radio-inline"><input type="radio" name="levelOfAccess" value="Manager">Manager</label></br>
                               <label><b>First Name</b></label>
                               <input type="text" name="firstName" style="width: 100%;" required>
                               <label><b>Middle Name</b></label>

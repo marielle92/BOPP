@@ -10,12 +10,12 @@
 </head>
 	<body>
 		<?php
-			
+
       $reservationId = $_POST["reservationId"];
       $contactNumber = $_POST["contactNumber"];
       $reservedDate = $_POST["reservedDate"];
       $time = $_POST["time"];
-			 
+
         $reservationSql = "UPDATE tbl_reservation SET contactNumber='$contactNumber', reservedDate='$reservedDate', time='$time'  WHERE id = '$reservationId'";
         if($cn->query($reservationSql) === TRUE) {
         	//header ('Location: paypal.php');
