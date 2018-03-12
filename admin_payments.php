@@ -134,7 +134,6 @@
                   <th>Downpayment Paid On</th>
                   <th>Remaining Balance</th>
                   <th>Full Paid On</th>
-                  <th>Deposit Slip<th>
                   <th>Payment Status</th>
                   <th>Reservation ID</th>
                 </tr>
@@ -156,7 +155,6 @@
                         $dpPaidOn = $row["dpPaidOn"];
                         $remainingBalance = $row["remainingBalance"];
                         $fullPaidOn = $row["fullPaidOn"];
-                        $depositSlip = $row["depositSlip"];
                         $paymentStatus = $row["paymentStatus"];
                         $reservationId = $row["reservation_id"];
 
@@ -180,7 +178,6 @@
                             <td>' . $dpPaidOn . '</td>
                             <td>' . $remainingBalance . '</td>
                             <td>' . $fullPaidOn . '</td>
-                            <td> <img src="payments/' . $depositSlip . '" height="100" width="150" ></td>
                             <td>' . $paymentStatus . '</td>
                             <td>' . $reservationId . '</td>
                           </tr>
@@ -204,7 +201,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>by Marielle</small>
+          <small>Copyright © Your Website 2017</small>
         </div>
       </div>
     </footer>
@@ -237,7 +234,7 @@
   <!-- The Modal -->
   <div class="container-fluid">
     <div class="modal fade" id="update">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
           <!-- Modal Header -->
@@ -249,31 +246,107 @@
           <!-- Modal body -->
           <div class="modal-body">
             <form action="payment_update.php" method="post">
-              <label>Payment ID</label>
-              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Full Name</label>
-              <input type="text" name="fullName" required><br><br>
-              <label>Country</label>
-              <input type="text" name="addressCountry" required><br><br>
-              <label>City</label>
-              <input type="text" name="addressCity" required><br><br>
-              <label>Specific Address</label>
-              <input type="text" name="addressOthers" required><br><br>
-              <label>Total Amount</label>
-              <input type="text" name="totalAmount"><br><br>
-              <label>Downpayment Amount</label>
-              <input type="text" name="dpAmount" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Downpayment Paid On</label>
-              <input type="text" name="dpPaidOn" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Remaining Balance</label>
-              <input type="text" name="remainingBalance" required><br><br>
-              <label>Full Paid On</label>
-              <input type="text" name="fullPaidOn"><br><br>
-              <label>Payment Status</label>
-              <input type="text" name="paymentStatus" required><br><br>
-              <label>Reservation Id</label>
-              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
-              <input type="Submit" value="Update">
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Payment ID</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Full Name</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="fullName" required>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Country</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="addressCountry" required>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>City</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="addressCity" required>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Specific Address</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="addressOthers" required>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Total Amount</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="totalAmount">
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Downpayment Amount</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="dpAmount" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Downpayment Paid On</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="dpPaidOn" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Remaining Balance</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="remainingBalance" required>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Full Paid On</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="fullPaidOn">
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Payment Status</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="paymentStatus" required>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left:10%;">
+                <div class="col-md-5">
+                  <label>Reservation Id</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-success">Update</button>
+                </div>
+              </div>
             </form>
 
           </div>
@@ -321,9 +394,29 @@
     $('#dataTable').DataTable( {
       dom: 'Blfrtip',
       buttons: [
-       'excel', 'pdf', 'print',]
+      {
+        extend: 'excel',
+        exportOptions: {
+          columns: [1,2,3,4,5,6,7,8,9,10,11,12]
+        }
+      },
+      {
+        extend: 'pdf',
+        exportOptions: {
+          columns: [1,2,3,4,5,6,7,8,9,10,11,12]
+        }
+      },
+      {
+        extend: 'print',
+        exportOptions: {
+          columns: [1,2,3,4,5,6,7,8,9,10,11,12]
+        }
+      }
+
+       ]
     } );
   </script>
+
   <!--ajax -->
   <script type="text/javascript">
     $(function(){

@@ -78,7 +78,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -137,13 +137,13 @@
 
               echo '
                   <div class="row">
-                    
+
                     <div class="offset-1 col-10">
                       <h3>Select Amenities </h3>
                     </div>
                   </div><br/>
                   <div class="row">
-                    
+
               ';
 
               while($row = $result->fetch_assoc()) {
@@ -192,9 +192,8 @@
 
       </form>
     </div>
-
       <!-- Example DataTables Card-->
-      
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -228,7 +227,7 @@
     </div>
 
   </div>
-  
+
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -247,8 +246,8 @@
   <!-- jqBootstrapValidation -->
   <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
   <script>
-    $(function () { 
-      $("input,select,text").not("[type=submit]").jqBootstrapValidation(); 
+    $(function () {
+      $("input,select,text").not("[type=submit]").jqBootstrapValidation();
     });
   </script>
 

@@ -5,7 +5,7 @@
 <html lang="en">
 	<head>
 		<title>About Us</title>
-	
+
 	  <meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="css/bootstrap337/bootstrap.min.css">
@@ -23,7 +23,7 @@
 
 	</head>
 	<body>
-	
+
 		<!-- NAVBAR FIXED TOP RESPONSIVE -->
 		<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -46,10 +46,10 @@
 				<li><a href="contact_us.php">Contact Us</a></li>
 			  </ul>
 
-			  
+
 			  <div>
 				  <ul class="nav navbar-nav navbar-right">
-					<!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->  	
+					<!-- SIGNUP BUTTON AND MODAL RESPONSIVE -->
 						<li>
 							<link rel="stylesheet" href="css/signup.css">
 							<button class="btn btn-default" onclick="document.getElementById('signup').style.display='block'" style="width:auto; margin-left:10px;">Sign Up</button>
@@ -57,30 +57,34 @@
 							<div id="signup" class="modal">
 
 							  <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
-							  <form class="modal-content" method="post" action="signup_redirect.php">
-								<div class="container-fluid">
-								  <h1 style="color:black;">Sign Up</h1>
-								  <p style="color:black;">Please fill out this form to create an account.</p>
-								  <hr>
-								  <label style="color:black;"><b>First Name</b></label>
-									<input style="color:black;" type="text" name="firstName" required>
-									<label style="color:black;"><b>Middle Name</b></label>
-									<input style="color:black;" type="text" name="middleName">
-									<label style="color:black;"><b>Last Name</b></label>
-									<input style="color:black;" type="text" name="lastName" required>
-									<label style="color:black;"><b>Email Address</b></label>
-									<input style="color:black;" type="text" name="email" required>
-									<label style="color:black;"><b>Username</b></label>
-									<input style="color:black;" type="text" name="username" required>
-									<label style="color:black;"><b>Password</b></label>
-									<input style="color:black;" type="password" name="password" required>
+			  				<div class="container">
+                  <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                      <form class="modal-content" method="post" action="signup_redirect.php" style="padding-right: 10px; padding-left: 10px; color: black;">
+                        <h1>Sign Up</h1>
+                        <p>Please fill out this form to create an account.</p>
+                        <hr>
+                        <label><b>First Name</b></label>
+                        <input type="text" name="firstName" required>
+                        <label><b>Middle Name</b></label>
+                        <input type="text" name="middleName">
+                        <label><b>Last Name</b></label>
+                        <input type="text" name="lastName" required>
+                        <label><b>Email Address</b></label>
+                        <input type="text" name="email" required>
+                        <label><b>Username</b></label>
+                        <input type="text" name="username" required>
+                        <label><b>Password</b></label>
+                        <input type="password" name="password" required>
 
-								  <div class="clearfix">
-									<button type="button" class="btn btn-danger" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
-									<button type="submit" class="signupbtn btn btn-success" style="width: auto; margin-right:10px;">Sign Up</button>
-								  </div><br>
-								</div>
-							  </form>
+                        <div class="clearfix">
+                          <button type="button" class="btn btn-danger" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
+                          <button type="submit" class="signupbtn btn btn-success" style="width: auto; margin-right:10px;">Sign Up</button>
+                        </div><br>
+                      </form>
+                    </div>
+                  </div>
+                </div>
 							</div>
 
 							<script>
@@ -101,19 +105,25 @@
 						<link rel="stylesheet" href="css/login.css">
 
 							<button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin-left: 10px">Log In</button>
-							<div id="id01" class="modal">  
-							  <form class="modal-content animate" action="login_redirect.php" method="post">
-								<div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
-								  <label style="color:black;"><b>Username</b></label>
-								  <input style="color:black;" type="text" placeholder="Enter Username" name="login_username" required>
-								  <label style="color:black;"><b>Password</b></label>
-								  <input style="color:black;" type="password" placeholder="Enter Password" name="login_password" required>
-								  <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
-								  <a href="forgot_password.php">
-						          	<button type="button" class="btn btn-warning" role="button">Forgot Password</button>
-						          </a>
-								</div>
-							  </form>
+							<div id="id01" class="modal">
+							  <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <form class="modal-content animate" action="login_redirect.php" method="post">
+                        <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
+                          <label><b>Username</b></label>
+                          <input type="text" placeholder="Enter Username" name="login_username" required>
+                          <label><b>Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="login_password" required>
+                          <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
+                          <a href="forgot_password.php">
+                            <button type="button" class="btn btn-warning" role="button">Forgot Password</button>
+                          </a>
+                        </div>
+                       </form>
+                    </div>
+                  </div>
+                </div>
 							</div>
 							<script>
 							  var modal = document.getElementById('id01');

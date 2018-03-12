@@ -17,6 +17,15 @@
 			$amenity = $_POST["amenity"];
 			$contactNumber = $_POST["contactNumber"];
 
+			$reservationsSql = "SELECT reservedDate FROM tbl_reservation WHERE reservedDate=$date";
+      $reservationsResult = $cn->query($reservationsSql);
+          if ($reservationsResult->num_rows > 0) {
+
+            echo '<script> alert("Date Blocked"); window.location.href="user_reservation.php"; </script>';
+        }
+
+      else {
+
 			$user_id = $_SESSION["id"]; //user_id
 			$arrlength = count($amenity);
 			$signupSql = "INSERT INTO tbl_reservation (contactNumber, reservedDate, time, user_id) VALUES ('$contactNumber', '$date', '$time', '$user_id')";
@@ -31,16 +40,21 @@
 
       		}
       		//redirect to page
+      	}
       		header('Location: user_payment.php');
       		exit();
-      	}
       }
-	    else {
-      	$msg = $cn->error;
-        echo "ERROR with tbl_reservation: " . $msg . '<br>';
-        echo "post: " . $_POST["reservationDate"] . '<br>';
-        echo "var: " . $date . "<br>";
+      else {
+	    	$msg = $cn->error;
+	      echo "ERROR with tbl_reservation: " . $msg . '<br>';
+	      echo "post: " . $_POST["reservationDate"] . '<br>';
+	      echo "var: " . $date . "<br>";
 	    }
+    }
+
+
+
+
 		?>
 	</body>
 </html>

@@ -164,6 +164,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th></th>
                   <th>User ID</th>
                   <th>Level of Access</th>
                   <th>First Name</th>
@@ -179,15 +180,31 @@
                   $con = mysqli_connect("localhost", "root", "", "blueoasis") or die("Connection Error");
                   $query = mysqli_query($con, "SELECT * FROM tbl_user");
                   while ($tblResult = mysqli_fetch_array($query)) {
-                    echo '<tr>
-                      <td>' . $tblResult["id"] . '</td>
-                      <td>' . $tblResult["levelOfAccess"] . '</td>
-                      <td>' . $tblResult["firstName"] . '</td>
-                      <td>' . $tblResult["middleName"] . '</td>
-                      <td>' . $tblResult["lastName"] . '</td>
-                      <td>' . $tblResult["email"] . '</td>
-                      <td>' . $tblResult["username"] . '</td>
-                      <td>' . $tblResult["status"] . '</td>
+                    $userId = $tblResult["id"];
+                    $levelOfAccess = $tblResult["levelOfAccess"];
+                    $firstName = $tblResult["firstName"];
+                    $middleName = $tblResult["middleName"];
+                    $lastName = $tblResult["lastName"];
+                    $email = $tblResult["email"];
+                    $username = $tblResult["username"];
+                    $status = $tblResult["status"];
+
+                    echo '
+                    <tr>
+                      <td>
+                        <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $userId .'">
+                          Update
+                        </button>
+                      </td>
+                      <td>' . $userId . '</td>
+                      <td>' . $levelOfAccess . '</td>
+                      <td>' . $firstName . '</td>
+                      <td>' . $middleName . '</td>
+                      <td>' . $lastName . '</td>
+                      <td>' . $email . '</td>
+                      <td>' . $username . '</td>
+                      <td>' . $status . '</td>
                     </tr>';
                   }
                 ?>
@@ -232,6 +249,115 @@
 
   </div>
 
+  <!-- insert modal here -->
+  <!-- The Modal -->
+  <div class="container-fluid">
+    <div class="modal fade" id="update">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Update Row</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- $("input[name='reservationId']").val() -->
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form action="user_update.php" method="post">
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>User ID</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="userId" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Level of Access</label>
+                </div>
+                <div class="col-md-5">
+                  <input type="text" name="levelOfAccess">
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>First Name</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="firstName" >
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Middle Name</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="middleName">
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Last Name</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="lastName">
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Email</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="email">
+                </div>
+              </div></br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Username</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="username">
+                </div>
+              </div></br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Password</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="password" name="password" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div></br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Token</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="password" name="token" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div></br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Status</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="status">
+                </div>
+              </div></br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-success">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div> <!-- container -->
+
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
   <!-- Bootstrap core JavaScript-->
@@ -264,6 +390,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 
+<!--
   <script type="text/javascript">
     $('#dataTable').DataTable( {
         dom: 'Blfrtip',
@@ -272,8 +399,65 @@
         ]
     } );
   </script>
+-->
 
+<script type="text/javascript">
+    $('#dataTable').DataTable( {
+      dom: 'Blfrtip',
+      buttons: [
+      {
+        extend: 'excel',
+        exportOptions: {
+          columns: [1,2,3,4,5,6]
+        }
+      },
+      {
+        extend: 'pdf',
+        exportOptions: {
+          columns: [1,2,3,4,5,6]
+        }
+      },
+      {
+        extend: 'print',
+        exportOptions: {
+          columns: [1,2,3,4,5,6]
+        }
+      }
 
+       ]
+    } );
+  </script>
+
+  <!--ajax -->
+  <script type="text/javascript">
+    $(function(){
+      $(document).on('click', '.btn_update', function(){
+        var userId = $(this).attr('data-rId');
+        $.ajax({
+          url : "get_user.php?update=true&rid=" + userId,
+          type : "get",
+          dataType : 'json',
+          success : function(data){
+            console.log(data);
+            $("input[name='userId']").val(data.id);
+            $("input[name='levelOfAccess']").val(data.levelOfAccess);
+            $("input[name='firstName']").val(data.firstName);
+            $("input[name='middleName']").val(data.middleName);
+            $("input[name='lastName']").val(data.lastName);
+            $("input[name='email']").val(data.email);
+            $("input[name='username']").val(data.username);
+            $("input[name='password']").val(data.password);
+            $("input[name='token']").val(data.token);
+            $("input[name='status']").val(data.status);
+
+          },
+          error: function(err){
+            console.log(err);
+          }
+        })
+      })
+    });
+  </script>
 </body>
 
 </html>

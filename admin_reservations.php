@@ -154,7 +154,6 @@
                               <button type="button" class="btn btn-primary btn-sm btn_update" data-toggle="modal" data-target="#update" data-rId="'. $reservationId .'">
                                 Update
                               </button>
-
                             </td>
                             <td>' . $reservationId . '</td>
                             <td>' . $contactNumber . '</td>
@@ -216,7 +215,7 @@
   <!-- The Modal -->
   <div class="container-fluid">
     <div class="modal fade" id="update">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
           <!-- Modal Header -->
@@ -228,27 +227,66 @@
           <!-- Modal body -->
           <div class="modal-body">
             <form action="reservation_update.php" method="post">
-              <label>Reservation ID</label>
-              <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Contact Number</label>
-              <input type="text" name="contactNumber"><br><br>
-              <label>Reserved Date(YYYY-MM-DD)</label>
-              <input type="text" name="reservedDate" ><br><br>
-              <label>Time</label>
-              <input type="text" name="time"><br><br>
-              <label>User ID</label>
-              <input type="text" name="userId" style="background-color:#C0C0C0;" readonly><br><br>
-              <label>Payment ID</label>
-              <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly><br><br>
-              <input type="Submit" value="Update">
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Reservation ID</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="reservationId" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Contact Number</label>
+                </div>
+                <div class="col-md-5">
+                  <input type="text" name="contactNumber">
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Reserved Date (YYYY-MM-DD)</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="reservedDate" >
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Time</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="time">
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>User ID</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="userId" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div><br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-5">
+                  <label>Payment ID</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" name="paymentId" style="background-color:#C0C0C0;" readonly>
+                </div>
+              </div></br>
+              <div class="row" style="margin-left: 10%;">
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-success">Update</button>
+                </div>
+              </div>
             </form>
-
           </div>
 
         </div>
       </div>
     </div>
-  </div>
+  </div> <!-- container -->
 
 
 
@@ -288,9 +326,29 @@
     $('#dataTable').DataTable( {
       dom: 'Blfrtip',
       buttons: [
-       'excel', 'pdf', 'print',]
+      {
+        extend: 'excel',
+        exportOptions: {
+          columns: [1,2,3,4,5,6]
+        }
+      },
+      {
+        extend: 'pdf',
+        exportOptions: {
+          columns: [1,2,3,4,5,6]
+        }
+      },
+      {
+        extend: 'print',
+        exportOptions: {
+          columns: [1,2,3,4,5,6]
+        }
+      }
+
+       ]
     } );
   </script>
+
   <!--ajax -->
   <script type="text/javascript">
     $(function(){
@@ -305,9 +363,9 @@
             $("input[name='reservationId']").val(data.id);
             $("input[name='contactNumber']").val(data.contactNumber);
             $("input[name='reservedDate']").val(data.reservedDate);
-             $("input[name='time']").val(data.time);
-              $("input[name='userId']").val(data.user_id);
-               $("input[name='paymentId']").val(data.payment_id);
+            $("input[name='time']").val(data.time);
+            $("input[name='userId']").val(data.user_id);
+            $("input[name='paymentId']").val(data.payment_id);
 
           },
           error: function(err){

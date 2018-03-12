@@ -56,30 +56,34 @@
 							<div id="signup" class="modal">
 
 							  <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
-							  <form class="modal-content" method="post" action="signup_redirect.php">
-								<div class="container-fluid">
-								  <h1>Sign Up</h1>
-								  <p>Please fill out this form to create an account.</p>
-								  <hr>
-								  	<label><b>First Name</b></label>
-									<input type="text" name="firstName" required>
-									<label><b>Middle Name</b></label>
-									<input type="text" name="middleName" required>
-									<label><b>Last Name</b></label>
-									<input type="text" name="lastName" required>
-									<label><b>Email Address</b></label>
-									<input type="email" name="email" required>
-									<label><b>Username</b></label>
-									<input type="text" name="username" required>
-									<label><b>Password</b></label>
-									<input type="password" name="password" required>
+							  <div class="container">
+                  <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                      <form class="modal-content" method="post" action="signup_redirect.php" style="padding-right: 10px; padding-left: 10px;">
+                        <h1>Sign Up</h1>
+                        <p>Please fill out this form to create an account.</p>
+                        <hr>
+                        <label><b>First Name</b></label>
+                        <input type="text" name="firstName" required>
+                        <label><b>Middle Name</b></label>
+                        <input type="text" name="middleName">
+                        <label><b>Last Name</b></label>
+                        <input type="text" name="lastName" required>
+                        <label><b>Email Address</b></label>
+                        <input type="text" name="email" required>
+                        <label><b>Username</b></label>
+                        <input type="text" name="username" required>
+                        <label><b>Password</b></label>
+                        <input type="password" name="password" required>
 
-								  <div class="clearfix">
-									<button type="button" class="btn btn-danger" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
-									<button type="submit" class="signupbtn btn btn-success" style="width: auto; margin-right:10px;">Sign Up</button>
-								  </div><br>
-								</div>
-							  </form>
+                        <div class="clearfix">
+                          <button type="button" class="btn btn-danger" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
+                          <button type="submit" class="signupbtn btn btn-success" style="width: auto; margin-right:10px;">Sign Up</button>
+                        </div><br>
+                      </form>
+                    </div>
+                  </div>
+                </div>
 							</div>
 
 							<script>
@@ -101,18 +105,24 @@
 
 							<button type="button" class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" style="width:auto; margin-left: 10px">Log In</button>
 							<div id="id01" class="modal">
-							  <form class="modal-content animate" action="login_redirect.php" method="post">
-								<div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
-								  <label><b>Username</b></label>
-								  <input type="text" placeholder="Enter Username" name="login_username" required>
-								  <label><b>Password</b></label>
-								  <input type="password" placeholder="Enter Password" name="login_password" required>
-								  <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
-								  <a href="forgot_password.php">
-						          	<button type="button" class="btn btn-warning" role="button">Forgot Password</button>
-						          </a>
+								<div class="container">
+									<div class="row">
+										<div class="col-md-6 col-md-offset-3">
+											<form class="modal-content animate" action="login_redirect.php" method="post">
+												<div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
+												  <label><b>Username</b></label>
+												  <input type="text" placeholder="Enter Username" name="login_username" required>
+												  <label><b>Password</b></label>
+												  <input type="password" placeholder="Enter Password" name="login_password" required>
+												  <button type="submit" class="btn btn-primary" style="width: auto;">Log In</button>
+												  <a href="forgot_password.php">
+								          	<button type="button" class="btn btn-warning" role="button">Forgot Password</button>
+								          </a>
+												</div>
+											 </form>
+										</div>
+									</div>
 								</div>
-							  </form>
 							</div>
 							<script>
 							  var modal = document.getElementById('id01');
