@@ -1,13 +1,13 @@
 <?php
 
 	require_once 'vendor/autoload.php';
-	require_once 'vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+	//require_once 'vendor/swiftmailer/swiftmailer/lib/swift_required.php';
 
 
 	// Create the Transport
-	$transport = (new Swift_SmtpTransport('blueoasis.dev2@gmail.com', 25))
-	  ->setUsername('blueoasis.dev2@gmail.com')
-	  ->setPassword('elleiram92')
+	$transport = (new Swift_SmtpTransport('ns-cloud-e1.googledomains.com', 25))
+	  ->setUsername('ns-cloud-e2.googledomains.com')
+	  ->setPassword('J5nd3nze7')
 	;
 
 	// Create the Mailer using your created Transport
