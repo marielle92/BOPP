@@ -102,43 +102,46 @@
       </ol>
     </div>
 
-    <form method="post" action="modify_booking.php">
-      <button type="submit">Modify Booking</button>
-    </form>
-    <form method="post" action="cancel_booking.php">
-      <button type="submit">Cancel</button>
-    </form>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+          <form method="post" action="select_booking_redirect.php">
+          <label>Select Reservation:</label>
+          <select name="reservationId">
+          <?php
 
-    <a href="modify_reservation.php"></a>
+          $reservationsSql = "SELECT * FROM tbl_reservation where user_id='$id'";
+          $reservationsResult = $cn->query($reservationsSql);
+            if ($reservationsResult->num_rows > 0) {
 
-    <table>
-    <?php
+              while($row = $reservationsResult->fetch_assoc()) {
+                $reservationId = $row["id"];
+                $reservedDate = $row["reservedDate"];
+                $time = $row["time"];
+                $payment_id = $row["payment_id"];
 
-    $reservationsSql = "SELECT * FROM tbl_reservation where user_id='$id'";
-    $reservationsResult = $cn->query($reservationsSql);
-      if ($reservationsResult->num_rows > 0) {
+                echo '
 
-        while($row = $reservationsResult->fetch_assoc()) {
-          $reservationId = $row["id"];
-          $reservedDate = $row["reservedDate"];
-          $time = $row["time"];
-          $payment_id = $row["payment_id"];
+                    <option value="' . $reservationId . '">' . $reservedDate . "/" . $time .  '</option>
+                  <!--<tr>
+                    <td>
+                      <a href="modify_reservation.php?id='. $reservationId .'">' . $reservationId . '</a>
+                    </td>
+                  </tr>-->
+                ';
 
-          echo '
-            <tr>
-              <td>
-                <a href="modify_reservation.php?id='. $reservationId .'">' . $reservationId . '</a>
-              </td>
-            </tr>
-          ';
-
-        }
-      }
-      else {
-        echo '<script> alert("Non-existent in DB"); window.location.href="index.php"; </script>';
-        }
-?>
-    </table>
+              }
+            }
+            else {
+              echo '<script> alert("Non-existent in DB"); window.location.href="index.php"; </script>';
+              }
+            ?>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">Select</button>
+        </form>
+        </div>
+      </div>
+    </div><br>
 
     <!-- Example DataTables Card-->
     <div class="container-fluid">
