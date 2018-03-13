@@ -106,14 +106,25 @@
           <div class="offset-1 col-md-10">
             <div class="form-group">
               <div class="input-group">
-                <label class="radio"><input type="radio" name="time" value="Day" checked>Day</label>
+                <label class="radio"><input type="radio" name="time" value="Day" checked>Day (8am-5pm)</label>
                 <div class="col-2"></div>
-                <label class="radio"><input type="radio" name="time" value="Night">Night</label>
+                <label class="radio"><input type="radio" name="time" value="Night">Night (7pm-7am)</label>
               </div>
             </div>
           </div>
         </div>
         </div><br/><br/>
+
+        <?php
+          $reservationsSql = "SELECT reservedDate FROM tbl_reservation";
+          $reservationsResult = $cn->query($reservationsSql);
+          if ($reservationsResult->num_rows > 0) {
+            while($row = $reservationsResult->fetch_assoc()) {
+              $reservedDate = $row["reservedDate"];
+              echo $reservedDate;
+            }
+          }
+        ?>
 
         <div class="row">
           <div class="offset-1 col-10">
@@ -199,7 +210,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>by Marielle</small>
         </div>
       </div>
     </footer>
@@ -254,11 +265,17 @@
   <script type="text/javascript" src="js/momentjs/moment.js"></script>
   <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
+  <!-- snip -->
+  <script>
+      var dates = <?php echo $reservedDate; ?>; //Don't forget the extra semicolon!
+  </script>
+  <!-- snip -->
+
   <script type="text/javascript">
     $(function () {
       $('#reservationDate').datepicker({
         format: 'yyyy-mm-dd',
-        startDate: moment().format('YYYY-MM-DD')
+        startDate: moment().format('YYYY-MM-DD'),
       });
     });
   </script>

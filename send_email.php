@@ -85,3 +85,7 @@
 	// ';
 	return true;
 ?>
+
+<script>
+	alert("Your message has been sent."); window.location.href="index.php";
+</script>

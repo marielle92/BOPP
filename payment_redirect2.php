@@ -31,7 +31,7 @@
       $photo = (string) basename( $_FILES['photo']['name']);
     }
     else{
-      echo '<script> alert("Error upload. Maximun size exceded."); window.location.href="user_payment.php"; </script>';
+      echo '<script> alert("Error upload. Maximun size exceeded."); window.location.href="user_payment.php"; </script>';
     }
   }
 
