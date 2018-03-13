@@ -1,7 +1,7 @@
 <?php
 
 	require_once 'vendor/autoload.php';
-	//require_once 'vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+	require_once 'vendor/swiftmailer/swiftmailer/lib/swift_required.php';
 
 
 	// Create the Transport
@@ -22,4 +22,5 @@
 
 	// Send the message
 	$result = $mailer->send($message);
+	echo "HELLO";
 ?>
