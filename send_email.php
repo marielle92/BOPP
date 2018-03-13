@@ -1,4 +1,7 @@
 <?php
+	require 'vendor/autoload.php';
+	use Mailgun\Mailgun;
+
 	// Check for empty fields
 	if(empty($_POST['name'])      ||
 	   empty($_POST['email'])     ||
@@ -20,6 +23,14 @@
 	$email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
 	$headers = "From: blueoasis.dev2@gmail.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
 	$headers .= "Reply-To: $email_address";
+
+	$mg = Mailgun::create('key-f37956629ce12886c64fafbc9db85cc9');
+	$mg->messages()->send('sandboxda173ac6377b46839c0c5ff73868696b.mailgun.org', array(
+		'from' => "$name <$email_address>",
+		'to' => 'Admin <blueoasis.dev2@gmail.com>',
+		'subject' => $email_subject,
+		'text' => $email_body
+	));
 
 	// headers: {
 	// 		  	"Access-Control-Allow-Headers": "Authorization, Access-Control-Allow-Headers",
@@ -44,33 +55,33 @@
 	// 		  }
 	// 		})
 
-	echo '
-		<script src="js/jquery/jquery-3.3.1.js"></script>
-		<script src="js/axios/axios.min.js"></script>
-		<script>
-			axios({
-			  method:"post",
-			  url:"https://api.mailgun.net/v3/sandboxda173ac6377b46839c0c5ff73868696b.mailgun.org/messages",
-			  credentials: true,
-			  headers: {
-			  	"Content-Type": "application/x-www-form-urlencoded"
-			  },
-			  auth: {
-			  	username: "api",
-			  	password: "key-f37956629ce12886c64fafbc9db85cc9"
-			  },
-			  data: {
-			  	from: "Sample <sample@email.com>",
-			  	to: "blueoasis.dev2@gmail.com",
-			  	subject: "Website Contact Form: ",
-			  	text: "hello world"
-			  }
-			})
-			.then(function(response) {
-			  alert("Email sent");
-			  window.location.href = "contact_us.php";
-			});
-		</script>
-	';
+	// echo '
+	// 	<script src="js/jquery/jquery-3.3.1.js"></script>
+	// 	<script src="js/axios/axios.min.js"></script>
+	// 	<script>
+	// 		axios({
+	// 		  method:"post",
+	// 		  url:"https://api.mailgun.net/v3/sandboxda173ac6377b46839c0c5ff73868696b.mailgun.org/messages",
+	// 		  credentials: true,
+	// 		  headers: {
+	// 		  	"Content-Type": "application/x-www-form-urlencoded"
+	// 		  },
+	// 		  auth: {
+	// 		  	username: "api",
+	// 		  	password: "key-f37956629ce12886c64fafbc9db85cc9"
+	// 		  },
+	// 		  data: {
+	// 		  	from: "Sample <sample@email.com>",
+	// 		  	to: "blueoasis.dev2@gmail.com",
+	// 		  	subject: "Website Contact Form: ",
+	// 		  	text: "hello world"
+	// 		  }
+	// 		})
+	// 		.then(function(response) {
+	// 		  alert("Email sent");
+	// 		  window.location.href = "contact_us.php";
+	// 		});
+	// 	</script>
+	// ';
 	return true;
 ?>
