@@ -93,7 +93,6 @@
       </ul>
     </div>
   </nav>
-
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -104,10 +103,10 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-3 col-md-offset-2">
+        <div class="col-md-5 col-md-offset-1">
           <form method="post" action="select_booking_redirect.php">
-          <label>Select Reservation:</label>
-          <select name="reservationId">
+          <label>Modify Reservation:</label>
+          <select name="reservationId" onchange="window.location.href=this.value;">
           <?php
 
           $reservationsSql = "SELECT * FROM tbl_reservation where user_id='$id'";
@@ -121,13 +120,9 @@
                 $payment_id = $row["payment_id"];
 
                 echo '
-
-                    <option value="' . $reservationId . '">' . $reservedDate . "/" . $time .  '</option>
-                  <!--<tr>
-                    <td>
-                      <a href="modify_reservation.php?id='. $reservationId .'">' . $reservationId . '</a>
-                    </td>
-                  </tr>-->
+                    <option value="modify_reservation.php?id='. $reservationId .'">
+                      ID: '. $reservationId . "/DATE: " . $reservedDate . "/TIME: " . $time .  '
+                    </option>
                 ';
 
               }
@@ -142,7 +137,13 @@
         </div>
       </div>
     </div><br>
-
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+          <h4>Latest Booking:</h4>
+        </div>
+      </div>
+    </div>
     <!-- Example DataTables Card-->
     <div class="container-fluid">
       <div class="card mb-3">
