@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2018 at 12:00 AM
+-- Generation Time: Mar 14, 2018 at 10:32 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `blueoasis`
 --
-CREATE DATABASE IF NOT EXISTS `blueoasis` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `blueoasis`;
 
 -- --------------------------------------------------------
 
@@ -29,6 +27,7 @@ USE `blueoasis`;
 -- Table structure for table `tbl_amenities`
 --
 
+DROP TABLE IF EXISTS `tbl_amenities`;
 CREATE TABLE `tbl_amenities` (
   `id` int(11) NOT NULL,
   `amenityName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -56,6 +55,7 @@ INSERT INTO `tbl_amenities` (`id`, `amenityName`, `amenityDescription`, `amenity
 -- Table structure for table `tbl_equipment`
 --
 
+DROP TABLE IF EXISTS `tbl_equipment`;
 CREATE TABLE `tbl_equipment` (
   `id` int(11) NOT NULL,
   `equipmentName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -97,6 +97,7 @@ INSERT INTO `tbl_equipment` (`id`, `equipmentName`, `quantity`, `buyingPrice`, `
 -- Table structure for table `tbl_feedback`
 --
 
+DROP TABLE IF EXISTS `tbl_feedback`;
 CREATE TABLE `tbl_feedback` (
   `id` int(11) NOT NULL,
   `rating` int(11) DEFAULT NULL,
@@ -125,6 +126,7 @@ INSERT INTO `tbl_feedback` (`id`, `rating`, `review`, `image`, `mgr_evaluation`,
 -- Table structure for table `tbl_gallery`
 --
 
+DROP TABLE IF EXISTS `tbl_gallery`;
 CREATE TABLE `tbl_gallery` (
   `id` int(11) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL
@@ -147,6 +149,7 @@ INSERT INTO `tbl_gallery` (`id`, `imageName`) VALUES
 -- Table structure for table `tbl_home`
 --
 
+DROP TABLE IF EXISTS `tbl_home`;
 CREATE TABLE `tbl_home` (
   `id` int(8) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -158,7 +161,7 @@ CREATE TABLE `tbl_home` (
 --
 
 INSERT INTO `tbl_home` (`id`, `imageName`, `imageDescription`) VALUES
-(1, 'home1.JPG', 'Clear blue waters'),
+(1, 'home1.JPG', 'The quick brown fox jumps over the lazy dog'),
 (2, 'home2.JPG', 'Modern style'),
 (5, 'home3.JPG', 'Garden setting');
 
@@ -168,6 +171,7 @@ INSERT INTO `tbl_home` (`id`, `imageName`, `imageDescription`) VALUES
 -- Table structure for table `tbl_logs`
 --
 
+DROP TABLE IF EXISTS `tbl_logs`;
 CREATE TABLE `tbl_logs` (
   `id` int(255) NOT NULL,
   `user_id` int(255) NOT NULL,
@@ -334,7 +338,46 @@ INSERT INTO `tbl_logs` (`id`, `user_id`, `log_dateTime`, `action`) VALUES
 (152, 13, '2018-03-04 07:43:25.000000', 'Log Out'),
 (153, 13, '2018-03-04 07:43:38.000000', 'Log In'),
 (154, 13, '2018-03-04 07:45:09.000000', 'Log Out'),
-(155, 13, '2018-03-04 07:45:18.000000', 'Log In');
+(155, 13, '2018-03-04 07:45:18.000000', 'Log In'),
+(156, 13, '2018-03-04 08:06:37.000000', 'Log Out'),
+(157, 7, '2018-03-04 08:18:52.000000', 'Log In'),
+(158, 7, '2018-03-04 08:20:31.000000', 'Log Out'),
+(159, 14, '2018-03-04 08:20:38.000000', 'Log In'),
+(160, 14, '2018-03-04 08:20:49.000000', 'Log Out'),
+(161, 7, '2018-03-04 08:27:10.000000', 'Log In'),
+(162, 7, '2018-03-04 08:50:59.000000', 'Log Out'),
+(163, 1, '2018-03-04 08:51:17.000000', 'Log In'),
+(164, 1, '2018-03-04 09:13:51.000000', 'Log Out'),
+(165, 7, '2018-03-04 09:14:00.000000', 'Log In'),
+(166, 7, '2018-03-04 09:14:03.000000', 'Log Out'),
+(167, 1, '2018-03-04 09:14:10.000000', 'Log In'),
+(168, 1, '2018-03-04 09:15:09.000000', 'Log In'),
+(169, 1, '2018-03-04 09:33:48.000000', 'Log Out'),
+(170, 7, '2018-03-04 09:34:01.000000', 'Log In'),
+(171, 7, '2018-03-04 09:34:31.000000', 'Log Out'),
+(172, 1, '2018-03-04 09:34:41.000000', 'Log In'),
+(173, 7, '2018-03-04 09:36:27.000000', 'Log In'),
+(174, 7, '2018-03-11 12:21:50.000000', 'Log In'),
+(175, 7, '2018-03-11 12:24:24.000000', 'Log Out'),
+(176, 1, '2018-03-11 12:24:32.000000', 'Log In'),
+(177, 1, '2018-03-11 12:25:16.000000', 'Log Out'),
+(178, 7, '2018-03-11 13:36:48.000000', 'Log In'),
+(179, 7, '2018-03-11 14:52:31.000000', 'Log Out'),
+(180, 7, '2018-03-13 00:22:25.000000', 'Log In'),
+(181, 7, '2018-03-13 01:53:01.000000', 'Log In'),
+(182, 7, '2018-03-13 02:00:56.000000', 'Log In'),
+(183, 7, '2018-03-13 02:06:15.000000', 'Log In'),
+(184, 7, '2018-03-13 02:13:36.000000', 'Log In'),
+(185, 7, '2018-03-13 02:16:34.000000', 'Log In'),
+(186, 7, '2018-03-13 02:31:56.000000', 'Log In'),
+(187, 7, '2018-03-13 02:34:26.000000', 'Log In'),
+(188, 1, '2018-03-13 09:24:24.000000', 'Log In'),
+(189, 1, '2018-03-14 03:17:54.000000', 'Log In'),
+(190, 1, '2018-03-15 03:14:25.000000', 'Log In'),
+(191, 1, '2018-03-15 03:54:27.000000', 'Log In'),
+(192, 1, '2018-03-15 04:02:06.000000', 'Log In'),
+(193, 1, '2018-03-15 04:20:31.000000', 'Log Out'),
+(194, 1, '2018-03-15 04:20:46.000000', 'Log In');
 
 -- --------------------------------------------------------
 
@@ -342,6 +385,7 @@ INSERT INTO `tbl_logs` (`id`, `user_id`, `log_dateTime`, `action`) VALUES
 -- Table structure for table `tbl_payment`
 --
 
+DROP TABLE IF EXISTS `tbl_payment`;
 CREATE TABLE `tbl_payment` (
   `id` int(11) NOT NULL,
   `fullName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -413,7 +457,30 @@ INSERT INTO `tbl_payment` (`id`, `fullName`, `addressCountry`, `addressCity`, `a
 (49, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11000, 5500, NULL, 5500, NULL, 'DSC_4660.jpg', 'Pending', 44),
 (50, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11000, 5500, NULL, 5500, NULL, 'DSC_4660.jpg', 'DPPaid', 44),
 (51, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 11000, 5500, '2018-03-04 03:33:53', 5500, NULL, 'DSC_4660.jpg', 'DPpaid', 44),
-(52, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12900, 6450, '2018-03-04 06:30:41', 6450, NULL, 'DSC_4642.jpg', 'DPpaid', 45);
+(52, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 12900, 6450, '2018-03-04 06:30:41', 6450, NULL, 'DSC_4642.jpg', 'DPpaid', 45),
+(53, 'Marielle S. Banares', 'Philippines', 'Valenzuela City', '006 Dela Cruz Alley, 103 Interior, Brgy. Maysan', 15700, 7850, '2018-03-04 08:53:03', 7850, NULL, 'cxcd.jpg', 'DPpaid', 46);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_promocode`
+--
+
+DROP TABLE IF EXISTS `tbl_promocode`;
+CREATE TABLE `tbl_promocode` (
+  `id` int(11) NOT NULL,
+  `promoCode` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `value` varchar(255) CHARACTER SET utf16 NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_promocode`
+--
+
+INSERT INTO `tbl_promocode` (`id`, `promoCode`, `value`) VALUES
+(1, 'promo123', '1000'),
+(2, '123promo', '500'),
+(3, 'blue222', '222');
 
 -- --------------------------------------------------------
 
@@ -421,6 +488,7 @@ INSERT INTO `tbl_payment` (`id`, `fullName`, `addressCountry`, `addressCity`, `a
 -- Table structure for table `tbl_ratesandamenities`
 --
 
+DROP TABLE IF EXISTS `tbl_ratesandamenities`;
 CREATE TABLE `tbl_ratesandamenities` (
   `id` int(8) NOT NULL,
   `imageName` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -444,65 +512,118 @@ INSERT INTO `tbl_ratesandamenities` (`id`, `imageName`, `amenityName`, `descript
 -- Table structure for table `tbl_reservation`
 --
 
+DROP TABLE IF EXISTS `tbl_reservation`;
 CREATE TABLE `tbl_reservation` (
   `id` int(11) NOT NULL,
   `contactNumber` varchar(255) NOT NULL,
   `reservedDate` date NOT NULL,
   `time` varchar(255) CHARACTER SET utf8 NOT NULL,
   `user_id` int(11) NOT NULL,
-  `payment_id` int(11) DEFAULT NULL
+  `payment_id` int(11) DEFAULT NULL,
+  `promo_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`id`, `contactNumber`, `reservedDate`, `time`, `user_id`, `payment_id`) VALUES
-(1, '09273535869', '2018-01-31', 'Day', 1, NULL),
-(2, '09273535869', '2018-01-30', 'Day', 1, NULL),
-(3, '09179876543', '2018-01-29', 'Night', 1, NULL),
-(4, '09273535869', '2018-01-28', 'Day', 1, NULL),
-(5, '09951112233', '2018-01-28', 'Night', 3, NULL),
-(6, 'ascacwec', '2018-01-31', 'Night', 1, NULL),
-(7, '09999999', '2018-01-30', 'Night', 1, NULL),
-(8, '09273535869', '2018-01-30', 'Day', 1, NULL),
-(9, '09273535869', '2018-01-31', 'Day', 1, NULL),
-(10, '09273535869', '2018-01-28', 'Night', 1, NULL),
-(11, '09273535869', '2018-01-31', 'Night', 1, NULL),
-(12, '09273535869', '2018-01-30', 'Night', 1, NULL),
-(13, '09273535869', '2018-01-31', 'Night', 1, NULL),
-(14, '09273535869', '2018-01-31', 'Night', 1, NULL),
-(15, '09273535869', '2018-01-31', 'Night', 1, NULL),
-(16, '09273535869', '2018-01-31', 'Night', 1, NULL),
-(17, '09273535869', '2018-01-30', 'Night', 1, NULL),
-(18, '09273535869', '2018-01-31', 'Night', 1, 21),
-(19, '09951112233', '2018-01-31', 'Night', 3, 22),
-(20, '09273535869', '2018-01-29', 'Night', 3, 25),
-(21, '09273535869', '2018-02-09', 'Day', 1, 30),
-(22, '0927353536', '2018-01-31', 'Night', 3, 31),
-(23, '12345678', '2018-02-20', 'Night', 5, 32),
-(24, '09353947863', '2018-03-04', 'Day', 6, 33),
-(25, '0912232312', '2018-02-28', 'Night', 3, NULL),
-(26, '09223334455', '2018-02-20', 'Day', 3, 34),
-(27, 'rgerheryery', '2018-02-23', 'Day', 3, NULL),
-(28, '09171234567', '2018-02-23', 'Day', 8, 36),
-(29, '09982221134', '2018-02-27', 'Night', 3, 37),
-(30, '09273535869', '2018-02-28', 'Night', 3, 38),
-(31, '09273535869', '2018-02-28', 'Night', 3, 39),
-(32, 'wefwef', '2018-02-19', 'Night', 3, 40),
-(33, '09273535869', '2018-02-28', 'Night', 3, 41),
-(34, '09273535869', '2018-02-20', 'Night', 3, NULL),
-(35, '09273535869', '2018-02-28', 'Night', 3, 42),
-(36, '09273535869', '2018-02-20', 'Night', 3, 43),
-(37, '09273535869', '2018-02-19', 'Day', 3, 45),
-(38, '09273535869', '2018-02-22', 'Night', 9, 46),
-(39, '09273535869', '2018-02-23', 'Night', 9, NULL),
-(40, '09177001502', '2018-03-16', 'Day', 10, 47),
-(41, '12345678', '2018-02-05', 'Day', 10, NULL),
-(42, '12345678', '2018-02-05', 'Night', 10, 48),
-(43, '09273535869', '2018-02-28', 'Night', 1, NULL),
-(44, '0912232312', '2018-03-20', 'Night', 1, 51),
-(45, '09273535869', '2018-03-30', 'Night', 1, 52);
+INSERT INTO `tbl_reservation` (`id`, `contactNumber`, `reservedDate`, `time`, `user_id`, `payment_id`, `promo_id`) VALUES
+(1, '09273535869', '2018-01-31', 'Night', 1, NULL, 0),
+(2, '09273535869', '2018-01-30', 'Day', 1, NULL, 0),
+(3, '09179876543', '2018-01-29', 'Night', 1, NULL, 0),
+(4, '09273535869', '2018-01-28', 'Day', 1, NULL, 0),
+(5, '09951112233', '2018-01-28', 'Night', 3, NULL, 0),
+(6, 'ascacwec', '2018-01-31', 'Night', 1, NULL, 0),
+(7, '09999999', '2018-01-30', 'Night', 1, NULL, 0),
+(8, '09273535869', '2018-01-30', 'Day', 1, NULL, 0),
+(9, '09273535869', '2018-01-31', 'Day', 1, NULL, 0),
+(10, '09273535869', '2018-01-28', 'Night', 1, NULL, 0),
+(11, '09273535869', '2018-01-31', 'Night', 1, NULL, 0),
+(12, '09273535869', '2018-01-30', 'Night', 1, NULL, 0),
+(13, '09273535869', '2018-01-31', 'Night', 1, NULL, 0),
+(14, '09273535869', '2018-01-31', 'Night', 1, NULL, 0),
+(15, '09273535869', '2018-01-31', 'Night', 1, NULL, 0),
+(16, '09273535869', '2018-01-31', 'Night', 1, NULL, 0),
+(17, '09273535869', '2018-01-30', 'Night', 1, NULL, 0),
+(18, '09273535869', '2018-01-31', 'Night', 1, 21, 0),
+(19, '09951112233', '2018-01-31', 'Night', 3, 22, 0),
+(20, '09273535869', '2018-01-29', 'Night', 3, 25, 0),
+(21, '09273535869', '2018-02-09', 'Day', 1, 30, 0),
+(22, '0927353536', '2018-01-31', 'Night', 3, 31, 0),
+(23, '12345678', '2018-02-20', 'Night', 5, 32, 0),
+(24, '09353947863', '2018-03-04', 'Day', 6, 33, 0),
+(25, '0912232312', '2018-02-28', 'Night', 3, NULL, 0),
+(26, '09223334455', '2018-02-20', 'Day', 3, 34, 0),
+(27, 'rgerheryery', '2018-02-23', 'Day', 3, NULL, 0),
+(28, '09171234567', '2018-02-23', 'Day', 8, 36, 0),
+(29, '09982221134', '2018-02-27', 'Night', 3, 37, 0),
+(30, '09273535869', '2018-02-28', 'Night', 3, 38, 0),
+(31, '09273535869', '2018-02-28', 'Night', 3, 39, 0),
+(32, 'wefwef', '2018-02-19', 'Night', 3, 40, 0),
+(33, '09273535869', '2018-02-28', 'Night', 3, 41, 0),
+(34, '09273535869', '2018-02-20', 'Night', 3, NULL, 0),
+(35, '09273535869', '2018-02-28', 'Night', 3, 42, 0),
+(36, '09273535869', '2018-02-20', 'Night', 3, 43, 0),
+(37, '09273535869', '2018-02-19', 'Day', 3, 45, 0),
+(38, '09273535869', '2018-02-22', 'Night', 9, 46, 0),
+(39, '09273535869', '2018-02-23', 'Night', 9, NULL, 0),
+(40, '09177001502', '2018-03-16', 'Day', 10, 47, 0),
+(41, '12345678', '2018-02-05', 'Day', 10, NULL, 0),
+(42, '12345678', '2018-02-05', 'Night', 10, 48, 0),
+(43, '09273535869', '2018-02-28', 'Night', 1, NULL, 0),
+(44, '0912232312', '2018-03-20', 'Night', 1, 51, 0),
+(45, '09273535869', '2018-03-30', 'Night', 1, 52, 0),
+(46, '09273535869', '2018-03-21', 'Night', 1, 53, 0),
+(47, '9', '2018-03-21', 'Night', 1, NULL, 0),
+(48, '09273535869', '2018-03-21', 'Night', 1, NULL, 0),
+(49, '09179876543', '2018-03-21', 'Night', 1, NULL, 0),
+(50, '09273535869', '2018-03-21', 'Night', 1, NULL, 0),
+(51, '09179876543', '2018-03-28', 'Night', 1, NULL, 0),
+(52, '09273535869', '2018-03-28', 'Day', 1, NULL, 0),
+(53, '09273535869', '2018-03-28', 'Day', 1, NULL, 0),
+(54, '98', '2018-03-28', 'Day', 1, NULL, 0),
+(55, '09273535869', '2018-03-28', 'Day', 1, NULL, 0),
+(56, '09273535869', '2018-04-11', 'Day', 1, NULL, 0),
+(57, '999', '2018-04-12', 'Day', 1, NULL, 0),
+(58, '09273535869', '2018-04-13', 'Day', 1, NULL, 0),
+(59, '90909', '2018-04-14', 'Day', 1, NULL, 0),
+(60, '09273535869', '2018-04-14', 'Day', 1, NULL, 0),
+(61, '09273535869', '2018-04-14', 'Day', 1, NULL, 0),
+(62, '098', '2018-03-14', 'Day', 1, NULL, 0),
+(63, '09951112233', '2018-03-14', 'Day', 1, NULL, 0),
+(64, '09887', '2018-03-14', 'Day', 1, NULL, 0),
+(65, '09273535869', '2018-04-14', 'Day', 1, NULL, 0),
+(66, '8757', '2018-04-20', 'Day', 1, NULL, 0),
+(67, '90787', '2018-04-23', 'Day', 1, NULL, 0),
+(68, '1234', '2018-03-24', 'Night', 1, NULL, 0),
+(69, '456343', '2018-04-24', 'Day', 1, NULL, 0),
+(70, '12123124', '2018-04-27', 'Day', 1, NULL, 0),
+(71, '12', '2018-04-27', 'Night', 1, NULL, 0),
+(72, '12345', '2018-04-27', 'Day', 1, NULL, 0),
+(73, '12345', '2018-04-27', 'Night', 1, NULL, 0),
+(74, '0909', '2018-03-27', 'Night', 1, NULL, 0),
+(75, '12412421', '2018-04-30', 'Day', 1, NULL, 0),
+(76, '454356', '2018-04-30', 'Night', 1, NULL, 0),
+(77, '2352353', '2018-04-30', 'Night', 1, NULL, 0),
+(78, '345456456', '2018-04-29', 'Day', 1, NULL, 0),
+(79, '34534634', '2018-04-29', 'Night', 1, NULL, 0),
+(80, '343534', '2018-04-29', 'Night', 1, NULL, 0),
+(81, '234234', '2018-04-29', 'Night', 1, NULL, 0),
+(82, '56768768', '2018-04-29', 'Day', 1, NULL, 0),
+(83, '4745777', '2018-04-29', 'Night', 1, NULL, 0),
+(84, '34534634', '2018-04-26', 'Day', 1, NULL, 0),
+(85, '345345', '2018-05-01', 'Day', 1, NULL, 0),
+(86, '2342342', '2018-05-01', 'Night', 1, NULL, 0),
+(87, '0897899', '2018-06-13', 'Day', 1, NULL, NULL),
+(88, '324553', '2018-05-11', 'Day', 1, NULL, NULL),
+(89, '56445', '2018-06-01', 'Day', 1, NULL, NULL),
+(90, '23435', '2018-05-24', 'Day', 1, NULL, NULL),
+(91, '2343535', '2018-05-25', 'Day', 1, NULL, NULL),
+(92, '4765756', '2018-03-29', 'Night', 1, NULL, NULL),
+(93, '23423523', '2018-05-16', 'Night', 1, NULL, NULL),
+(94, '3534633', '2018-05-09', 'Day', 1, NULL, NULL),
+(95, '234235', '2018-05-08', 'Day', 1, NULL, 0),
+(96, '4544535', '2018-05-07', 'Day', 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -510,6 +631,7 @@ INSERT INTO `tbl_reservation` (`id`, `contactNumber`, `reservedDate`, `time`, `u
 -- Table structure for table `tbl_reservation_amenities`
 --
 
+DROP TABLE IF EXISTS `tbl_reservation_amenities`;
 CREATE TABLE `tbl_reservation_amenities` (
   `reservation_id` int(11) NOT NULL,
   `amenity_id` int(11) NOT NULL
@@ -639,7 +761,114 @@ INSERT INTO `tbl_reservation_amenities` (`reservation_id`, `amenity_id`) VALUES
 (2, 3),
 (45, 2),
 (45, 4),
-(45, 7);
+(45, 7),
+(46, 1),
+(46, 2),
+(46, 3),
+(46, 7),
+(47, 5),
+(48, 1),
+(48, 3),
+(48, 5),
+(49, 1),
+(49, 4),
+(49, 7),
+(50, 2),
+(50, 5),
+(51, 3),
+(52, 1),
+(53, 3),
+(54, 4),
+(55, 1),
+(55, 4),
+(56, 1),
+(57, 1),
+(57, 3),
+(58, 1),
+(58, 4),
+(58, 7),
+(59, 1),
+(59, 4),
+(59, 7),
+(60, 3),
+(60, 7),
+(61, 2),
+(61, 4),
+(61, 5),
+(62, 3),
+(62, 4),
+(62, 5),
+(63, 4),
+(64, 2),
+(64, 5),
+(65, 1),
+(65, 4),
+(66, 4),
+(66, 7),
+(67, 2),
+(67, 4),
+(68, 1),
+(69, 4),
+(69, 7),
+(70, 1),
+(70, 4),
+(70, 7),
+(71, 1),
+(72, 5),
+(72, 7),
+(73, 4),
+(73, 7),
+(74, 1),
+(74, 4),
+(74, 7),
+(75, 5),
+(75, 7),
+(76, 2),
+(76, 4),
+(76, 7),
+(77, 2),
+(77, 7),
+(78, 2),
+(78, 4),
+(78, 7),
+(79, 4),
+(79, 5),
+(80, 3),
+(80, 5),
+(81, 4),
+(81, 5),
+(82, 1),
+(82, 3),
+(83, 5),
+(83, 7),
+(84, 2),
+(84, 4),
+(85, 3),
+(85, 4),
+(86, 2),
+(86, 7),
+(87, 1),
+(87, 3),
+(87, 5),
+(88, 5),
+(88, 7),
+(89, 2),
+(89, 5),
+(89, 7),
+(90, 1),
+(90, 3),
+(90, 5),
+(91, 1),
+(91, 4),
+(91, 5),
+(92, 2),
+(92, 4),
+(93, 4),
+(93, 7),
+(94, 1),
+(94, 2),
+(95, 5),
+(96, 4);
 
 -- --------------------------------------------------------
 
@@ -647,6 +876,7 @@ INSERT INTO `tbl_reservation_amenities` (`reservation_id`, `amenity_id`) VALUES
 -- Table structure for table `tbl_user`
 --
 
+DROP TABLE IF EXISTS `tbl_user`;
 CREATE TABLE `tbl_user` (
   `id` int(11) NOT NULL,
   `levelOfAccess` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -665,7 +895,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id`, `levelOfAccess`, `firstName`, `middleName`, `lastName`, `email`, `username`, `password`, `token`, `status`) VALUES
-(1, 'User', 'Marielle', 'Sano', 'Banares', 'mariellebanares@gmail.com', 'marielle92', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL),
+(1, 'User', 'Marielle', 'Sano', 'Banares', 'mariellebanares@gmail.com', 'marielle92', '827ccb0eea8a706c4c34a16891f84e7b', 'YMQERWO9PB', NULL),
 (2, 'User', 'Lucita', 'Centeno', 'Sano', 'lsbnov@yahoo.com', 'lucy1130', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, NULL),
 (3, 'User', 'Rhouwelle', 'Berba', 'Banares', 'rhouwelle@yahoo.com', 'rhouwelle86', 'ef4cdd3117793b9fd593d7488409626d', NULL, NULL),
 (4, 'Manager', 'Harley', 'Sano', 'Banares', 'harley@gmail.com', 'harley0615', '518c944f355c35c103e892c24e8ebfc6', NULL, NULL),
@@ -675,9 +905,10 @@ INSERT INTO `tbl_user` (`id`, `levelOfAccess`, `firstName`, `middleName`, `lastN
 (8, 'User', 'user', 'one', 'one', 'userone@gmail.com', 'userone', 'd8578edf8458ce06fbc5bb76a58c5ca4', NULL, NULL),
 (9, 'User', 'Yeye', 'Banares', 'Sano', 'yeyebanares@gmail.com', 'yeye0902', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL),
 (10, 'User', 'Lucy', 'Centeno', 'Sano', 'lsbnov@yahoo.com', 'lucita1130', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL),
-(11, 'User', 'Marielle', 'S.', 'Banares', 'mariellebanares@gmail.com', 'marielle0902', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL),
+(11, 'User', 'Marielle', 'S.', 'Banares', 'mariellebanares@gmail.com', 'marielle0902', '827ccb0eea8a706c4c34a16891f84e7b', 'YMQERWO9PB', NULL),
 (12, 'Manager', 'Noah Deecon', '', 'Eltanal', 'noahdeecon@gmail.com', 'noahdeecon', '48eb717bcc142780548400509e2e32d8', NULL, 'Active'),
-(13, 'Staff', 'Marielle', 'Sano', 'Banares', 'mariellebanares@gmail.com', 'marielle29', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Active');
+(13, 'Staff', 'Marielle', 'Sano', 'Banares', 'mariellebanares@gmail.com', 'marielle29', '827ccb0eea8a706c4c34a16891f84e7b', 'YMQERWO9PB', 'Active'),
+(14, 'Staff', 'Joel', '', 'Aguiba', 'Kuya.Joel@gmail.com', 'kuyajoel', '22c22895822830f4f128cd72863c08a2', NULL, 'Active');
 
 --
 -- Indexes for dumped tables
@@ -726,6 +957,12 @@ ALTER TABLE `tbl_logs`
 ALTER TABLE `tbl_payment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_payment_reservation` (`reservation_id`);
+
+--
+-- Indexes for table `tbl_promocode`
+--
+ALTER TABLE `tbl_promocode`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_ratesandamenities`
@@ -787,12 +1024,17 @@ ALTER TABLE `tbl_home`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 --
 -- AUTO_INCREMENT for table `tbl_payment`
 --
 ALTER TABLE `tbl_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT for table `tbl_promocode`
+--
+ALTER TABLE `tbl_promocode`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_ratesandamenities`
 --
@@ -802,12 +1044,12 @@ ALTER TABLE `tbl_ratesandamenities`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --

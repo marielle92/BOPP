@@ -112,13 +112,28 @@
           $reservationsSql = "SELECT * FROM tbl_reservation where user_id='$id'";
           $reservationsResult = $cn->query($reservationsSql);
             if ($reservationsResult->num_rows > 0) {
-
               while($row = $reservationsResult->fetch_assoc()) {
                 $reservationId = $row["id"];
                 $reservedDate = $row["reservedDate"];
                 $time = $row["time"];
                 $payment_id = $row["payment_id"];
 
+                //select dates to convert
+                $selectedDate = $reservedDate;
+                date_default_timezone_set("Asia/Manila");
+                $dateNow = date("Y-m-d ") . date("H:i:s");
+
+                //convert dates to unix  timestamp
+                $unixSelected = strtotime($selectedDate);
+                $unixNow = strtotime($dateNow);
+
+                //identify if future or past
+                //subtract now from selected
+                /*
+                $returnBool = true;
+                $diffInDates = $unixSelected - $unixNow;
+                if ($diffInDates < 0) { $returnBool = false; } return $returnBool;
+                */
                 echo '
                     <option value="modify_reservation.php?id='. $reservationId .'">
                       ID: '. $reservationId . "/DATE: " . $reservedDate . "/TIME: " . $time .  '
@@ -130,10 +145,34 @@
             else {
               echo '<script> alert("Non-existent in DB"); window.location.href="index.php"; </script>';
               }
+
             ?>
         </select>
         <button type="submit" class="btn btn-primary btn-sm">Select</button>
         </form>
+
+        <!--
+
+        <?php /*
+          //select dates to convert
+          $selectedDate = $reservedDate;
+          date_default_timezone_set("Asia/Manila");
+          $dateNow = date("Y-m-d ") . date("H:i:s");
+
+          //convert dates to unix  timestamp
+          $unixSelected = strtotime($selectedDate);
+          $unixNow = strtotime($dateNow);
+
+          echo '
+            Selected Date: ' . $selectedDate . '
+            Date Now: ' . $dateNow . '
+
+            unix selected date: ' . $unixSelected . '
+            unix date now: ' . $unixNow . '
+          ';
+        */ ?>
+      -->
+
         </div>
       </div>
     </div><br>
