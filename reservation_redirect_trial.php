@@ -10,6 +10,22 @@
 	<body>
 		<?php
 
+			//get promo code
+			$_SESSION["promoCode"] = $_POST["promoCode"];
+	    $promoCode = $_SESSION["promoCode"];
+	    $promoSql = "SELECT * FROM tbl_promocode where promoCode='$promoCode'";
+	    $promoResult = $cn->query($promoSql);
+	    if ($promoResult->num_rows > 0) {
+	      while($row = $promoResult->fetch_assoc()) {
+	        $promoId = $row["id"];
+	      }
+	      //echo '<script> alert("Promo code is: ' . $_SESSION["promoCode"] . ' Promo value is: ' . $_SESSION["promoValue"] . '"); window.location.href="user_reservation.php"; </script>';
+	    }
+	    else {
+	      $promoId = 0;
+	      //echo '<script> alert("Promo code is: ' . $_SESSION["promoCode"] . ' Promo value is: ' . $_SESSION["promoValue"] . '"); window.location.href="user_reservation.php"; </script>';
+	    }
+
 			$_SESSION["time"] = $_POST["time"];
 			$_SESSION["reservationDate"] = $_POST["reservationDate"];
 
@@ -22,12 +38,13 @@
 	    $reservationsResult = $cn->query($reservationsSql);
 
 	    if ($reservationsResult->num_rows > 0) {
-	        echo '<script> alert("Selected date ' . $date . ' is blocked for ' . $reservedTime . ' swim. Please choose another date or time."); window.location.href="user_reservation.php"; </script>';
+	        echo '<script> alert("Selected date ' . $date . ' is blocked for ' . $time . ' swim. Please choose another date or time."); window.location.href="user_reservation.php"; </script>';
 	      }
 	    else {
+
 	    	$user_id = $_SESSION["id"]; //user_id
 				$arrlength = count($amenity);
-				$signupSql = "INSERT INTO tbl_reservation (contactNumber, reservedDate, time, user_id) VALUES ('$contactNumber', '$date', '$time', '$user_id')";
+				$signupSql = "INSERT INTO tbl_reservation (contactNumber, reservedDate, time, user_id, promo_id) VALUES ('$contactNumber', '$date', '$time', '$user_id', '$promoId')";
 
 				if ($cn->query($signupSql) === TRUE) {
 					$latestId = $cn->insert_id; {

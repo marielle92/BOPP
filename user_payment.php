@@ -3,10 +3,26 @@
 
   require 'connection.php';
 
+    //get promo code
+    $promoCode = $_SESSION["promoCode"];
+    $promoSql = "SELECT * FROM tbl_promocode where promoCode='$promoCode'";
+    $promoResult = $cn->query($promoSql);
+    if ($promoResult->num_rows > 0) {
+      while($row = $promoResult->fetch_assoc()) {
+        $promoId = $row["id"];
+        $promoValue = $row["value"];
+      }
+      //echo '<script> alert("Promo code is: ' . $_SESSION["promoCode"] . ' Promo value is: ' . $_SESSION["promoValue"] . '"); window.location.href="user_reservation.php"; </script>';
+    }
+    else {
+      $promoId = 0;
+      $promoValue = 0;
+      //echo '<script> alert("Promo code is: ' . $_SESSION["promoCode"] . ' Promo value is: ' . $_SESSION["promoValue"] . '"); window.location.href="user_reservation.php"; </script>';
+    }
+
     $id = $_SESSION["id"];
     $reservationId = $_SESSION["reservationId"];
     $reservationTime = $_SESSION["time"];
-
 
     $sql = "SELECT * FROM tbl_user where id='$id'";
     $result = $cn->query($sql);
@@ -108,6 +124,10 @@
       <div class="row">
           <div class="offset-1 col-md-10">
             <?php
+              echo '
+                Promo: ' . $promoCode . '<br>
+                Promo value: <b>' . $promoValue . 'Php</b> Off<br><br>
+              ';
 
               if ($reservationTime == "Day") {
                 $reservationTimePrice = 9000;
@@ -137,7 +157,7 @@
                 }
                 echo "<br>";
                 //echo $totalAmenityPrice;
-                $totalAmount = $totalAmenityPrice + $reservationTimePrice;
+                $totalAmount = ($totalAmenityPrice + $reservationTimePrice) - $promoValue;
                 //echo $totalAmount;
                 echo "<b>Total: </b><h4>" . $totalAmount . ".00Php</h4><br>";
                 $dpAmount = $totalAmount / 2;

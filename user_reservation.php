@@ -97,6 +97,14 @@
     <!-- RESERVATION FORM -->
     <div class="container-fluid" style="padding-bottom: 3px; padding-top: 3px;">
       <form method="post" action="reservation_redirect_trial.php">
+        <div class="offset-1 col-3">
+          <div class="control-group form-group">
+            <div class="controls">
+              <h3><label>Promo Code</label></h3>
+              <input type="text" class="form-control" name="promoCode">
+            </div>
+          </div><br/>
+        </div>
         <div class="row">
           <div class="offset-1 col-10">
             <h3>Select Time</h3><br/>
