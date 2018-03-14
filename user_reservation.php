@@ -115,16 +115,18 @@
         </div>
         </div><br/><br/>
 
+<!-- DISPLAY DATES
         <?php
-          $reservationsSql = "SELECT reservedDate FROM tbl_reservation";
-          $reservationsResult = $cn->query($reservationsSql);
-          if ($reservationsResult->num_rows > 0) {
-            while($row = $reservationsResult->fetch_assoc()) {
-              $reservedDate = $row["reservedDate"];
-              echo $reservedDate;
-            }
-          }
+//          $reservationsSql = "SELECT reservedDate FROM tbl_reservation";
+//          $reservationsResult = $cn->query($reservationsSql);
+//          if ($reservationsResult->num_rows > 0) {
+//            while($row = $reservationsResult->fetch_assoc()) {
+//              $reservedDate = $row["reservedDate"];
+//              echo $reservedDate;
+//            }
+//          }
         ?>
+-->
 
         <div class="row">
           <div class="offset-1 col-10">

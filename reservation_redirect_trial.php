@@ -14,24 +14,16 @@
 			$_SESSION["reservationDate"] = $_POST["reservationDate"];
 
 			$time = $_POST["time"];
-			$date = $_POST["reservationDate"];
+			$date = (string)$_POST["reservationDate"];
 			$amenity = $_POST["amenity"];
 			$contactNumber = $_POST["contactNumber"];
 
-			$reservationDate = strval($_SESSION["reservationDate"]);
-			$reservationTime = strval($_SESSION["time"]);
-
-	    $reservationsSql = "SELECT reservedDate, time FROM tbl_reservation WHERE reservedDate LIKE '%$reservationDate%'";
+	    $reservationsSql = "SELECT reservedDate, time FROM tbl_reservation WHERE reservedDate LIKE '%$date%' AND time LIKE '%$time%'";
 	    $reservationsResult = $cn->query($reservationsSql);
+
 	    if ($reservationsResult->num_rows > 0) {
-	      while($row = $reservationsResult->fetch_assoc()) {
-	      	$reservedTime = $row["time"];
-	        $reservedDate = $row["reservedDate"];
-	        if ($reservationDate == $reservedDate && $reservationTime == $reservedTime) {
-	          echo '<script> alert("Selected date ' . $date . ' is blocked for ' . $reservedTime . ' swim. Please choose another date or time."); window.location.href="user_reservation.php"; </script>';
-	        }
+	        echo '<script> alert("Selected date ' . $date . ' is blocked for ' . $reservedTime . ' swim. Please choose another date or time."); window.location.href="user_reservation.php"; </script>';
 	      }
-	    }
 	    else {
 	    	$user_id = $_SESSION["id"]; //user_id
 				$arrlength = count($amenity);
@@ -58,6 +50,7 @@
 		      echo "var: " . $date . "<br>";
 		    }
 		  }
+
 
 		?>
 	</body>
